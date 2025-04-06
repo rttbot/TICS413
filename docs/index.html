@@ -22,6 +22,7 @@
     <h1>Actividades por Día</h1>
     <ul>
         <li><strong>7 de Abril:</strong> <a href="#guia-flask">Guía para Crear un Aplicativo en Flask:</a> Crear un aplicativo web "Hola Mundo" utilizando Cursor con copilot.</li>
+        <li><strong>7 de Abril:</strong> <a href="#secure-shop">De 'Hola Mundo' a Secure Shop:</a> Aprende a expandir tu aplicación Flask básica a una aplicación más compleja como Secure Shop, utilizando IA generativa en Cursor.</li>
         <!-- Puedes añadir más actividades aquí -->
     </ul>
 
@@ -53,5 +54,110 @@ if __name__ == '__main__':
     <p>Cuando ejecutas una aplicación Flask localmente, se ejecuta en <code>localhost</code>, lo que significa que solo es accesible desde tu máquina. No se manejan certificados SSL ni encriptación en este entorno, ya que es solo para desarrollo. Para producción, se deben considerar aspectos de seguridad como el uso de HTTPS y certificados SSL.</p>
 
     <p>En un entorno de desarrollo local, no se realiza un handshake SSL ni se utiliza encriptación, ya que no es necesario. Sin embargo, es importante considerar estos aspectos al desplegar la aplicación en un servidor público.</p>
+
+    <h2 id="secure-shop">De 'Hola Mundo' a Secure Shop</h2>
+    <p>En esta actividad, aprenderás a transformar una aplicación básica de Flask en una aplicación más compleja como Secure Shop. Utilizaremos IA generativa en Cursor para facilitar el desarrollo y añadir funcionalidades como gestión de productos, carrito de compras, y registro de mascotas rescatadas.</p>
+    
+    <h3>Pasos para la Transformación</h3>
+    <ol>
+        <li>Revisar el código base de 'Hola Mundo' y entender su estructura.</li>
+        <li>Utilizar Cursor con Copilot para generar nuevas rutas y funcionalidades.</li>
+        <li>Implementar un sistema de gestión de productos y carrito de compras.</li>
+        <li>Añadir un formulario para el registro de mascotas rescatadas.</li>
+        <li>Probar la aplicación localmente y asegurar que todas las funcionalidades trabajen correctamente.</li>
+    </ol>
+
+    <h3>Motivación</h3>
+    <p>El uso de IA generativa no solo acelera el proceso de desarrollo, sino que también permite explorar nuevas ideas y enfoques de manera eficiente. Esta actividad te ayudará a comprender cómo escalar una aplicación simple a una más robusta y funcional.</p>
+
+    <h2 id="plantillas">Plantillas HTML y Funcionamiento de la Aplicación</h2>
+    <p>Para que la aplicación funcione correctamente, las plantillas HTML deben estar ubicadas en una carpeta llamada <code>templates</code> dentro del mismo directorio que <code>app.py</code>. Aquí está el contenido de cada plantilla:</p>
+    
+    <h3>tienda.html</h3>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Tienda de Mascotas&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Tienda de Mascotas&lt;/h1&gt;
+    &lt;ul&gt;
+        {% for producto in productos %}
+        &lt;li&gt;
+            {{ producto.nombre }} - ${{ producto.precio }}
+            &lt;a href="{{ url_for('agregar_al_carrito', producto_id=producto.id) }}"&gt;Agregar al carrito&lt;/a&gt;
+        &lt;/li&gt;
+        {% endfor %}
+    &lt;/ul&gt;
+    &lt;a href="{{ url_for('ver_carrito') }}"&gt;Ver Carrito&lt;/a&gt;
+    &lt;a href="{{ url_for('inscribir_mascota') }}"&gt;Inscribir Mascota Rescatada&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <h3>carrito.html</h3>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Carrito de Compras&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Carrito de Compras&lt;/h1&gt;
+    &lt;ul&gt;
+        {% for item in carrito %}
+        &lt;li&gt;{{ item.nombre }} - ${{ item.precio }}&lt;/li&gt;
+        {% endfor %}
+    &lt;/ul&gt;
+    &lt;p&gt;Total: ${{ total }}&lt;/p&gt;
+    &lt;a href="{{ url_for('tienda') }}"&gt;Seguir Comprando&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <h3>inscribir.html</h3>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Inscribir Mascota Rescatada&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Inscribir Mascota Rescatada&lt;/h1&gt;
+    &lt;form method="post"&gt;
+        &lt;label for="nombre"&gt;Nombre de la Mascota:&lt;/label&gt;
+        &lt;input type="text" id="nombre" name="nombre" required&gt;
+        &lt;button type="submit"&gt;Inscribir&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;a href="{{ url_for('tienda') }}"&gt;Volver a la Tienda&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <h3>Funcionamiento de la Aplicación</h3>
+    <p>La aplicación consta de un frontend y un backend. El frontend está compuesto por las plantillas HTML que se encargan de la interfaz de usuario, mostrando productos, el carrito de compras, y el formulario de inscripción. El backend, implementado con Flask, maneja la lógica del servidor, procesando solicitudes HTTP y generando respuestas. Las plantillas HTML se conectan al backend a través de rutas definidas en <code>app.py</code>, permitiendo la interacción entre el usuario y la aplicación.</p>
+
+    <h2 id="historia-tiger">Historia de Usuario: Tiger</h2>
+    <p>Imagina que tienes un gatito llamado Tiger al que rescataste. Decides comprarle un collar y lo inscribes para recibir bonos que te permitirán comprar comida y otros artículos. A continuación, se describe el flujo de interacción con la aplicación:</p>
+    
+    <h3>Flujo de Interacción</h3>
+    <ol>
+        <li>Visitas la tienda y ves los productos disponibles, como collares y juguetes.</li>
+        <li>Haces clic en "Agregar al carrito" junto al collar para Tiger. Esto añade el producto al carrito y te redirige de nuevo a la tienda.</li>
+        <li>Vas al carrito para revisar los productos seleccionados y el total.</li>
+        <li>Decides inscribir a Tiger para recibir los bonos. Navegas al formulario de inscripción y completas la información.</li>
+        <li>Después de inscribir a Tiger, eres redirigido de nuevo a la tienda.</li>
+    </ol>
+
+    <h3>Mensajes en el Terminal</h3>
+    <p>Al interactuar con la aplicación, verás mensajes en el terminal que indican las solicitudes HTTP que se están procesando. Por ejemplo:</p>
+    <ul>
+        <li><code>GET / HTTP/1.1 200</code>: Indica que se ha accedido a la página principal de la tienda con éxito.</li>
+        <li><code>GET /agregar/1 HTTP/1.1 302</code>: Muestra que se ha agregado un producto al carrito y se ha redirigido al usuario.</li>
+        <li><code>GET /carrito HTTP/1.1 200</code>: Indica que se ha accedido a la página del carrito.</li>
+        <li><code>POST /inscribir HTTP/1.1 302</code>: Indica que se ha enviado el formulario de inscripción y se ha redirigido al usuario.</li>
+    </ul>
+    <p>Estos mensajes ayudan a entender cómo las solicitudes son manejadas por el servidor y confirman que las acciones del usuario se están procesando correctamente.</p>
 </body>
 </html>
