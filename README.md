@@ -1,6 +1,6 @@
-# TICS413 - Actividades de Criptografía
+# TICS413 - Actividades 
 
-Este repositorio contiene las actividades prácticas del curso TICS413, enfocadas en criptografía y desarrollo web.
+Este repositorio contiene las actividades prácticas del curso TICS413 - para eso vaya al sitio web https://rttbot.github.io/TICS413/ - Clone este repo y vaya realizando las actividades en su máquina. 
 
 ## Crear una Página Web "Hola Mundo" usando GitHub Pages
 
