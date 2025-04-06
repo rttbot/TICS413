@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actividades TICS413</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        ul {
+            list-style-type: square;
+        }
+    </style>
 </head>
 <body>
     <h1>Actividades por Día</h1>
@@ -11,5 +24,34 @@
         <li><strong>7 de Abril:</strong> Crear un aplicativo web "Hola Mundo" utilizando Cursor e IA generativa.</li>
         <!-- Puedes añadir más actividades aquí -->
     </ul>
+
+    <h2>Guía para Crear un Aplicativo en Flask</h2>
+    <p>Flask es un microframework para Python que permite crear aplicaciones web de manera sencilla. A continuación, se presentan los pasos para crear y ejecutar una aplicación Flask localmente:</p>
+    
+    <h3>Pasos para Crear una Aplicación Flask</h3>
+    <ol>
+        <li>Instalar Flask en tu entorno virtual: <code>pip install Flask</code></li>
+        <li>Crear un archivo <code>app.py</code> con el siguiente contenido:</li>
+        <pre><code>from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hola Mundo'
+
+if __name__ == '__main__':
+    app.run(debug=True)</code></pre>
+        <li>Ejecutar la aplicación: <code>python app.py</code></li>
+        <li>Visitar <code>http://127.0.0.1:5000/</code> en tu navegador para ver la aplicación en funcionamiento.</li>
+    </ol>
+
+    <h3>Conceptos Básicos</h3>
+    <p>Una aplicación web generalmente tiene dos partes: el frontend (interfaz de usuario) y el backend (lógica del servidor). Flask se encarga del backend, manejando las solicitudes HTTP y generando respuestas.</p>
+
+    <h3>Seguridad y Localhost</h3>
+    <p>Cuando ejecutas una aplicación Flask localmente, se ejecuta en <code>localhost</code>, lo que significa que solo es accesible desde tu máquina. No se manejan certificados SSL ni encriptación en este entorno, ya que es solo para desarrollo. Para producción, se deben considerar aspectos de seguridad como el uso de HTTPS y certificados SSL.</p>
+
+    <p>En un entorno de desarrollo local, no se realiza un handshake SSL ni se utiliza encriptación, ya que no es necesario. Sin embargo, es importante considerar estos aspectos al desplegar la aplicación en un servidor público.</p>
 </body>
 </html>
