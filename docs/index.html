@@ -22,8 +22,8 @@
     <h1>Actividades por Día</h1>
     <ul>
         <li><strong>7 de Abril:</strong> <a href="#guia-flask">Guía para Crear un Aplicativo en Flask:</a> Crear un aplicativo web "Hola Mundo" utilizando Cursor con copilot.</li>
-        <li><strong>7 de Abril:</strong> <a href="#secure-shop">De 'Hola Mundo' a Secure Shop:</a> Aprende a expandir tu aplicación Flask básica a una aplicación más compleja como Secure Shop, utilizando IA generativa en Cursor.</li>
-        <!-- Puedes añadir más actividades aquí -->
+        <li><strong>7 de Abril:</strong> <a href="#secure-shop">De 'Hola Mundo' a Secure Shop:</a> Aprende a expandir tu aplicación Flask básica a una aplicación más compleja.</li>
+        <li><strong>7 de Abril:</strong> <a href="#secure-software">Implementación de Secure Shop y Secure Software:</a> Crear dos aplicaciones web interconectadas para gestión de mascotas rescatadas.</li>
     </ul>
 
     <h2 id="guia-flask">Guía para Crear un Aplicativo en Flask</h2>
@@ -159,5 +159,135 @@ if __name__ == '__main__':
         <li><code>POST /inscribir HTTP/1.1 302</code>: Indica que se ha enviado el formulario de inscripción y se ha redirigido al usuario.</li>
     </ul>
     <p>Estos mensajes ayudan a entender cómo las solicitudes son manejadas por el servidor y confirman que las acciones del usuario se están procesando correctamente.</p>
+
+    <h2 id="secure-software">Implementación de Secure Shop y Secure Software</h2>
+    <p>En esta actividad, crearemos dos aplicaciones web que se comunican entre sí: una tienda (Secure Shop) y un panel administrativo (Secure Software) con su API.</p>
+
+    <h3>Estructura del Proyecto</h3>
+    <pre><code>Criptografía-WebApp - 3/
+├── templates/
+│   ├── carrito.html
+│   ├── estadisticas.html
+│   ├── inscribir.html
+│   ├── login.html
+│   └── tienda.html
+├── api.py
+├── secureshop.py
+└── securesoftware.py</code></pre>
+
+    <h3>Archivos Principales</h3>
+    
+    <h4>1. api.py (Puerto 5001)</h4>
+    <p>API para manejar el registro y consulta de mascotas:</p>
+    <pre><code>from flask import Flask, request, jsonify
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+
+mascotas = []
+
+@app.route('/registrar_mascota', methods=['POST'])
+def registrar_mascota():
+    data = request.json
+    mascotas.append(data)
+    return jsonify({'message': 'Mascota registrada'}), 201
+
+@app.route('/mascotas', methods=['GET'])
+def get_mascotas():
+    return jsonify(mascotas)
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5001)</code></pre>
+
+    <h4>2. securesoftware.py (Puerto 5002)</h4>
+    <p>Panel de administración con login y visualización de estadísticas:</p>
+    <pre><code>from flask import Flask, render_template, request, redirect, url_for
+import requests
+
+app = Flask(__name__)
+
+usuarios = {
+    'admin': 'colocolo'
+}
+
+@app.route('/')
+def index():
+    return redirect(url_for('login'))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        usuario = request.form['usuario']
+        password = request.form['password']
+        if usuario in usuarios and usuarios[usuario] == password:
+            return redirect(url_for('estadisticas'))
+        else:
+            return 'Credenciales incorrectas'
+    return render_template('login.html')
+
+@app.route('/estadisticas')
+def estadisticas():
+    response = requests.get('http://localhost:5001/mascotas')
+    mascotas = response.json()
+    return render_template('estadisticas.html', mascotas=mascotas)
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5002)</code></pre>
+
+    <h4>3. secureshop.py (Puerto 5003)</h4>
+    <p>Tienda para vender productos e inscribir mascotas:</p>
+    <pre><code>from flask import Flask, render_template, request, redirect, url_for
+import requests
+
+app = Flask(__name__)
+
+productos = [
+    {'id': 1, 'nombre': 'Collar para Perro', 'precio': 10.0},
+    {'id': 2, 'nombre': 'Juguete para Gato', 'precio': 5.0}
+]
+
+carrito = []
+
+@app.route('/')
+def tienda():
+    return render_template('tienda.html', productos=productos)
+
+@app.route('/inscribir', methods=['GET', 'POST'])
+def inscribir_mascota():
+    if request.method == 'POST':
+        mascota_data = {
+            'nombre': request.form['nombre'],
+            'rut': request.form['rut'],
+            'chip': request.form['chip'],
+            'edad': request.form['edad'],
+            'color': request.form['color'],
+            'tipo': request.form['tipo']
+        }
+        requests.post('http://localhost:5001/registrar_mascota', json=mascota_data)
+        return redirect(url_for('tienda'))
+    return render_template('inscribir.html')
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5003)</code></pre>
+
+    <h3>Orden de Ejecución</h3>
+    <ol>
+        <li>Primero: Ejecutar <code>api.py</code> (puerto 5001)</li>
+        <li>Segundo: Ejecutar <code>securesoftware.py</code> (puerto 5002)</li>
+        <li>Tercero: Ejecutar <code>secureshop.py</code> (puerto 5003)</li>
+    </ol>
+
+    <h3>Flujo de Trabajo</h3>
+    <ol>
+        <li>Los clientes acceden a la tienda (Secure Shop) en <code>http://localhost:5003</code></li>
+        <li>Pueden comprar productos y registrar mascotas rescatadas</li>
+        <li>Los administradores acceden al panel en <code>http://localhost:5002</code></li>
+        <li>Usando las credenciales (usuario: admin, contraseña: colocolo)</li>
+        <li>Pueden ver las estadísticas de mascotas registradas</li>
+    </ol>
+
+    <h3>Dependencias Necesarias</h3>
+    <pre><code>pip install flask requests flask-cors</code></pre>
 </body>
 </html>
