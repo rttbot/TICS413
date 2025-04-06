@@ -24,6 +24,7 @@
         <li><strong>7 de Abril:</strong> <a href="#guia-flask">Guía para Crear un Aplicativo en Flask:</a> Crear un aplicativo web "Hola Mundo" utilizando Cursor con copilot.</li>
         <li><strong>7 de Abril:</strong> <a href="#secure-shop">De 'Hola Mundo' a Secure Shop:</a> Aprende a expandir tu aplicación Flask básica a una aplicación más compleja.</li>
         <li><strong>7 de Abril:</strong> <a href="#secure-software">Implementación de Secure Shop y Secure Software:</a> Crear dos aplicaciones web interconectadas para gestión de mascotas rescatadas.</li>
+        <li><strong>7 de Abril:</strong> <a href="#secure-shop-db">Secure Shop con Base de Datos:</a> Agregar persistencia de datos con SQLite.</li>
     </ul>
 
     <h2 id="guia-flask">Guía para Crear un Aplicativo en Flask</h2>
@@ -273,21 +274,223 @@ if __name__ == '__main__':
 
     <h3>Orden de Ejecución</h3>
     <ol>
-        <li>Primero: Ejecutar <code>api.py</code> (puerto 5001)</li>
-        <li>Segundo: Ejecutar <code>securesoftware.py</code> (puerto 5002)</li>
-        <li>Tercero: Ejecutar <code>secureshop.py</code> (puerto 5003)</li>
+        <li>Primero: Ejecutar <code>api.py</code> (puerto 5001) - Esto creará la base de datos</li>
+        <li>Segundo: Ejecutar <code>securesoftware.py</code> (puerto 5002) - Panel de administración</li>
+        <li>Tercero: Ejecutar <code>secureshop.py</code> (puerto 5003) - Tienda</li>
     </ol>
 
-    <h3>Flujo de Trabajo</h3>
+    <div class="alert alert-warning">
+        <h4>⚠️ Nota Importante sobre Seguridad</h4>
+        <p>Se ha identificado una vulnerabilidad de seguridad en la aplicación: El panel de administración (<code>securesoftware.py</code>) 
+        tiene una falla de seguridad donde se puede acceder directamente a la ruta <code>/estadisticas</code> sin necesidad de autenticación.</p>
+        <p>Por ejemplo, se puede acceder directamente a <code>http://127.0.0.1:5002/estadisticas</code> sin pasar por el login.</p>
+        <p>Esta es una vulnerabilidad que debe ser corregida implementando un sistema de autenticación adecuado con manejo de sesiones.</p>
+    </div>
+
+    <h3>URLs de Acceso</h3>
+    <ul>
+        <li>Tienda: <code>http://localhost:5003</code></li>
+        <li>API: <code>http://localhost:5001</code></li>
+        <li>Panel Admin: <code>http://localhost:5002</code></li>
+    </ul>
+
+    <h2 id="secure-shop-db">Secure Shop con Base de Datos</h2>
+    <p>En esta versión, agregaremos una base de datos SQLite para almacenar la información de manera persistente.</p>
+
+    <h3>Estructura del Proyecto</h3>
+    <pre><code>Criptografía-WebApp - 4/
+├── templates/
+│   ├── carrito.html
+│   ├── estadisticas.html
+│   ├── inscribir.html
+│   ├── login.html
+│   └── tienda.html
+├── api.py
+├── secureshop.py
+├── securesoftware.py
+└── secure_shop.db (se creará automáticamente)</code></pre>
+
+    <h3>Archivos Principales</h3>
+    
+    <h4>1. api.py (Puerto 5001)</h4>
+    <p>API con base de datos SQLite:</p>
+    <pre><code>from flask import Flask, request, jsonify
+from flask_cors import CORS
+import sqlite3
+from datetime import datetime
+
+app = Flask(__name__)
+CORS(app)
+
+def init_db():
+    conn = sqlite3.connect('secure_shop.db')
+    c = conn.cursor()
+    # Crear tabla de mascotas
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS mascotas (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre TEXT NOT NULL,
+            rut TEXT NOT NULL,
+            chip TEXT,
+            edad TEXT,
+            color TEXT,
+            tipo TEXT,
+            fecha_registro TIMESTAMP
+        )
+    ''')
+    # Crear tabla de usuarios
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS usuarios (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            usuario TEXT UNIQUE NOT NULL,
+            password TEXT NOT NULL
+        )
+    ''')
+    # Insertar usuario admin
+    c.execute('INSERT OR IGNORE INTO usuarios (usuario, password) VALUES (?, ?)', 
+             ('admin', 'colocolo'))
+    conn.commit()
+    conn.close()
+
+@app.route('/registrar_mascota', methods=['POST'])
+def registrar_mascota():
+    data = request.json
+    conn = sqlite3.connect('secure_shop.db')
+    c = conn.cursor()
+    c.execute('''
+        INSERT INTO mascotas (nombre, rut, chip, edad, color, tipo, fecha_registro)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    ''', (
+        data['nombre'],
+        data['rut'],
+        data['chip'],
+        data['edad'],
+        data['color'],
+        data['tipo'],
+        datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    ))
+    conn.commit()
+    conn.close()
+    return jsonify({'message': 'Mascota registrada'}), 201
+
+@app.route('/mascotas', methods=['GET'])
+def get_mascotas():
+    conn = sqlite3.connect('secure_shop.db')
+    c = conn.cursor()
+    c.execute('SELECT * FROM mascotas')
+    mascotas = [
+        {
+            'id': row[0],
+            'nombre': row[1],
+            'rut': row[2],
+            'chip': row[3],
+            'edad': row[4],
+            'color': row[5],
+            'tipo': row[6],
+            'fecha_registro': row[7]
+        }
+        for row in c.fetchall()
+    ]
+    conn.close()
+    return jsonify(mascotas)
+
+if __name__ == '__main__':
+    init_db()
+    app.run(debug=True, port=5001)</code></pre>
+
+    <h4>2. securesoftware.py (Puerto 5002)</h4>
+    <p>Panel de administración con autenticación desde la base de datos:</p>
+    <pre><code>from flask import Flask, render_template, request, redirect, url_for
+import requests
+import sqlite3
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return redirect(url_for('login'))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        usuario = request.form['usuario']
+        password = request.form['password']
+        
+        conn = sqlite3.connect('secure_shop.db')
+        c = conn.cursor()
+        c.execute('SELECT * FROM usuarios WHERE usuario = ? AND password = ?',
+                 (usuario, password))
+        user = c.fetchone()
+        conn.close()
+        
+        if user:
+            return redirect(url_for('estadisticas'))
+        else:
+            return 'Credenciales incorrectas'
+    return render_template('login.html')
+
+@app.route('/estadisticas')
+def estadisticas():
+    response = requests.get('http://localhost:5001/mascotas')
+    mascotas = response.json()
+    return render_template('estadisticas.html', mascotas=mascotas)
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5002)</code></pre>
+
+    <h3>Plantillas Actualizadas</h3>
+    
+    <h4>estadisticas.html</h4>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Estadísticas de Mascotas Rescatadas&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Estadísticas de Mascotas Rescatadas&lt;/h1&gt;
+    &lt;table border="1"&gt;
+        &lt;tr&gt;
+            &lt;th&gt;ID&lt;/th&gt;
+            &lt;th&gt;Nombre&lt;/th&gt;
+            &lt;th&gt;RUT Dueño&lt;/th&gt;
+            &lt;th&gt;Chip&lt;/th&gt;
+            &lt;th&gt;Edad&lt;/th&gt;
+            &lt;th&gt;Color&lt;/th&gt;
+            &lt;th&gt;Tipo&lt;/th&gt;
+            &lt;th&gt;Fecha Registro&lt;/th&gt;
+        &lt;/tr&gt;
+        {% for mascota in mascotas %}
+        &lt;tr&gt;
+            &lt;td&gt;{{ mascota.id }}&lt;/td&gt;
+            &lt;td&gt;{{ mascota.nombre }}&lt;/td&gt;
+            &lt;td&gt;{{ mascota.rut }}&lt;/td&gt;
+            &lt;td&gt;{{ mascota.chip }}&lt;/td&gt;
+            &lt;td&gt;{{ mascota.edad }}&lt;/td&gt;
+            &lt;td&gt;{{ mascota.color }}&lt;/td&gt;
+            &lt;td&gt;{{ mascota.tipo }}&lt;/td&gt;
+            &lt;td&gt;{{ mascota.fecha_registro }}&lt;/td&gt;
+        &lt;/tr&gt;
+        {% endfor %}
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <h3>Cambios Principales</h3>
+    <ul>
+        <li>Agregada base de datos SQLite para persistencia de datos</li>
+        <li>Creadas tablas para mascotas y usuarios</li>
+        <li>Implementada autenticación desde la base de datos</li>
+        <li>Agregado registro de fecha y hora para cada mascota</li>
+        <li>Mejorada la visualización de datos en formato tabla</li>
+    </ul>
+
+    <h3>Orden de Ejecución</h3>
     <ol>
-        <li>Los clientes acceden a la tienda (Secure Shop) en <code>http://localhost:5003</code></li>
-        <li>Pueden comprar productos y registrar mascotas rescatadas</li>
-        <li>Los administradores acceden al panel en <code>http://localhost:5002</code></li>
-        <li>Usando las credenciales (usuario: admin, contraseña: colocolo)</li>
-        <li>Pueden ver las estadísticas de mascotas registradas</li>
+        <li>Primero: Ejecutar <code>api.py</code> (puerto 5001) - Esto creará la base de datos</li>
+        <li>Segundo: Ejecutar <code>securesoftware.py</code> (puerto 5002) - Panel de administración</li>
+        <li>Tercero: Ejecutar <code>secureshop.py</code> (puerto 5003) - Tienda</li>
     </ol>
-
-    <h3>Dependencias Necesarias</h3>
-    <pre><code>pip install flask requests flask-cors</code></pre>
 </body>
 </html>
