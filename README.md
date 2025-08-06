@@ -109,6 +109,15 @@ Donde se tiene una nota por unidad temática (TX) la cual se calcula como:
 - **Evaluación Unidad Temática 2 - incluye CTF:** Semana del 3 de noviembre, 2025  
 - **Evaluación Unidad Temática 3 - incluye CTF:** Semana del 24 de noviembre, 2025
 
+
+## Bibliografía
+
+### Bibliografía Obligatoria
+- Stallings, W., & Brown, L. (2023). *Computer security: Principles and practice* (5ta ed.). Pearson.
+
+### Bibliografía Complementaria
+- Kim, D., & Solomon, M. G. (2016). *Fundamentals of information systems security: Print bundle*. Jones & Bartlett Learning.
+- Anderson, R. (2020). *Security engineering: A guide to building dependable distributed systems*. John Wiley & Sons.
 ## Cronograma Detallado del Curso
 
 | Sem. | Fecha | Unidad | Tema | Contenido | Lab |
@@ -166,11 +175,3 @@ Aunque la asistencia a clases no es obligatoria, se recomienda encarecidamente l
 
 3. **Comportamiento en Clases:** Dentro del aula de manera presencial y en el aula virtual fomente un ambiente de respeto a sus compañeros, al profesor, y conducente al aprendizaje.
 
-## Bibliografía
-
-### Bibliografía Obligatoria
-- Stallings, W., & Brown, L. (2023). *Computer security: Principles and practice* (5ta ed.). Pearson.
-
-### Bibliografía Complementaria
-- Kim, D., & Solomon, M. G. (2016). *Fundamentals of information systems security: Print bundle*. Jones & Bartlett Learning.
-- Anderson, R. (2020). *Security engineering: A guide to building dependable distributed systems*. John Wiley & Sons.
