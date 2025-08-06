@@ -168,42 +168,4 @@
 
 **Respuesta correcta:** D) Todos los anteriores
 
----
-
-## Configuración Sugerida para Mentimeter
-
-### Configuración General:
-- **Tipo de pregunta:** Quiz
-- **Tiempo por pregunta:** 30-45 segundos
-- **Mostrar resultados:** Después de cada pregunta
-- **Modo:** Competitivo (opcional)
-
-### Opciones de Visualización:
-- **Gráfico:** Barras horizontales
-- **Colores:** Verde para correcta, rojo para incorrecta
-- **Animaciones:** Habilitadas para mayor engagement
-
-### Puntuación:
-- **Puntos por respuesta correcta:** 10
-- **Puntos por respuesta incorrecta:** 0
-- **Bonificación por velocidad:** 2 puntos extra si responde en los primeros 15 segundos
-
----
-
-## Notas para el Profesor
-
-1. **Orden de presentación:** Comenzar con casos simples (1-5) y progresar a casos más complejos
-2. **Discusión:** Después de cada pregunta, explicar brevemente por qué esa es la respuesta correcta
-3. **Participación:** Animar a los estudiantes a explicar su razonamiento
-4. **Tiempo:** Ajustar el tiempo según el nivel de comprensión de la clase
-5. **Feedback:** Usar los resultados para identificar áreas que necesitan más explicación
-
----
-
-## Objetivos de Aprendizaje
-
-Al finalizar esta actividad, los estudiantes deberían ser capaces de:
-- Identificar correctamente qué principio de la triada CIA se ve afectado en diferentes escenarios
-- Comprender las diferencias entre Confidencialidad, Integridad y Disponibilidad
-- Aplicar estos conceptos a situaciones reales
-- Reconocer que algunos incidentes pueden afectar múltiples principios simultáneamente 
+Había un par de incorrectas - ¿cuáles eran? 
