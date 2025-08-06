@@ -1,5 +1,34 @@
 # Casos Prácticos - Triada CIA para Mentimeter
 
+
+
+## 🎯 **Actividades Dinámicas**
+
+### **Actividad 1: Quiz Interactivo - Triada CIA**
+**Plataforma:** Mentimeter  
+**Código:** 8172 1694  
+**Duración:** 15 minutos  
+**Tipo:** Competitivo
+
+**Instrucciones:**
+1. Accede a menti.com usando el código 8172 1694
+2. Responde cada pregunta en el tiempo asignado
+3. Analiza por qué tu respuesta es correcta
+4. Participa en la discusión posterior
+
+**Casos incluidos:**
+- Fuga de datos de clientes
+- Ataque de ransomware
+- Manipulación de datos financieros
+- Interceptación de comunicaciones
+- Fallo en sistema de energía
+- Alteración de documentos legales
+- Acceso no autorizado a redes sociales
+- Denegación de servicio (DDoS)
+- Filtración de información clasificada
+- Corrupción de base de datos
+
+---
 ## Instrucciones para el Profesor
 
 **Objetivo:** Que los estudiantes identifiquen cuál de los tres principios de la triada CIA (Confidencialidad, Integridad, Disponibilidad) se ve afectado en cada caso práctico.
