@@ -118,6 +118,7 @@ Donde se tiene una nota por unidad temática (TX) la cual se calcula como:
 ### Bibliografía Complementaria
 - Kim, D., & Solomon, M. G. (2016). *Fundamentals of information systems security: Print bundle*. Jones & Bartlett Learning.
 - Anderson, R. (2020). *Security engineering: A guide to building dependable distributed systems*. John Wiley & Sons.
+
 ## Cronograma Detallado del Curso
 
 | Sem. | Fecha | Unidad | Tema | Contenido | Lab |
