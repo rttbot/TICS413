@@ -127,19 +127,19 @@ Donde se tiene una nota por unidad temática (TX) la cual se calcula como:
 | 2 | 11-8-25 | Unidad 1 | Fundamentos de redes y protocolos | Repaso: Arquitectura de redes y protocolos TCP/IP | |
 | 3 | 18-8-25 | Unidad 1 | Fundamentos de redes y protocolos | Repaso: Arquitectura de redes y protocolos TCP/IP | Lab 1 |
 | 4 | 25-8-25 | Unidad 1 | Protocolos de seguridad de Internet y Aplicaciones de autenticación | Cap. 23: Kerberos, X.509 y PKI y Cap. 22: SSL/TLS, HTTPS y seguridad de protocolos | Lab 2 |
-| 5 | 1-9-25 | Unidad 1 | Seguridad de redes inalámbricas | Cap. 24: Seguridad WiFi y dispositivos móviles | Lab 3 |
-| 6 | 8-9-25 | Unidad 1 | Firewalls e IDS | Cap. 9 y 8 | Lab 4 |
-| 7 | 15-9-25 | | Pausa Académica | | |
-| 8 | 22-9-25 | Unidad 2 | Criptografía simétrica, asimétrica y hash | Cap. 2, 20 y 21: Criptografía simétrica, asimétrica y hash | Lab 5 |
-| 9 | 29-9-25 | Unidad 2 | Criptografía simétrica, asimétrica y hash | Cap. 2, 20 y 21: Criptografía simétrica, asimétrica y hash | **EVALUACIÓN T1 y CTF 1** |
-| 10 | 6-10-25 | Unidad 2 | Autenticación de usuarios | Cap. 3: Métodos de autenticación y tokens | Lab 6 |
+| 5 | 3-9-25 | Unidad 1 | Seguridad de redes inalámbricas | Cap. 24: Seguridad WiFi y dispositivos móviles | Lab 3 |
+| 6 | 10-9-25 | Unidad 1 | Firewalls e IDS | Cap. 9 y 8 | Lab 4 |
+| 7 | 17-9-25 | | Pausa Académica | | |
+| 8 | 24-9-25 | Unidad 2 | Criptografía simétrica, asimétrica y hash | Cap. 2, 20 y 21: Criptografía simétrica, asimétrica y hash | Lab 5 |
+| 9 | 1-10-25 | Unidad 2 | Criptografía simétrica, asimétrica y hash | Cap. 2, 20 y 21: Criptografía simétrica, asimétrica y hash | **EVALUACIÓN T1 y CTF 1** |
+| 10 | 8-10-25 | Unidad 2 | Autenticación de usuarios | Cap. 3: Métodos de autenticación y tokens **SUSPENSION DIA DE LA U | Lab 6 |
 | 11 | 13-10-25 | Unidad 2 | Desbordamiento de buffer | Cap. 10: Buffer overflow y técnicas de explotación | Lab 7 |
-| 12 | 20-10-25 | Unidad 2 | Control de acceso | Cap. 4: Modelos DAC, MAC, RBAC y ABAC | Lab 8 |
-| 13 | 27-10-25 | Unidad 2 | Seguridad de software | Cap. 11: Desarrollo seguro y manejo de entrada/salida y Capítulo 5: Base de datos segura | Lab 9 |
-| 14 | 3-11-25 | Unidad 2 | Seguridad de software | Cap. 11: Desarrollo seguro y manejo de entrada/salida y Capítulo 5: Base de datos segura | Ayudantía previa a la evaluación T2 |
-| 15 | 10-11-25 | Unidad 3 | Gestión de seguridad TI | Cap. 14 y 15: Gestión de seguridad y evaluación de riesgos y Planes de Continuidad de Negocio | **Evaluación 2 y CTF 2** |
-| 16 | 17-11-25 | Unidad 3 | Gestión de seguridad TI | Cap. 15 y 18: Planes y Auditoría de Seguridad | Ayudantía previa a la evaluación 3 |
-| 17 | 24-11-25 | Unidad 3 | Gestión de seguridad TI | Cap. 18 y 19: Auditoría de Seguridad y Aspectos éticos y legales | **Evaluación T3 y CTF 3** |
+| 12 | 22-10-25 | Unidad 2 | Control de acceso | Cap. 4: Modelos DAC, MAC, RBAC y ABAC | Lab 8 |
+| 13 | 29-10-25 | Unidad 2 | Seguridad de software | Cap. 11: Desarrollo seguro y manejo de entrada/salida y Capítulo 5: Base de datos segura | Lab 9 |
+| 14 | 5-11-25 | Unidad 2 | Seguridad de software | Cap. 11: Desarrollo seguro y manejo de entrada/salida y Capítulo 5: Base de datos segura | Ayudantía previa a la evaluación T2 |
+| 15 | 12-11-25 | Unidad 3 | Gestión de seguridad TI | Cap. 14 y 15: Gestión de seguridad y evaluación de riesgos y Planes de Continuidad de Negocio | **Evaluación 2 y CTF 2** |
+| 16 | 19-11-25 | Unidad 3 | Gestión de seguridad TI | Cap. 15 y 18: Planes y Auditoría de Seguridad | Ayudantía previa a la evaluación 3 |
+| 17 | 26-11-25 | Unidad 3 | Gestión de seguridad TI | Cap. 18 y 19: Auditoría de Seguridad y Aspectos éticos y legales | **Evaluación T3 y CTF 3** |
 | 18 | 1-12-25 | | | Recuperativos/Examen | |
 
 ## Metodología de Enseñanza y Aprendizaje
