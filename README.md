@@ -132,7 +132,7 @@ Donde se tiene una nota por unidad temática (TX) la cual se calcula como:
 | 7 | 17-9-25 | | Pausa Académica | | |
 | 8 | 24-9-25 | Unidad 2 | Criptografía simétrica, asimétrica y hash | Cap. 2, 20 y 21: Criptografía simétrica, asimétrica y hash | Lab 5 |
 | 9 | 1-10-25 | Unidad 2 | Criptografía simétrica, asimétrica y hash | Cap. 2, 20 y 21: Criptografía simétrica, asimétrica y hash | **EVALUACIÓN T1 y CTF 1** |
-| 10 | 8-10-25 | Unidad 2 | Autenticación de usuarios | Cap. 3: Métodos de autenticación y tokens **SUSPENSION DIA DE LA U | Lab 6 |
+| 10 | 8-10-25 | Unidad 2 | Autenticación de usuarios | Cap. 3: Métodos de autenticación y tokens **SUSPENSION DIA DE LA U** | Lab 6 |
 | 11 | 13-10-25 | Unidad 2 | Desbordamiento de buffer | Cap. 10: Buffer overflow y técnicas de explotación | Lab 7 |
 | 12 | 22-10-25 | Unidad 2 | Control de acceso | Cap. 4: Modelos DAC, MAC, RBAC y ABAC | Lab 8 |
 | 13 | 29-10-25 | Unidad 2 | Seguridad de software | Cap. 11: Desarrollo seguro y manejo de entrada/salida y Capítulo 5: Base de datos segura | Lab 9 |
