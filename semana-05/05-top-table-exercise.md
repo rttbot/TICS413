@@ -8,15 +8,13 @@ Este ejercicio simula un escenario real de seguridad en redes donde los estudian
 
 - Tarjetas de amenazas (12 tarjetas)
 - Tabla de clasificación (1 por grupo)
-- Marcadores y post-its
-- Cronómetro
-- Pizarra o papelógrafo para discusión
+
 
 ## Estructura del Ejercicio
 
 ### Fase 1: Preparación (10 minutos)
 - Formación de grupos de 4-5 estudiantes
-- Distribución de materiales
+
 - Explicación de reglas y objetivos
 
 ### Fase 2: Análisis Individual (15 minutos)
@@ -325,107 +323,305 @@ Este ejercicio simula un escenario real de seguridad en redes donde los estudian
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## Guía de Respuestas Esperadas
+## Fase 5: Conexión con Casos Prácticos
 
-### Capas OSI:
-- **Capa 1 (Física)**: Señales WiFi, cables, hardware
-- **Capa 2 (Enlace)**: Direcciones MAC, switches, WiFi
-- **Capa 3 (Red)**: Direcciones IP, routers, enrutamiento
-- **Capa 4 (Transporte)**: Puertos, conexiones TCP/UDP
-- **Capa 5 (Sesión)**: Sesiones de usuario, autenticación
-- **Capa 6 (Presentación)**: Encriptación, certificados SSL
-- **Capa 7 (Aplicación)**: Aplicaciones web, bases de datos
+### Objetivo de la Fase 5
 
-### Tipos de Ataques:
-- **Interceptación**: Capturar comunicaciones
-- **Suplantación**: Falsificar identidad o servicios
-- **Denegación de Servicio**: Interrumpir servicios
-- **Inyección**: Insertar código malicioso
-- **Fuerza Bruta**: Probar múltiples combinaciones
-- **Propagación**: Extender malware automáticamente
+Esta fase permite a los estudiantes aplicar los conocimientos adquiridos en las tarjetas a situaciones reales y complejas, desarrollando habilidades de análisis crítico y pensamiento estratégico.
 
-### Contramedidas Básicas:
-- **Firewalls**: Bloquear tráfico no autorizado
-- **Encriptación**: Proteger datos en tránsito
-- **Autenticación**: Verificar identidades
-- **Monitoreo**: Detectar actividad sospechosa
-- **Segmentación**: Aislar redes y sistemas
-- **Parches**: Corregir vulnerabilidades
+### Instrucciones para la Fase 5
 
-## Preguntas de Discusión
+1. **Asignación de Casos:** Cada grupo recibe uno de los casos prácticos de `04-casos-practicos.md`
+2. **Análisis de Conexión:** Identificar qué tarjetas se relacionan con los ataques del caso asignado
+3. **Aplicación de Contramedidas:** Proponer cómo aplicar las contramedidas de las tarjetas al caso real
+4. **Presentación Integrada:** Explicar la relación entre teoría (tarjetas) y práctica (casos)
 
-### 1. Análisis de Amenazas
-- ¿Qué amenazas son más críticas para una empresa?
-- ¿Cómo priorizarías las contramedidas?
-- ¿Qué amenazas requieren respuesta inmediata?
+### Matriz de Conexión Tarjetas-Casos
 
-### 2. Defensa en Profundidad
-- ¿Cómo implementarías múltiples capas de protección?
-- ¿Qué contramedidas son más efectivas por capa?
-- ¿Cómo coordinar las defensas entre capas?
+```
+┌─────────────────────────────────────────────────────────────┐
+│                MATRIZ DE CONEXIÓN TARJETAS-CASOS             │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  TARJETA │ CASO RELACIONADO │ ATAQUE ESPECÍFICO │ APLICACIÓN │
+│  ┌───────┼─────────────────┼───────────────────┼───────────┐ │
+│  │   1   │ Caso 1          │ Evil Twin Attack  │ WIDS/WIPS  │ │
+│  │       │ E-commerce     │ "TechStore_Guest" │ Detección  │ │
+│  │       │                 │                   │ automática │ │
+│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
+│  │   2   │ Caso 1          │ Evil Twin Attack  │ Verificar  │ │
+│  │       │ E-commerce     │ Punto de acceso   │ SSID + VPN │ │
+│  │       │                 │ malicioso         │ obligatorio│ │
+│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
+│  │   3   │ Caso 1          │ SYN Flood         │ SYN Cookies│ │
+│  │       │ E-commerce     │ Múltiples SYN     │ + Rate     │ │
+│  │       │                 │ desde 192.168.1.100│ Limiting   │ │
+│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
+│  │   5   │ Caso 1          │ SQL Injection     │ WAF +      │ │
+│  │       │ E-commerce     │ admin' OR '1'='1' │ Prepared   │ │
+│  │       │                 │                   │ Statements │ │
+│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
+│  │   6   │ Caso 1          │ ARP Poisoning     │ ARP        │ │
+│  │       │ E-commerce     │ Modificación tabla│ Monitoring │ │
+│  │       │                 │ ARP               │ + VLANs    │ │
+│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
+│  │   7   │ Caso 2          │ WiFi Jamming      │ Backup     │ │
+│  │       │ Hospital       │ Señales 2.4 GHz   │ cableado + │ │
+│  │       │                 │                   │ Detección RF│ │
+│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
+│  │   2   │ Caso 2          │ Rogue AP          │ WIDS/WIPS  │ │
+│  │       │ Hospital       │ "Hospital_Guest"  │ + Verificar│ │
+│  │       │                 │                   │ SSID       │ │
+│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
+│  │   8   │ Caso 3          │ Beacon Flooding   │ WIDS/WIPS  │ │
+│  │       │ Universidad     │ Múltiples SSIDs   │ + Rate     │ │
+│  │       │                 │ "UTS_WiFi_1,2"    │ Limiting   │ │
+│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
+│  │   3   │ Caso 3          │ DDoS Attack       │ DDoS       │ │
+│  │       │ Universidad     │ Servidores        │ Protection │ │
+│  │       │                 │ académicos        │ Services   │ │
+│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
+│  │   4   │ Caso 3          │ Auth Server       │ Rate       │ │
+│  │       │ Universidad     │ Overload          │ Limiting + │ │
+│  │       │                 │                   │ Timeouts   │ │
+│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
+│  │   7   │ Caso 4          │ WiFi Jamming      │ Redundancia│ │
+│  │       │ TelecomLatina  │ Señales WiFi/radio│ + Backup   │ │
+│  │       │                 │                   │ cableado   │ │
+│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
+│  │   6   │ Caso 4          │ ARP Poisoning     │ ARP        │ │
+│  │       │ TelecomLatina  │ Masivo            │ Monitoring │ │
+│  │       │                 │                   │ + VLANs    │ │
+│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
+│  │   3   │ Caso 4          │ DDoS Distribuido  │ DDoS       │ │
+│  │       │ TelecomLatina  │ Múltiples IPs     │ Protection │ │
+│  │       │                 │                   │ + Firewalls│ │
+│  └───────┴─────────────────┴───────────────────┴───────────┘ │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
 
-### 3. Redes Inalámbricas
-- ¿Qué amenazas son específicas de WiFi?
-- ¿Cómo proteger redes WiFi corporativas?
-- ¿Qué diferencias hay con redes cableadas?
+### Ejercicios de Conexión por Caso
 
-### 4. Detección y Respuesta
-- ¿Cómo detectarías estas amenazas en tiempo real?
-- ¿Qué herramientas necesitarías para monitoreo?
-- ¿Cómo responderías a un incidente de seguridad?
+#### Caso 1: E-commerce (TechStore.cl)
 
-## Criterios de Evaluación
+**Tarjetas Relacionadas:** 1, 2, 3, 5, 6
 
-### Análisis Técnico (40%)
-- Identificación correcta de capas OSI
-- Clasificación apropiada de tipos de ataque
-- Propuesta de contramedidas relevantes
+**Ejercicio de Aplicación:**
+```
+┌─────────────────────────────────────────────────────────────┐
+│                EJERCICIO CASO 1: E-COMMERCE                 │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  PREGUNTA: ¿Cómo aplicarías las contramedidas de las       │
+│  tarjetas 1, 2, 3, 5 y 6 para proteger TechStore.cl?       │
+│                                                             │
+│  ANÁLISIS REQUERIDO:                                        │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │                                                     │   │
+│  │ 1. TARJETA 1 (Interceptación WiFi):                │   │
+│  │    • Implementar WPA3 en red corporativa           │   │
+│  │    • Monitoreo continuo de usuarios conectados      │   │
+│  │    • WIDS/WIPS para detectar sniffing              │   │
+│  │                                                     │   │
+│  │ 2. TARJETA 2 (Evil Twin):                          │   │
+│  │    • Verificar SSID oficial "TechStore_Corp"       │   │
+│  │    • VPN obligatorio para empleados                │   │
+│  │    • Certificados SSL en todas las conexiones      │   │
+│  │                                                     │   │
+│  │ 3. TARJETA 3 (SYN Flood):                          │   │
+│  │    • SYN Cookies en servidores web                 │   │
+│  │    • Rate limiting por IP                           │   │
+│  │    • DDoS protection service                        │   │
+│  │                                                     │   │
+│  │ 4. TARJETA 5 (SQL Injection):                      │   │
+│  │    • WAF para bloquear inyecciones                 │   │
+│  │    • Prepared statements en código                 │   │
+│  │    • Input validation en formularios               │   │
+│  │                                                     │   │
+│  │ 5. TARJETA 6 (ARP Poisoning):                      │   │
+│  │    • ARP monitoring en switches                    │   │
+│  │    • VLANs para segmentar redes                    │   │
+│  │    • Port security en switches                     │   │
+│  │                                                     │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
 
-### Pensamiento Crítico (30%)
-- Análisis de impacto y priorización
-- Consideración de múltiples perspectivas
-- Evaluación de efectividad de contramedidas
+#### Caso 2: Hospital (Hospital Regional San José)
 
-### Trabajo en Equipo (20%)
-- Participación activa en discusiones
-- Colaboración efectiva con el grupo
-- Resolución de conflictos de opinión
+**Tarjetas Relacionadas:** 7, 2
 
-### Presentación (10%)
-- Claridad en la exposición de ideas
-- Organización lógica de la información
-- Respuestas a preguntas del instructor
+**Ejercicio de Aplicación:**
+```
+┌─────────────────────────────────────────────────────────────┐
+│                EJERCICIO CASO 2: HOSPITAL                   │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  PREGUNTA: ¿Por qué son críticos los ataques de las        │
+│  tarjetas 7 y 2 en un entorno hospitalario?                │
+│                                                             │
+│  ANÁLISIS REQUERIDO:                                        │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │                                                     │   │
+│  │ 1. TARJETA 7 (WiFi Jamming):                        │   │
+│  │    • CRÍTICO: Monitores de UCI desconectados        │   │
+│  │    • SOLUCIÓN: Backup cableado para equipos médicos │   │
+│  │    • DETECCIÓN: Monitoreo RF continuo               │   │
+│  │    • PLAN: Protocolos de emergencia médica          │   │
+│  │                                                     │   │
+│  │ 2. TARJETA 2 (Evil Twin):                          │   │
+│  │    • CRÍTICO: Datos de pacientes interceptados      │   │
+│  │    • SOLUCIÓN: Red WiFi aislada para equipos médicos│   │
+│  │    • VERIFICACIÓN: SSID oficial "Hospital_Med"     │   │
+│  │    • ENCRIPTACIÓN: VPN para acceso remoto           │   │
+│  │                                                     │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
 
-## Escenarios de Aplicación
+#### Caso 3: Universidad (Universidad Tecnológica del Sur)
 
-### Escenario 1: Pequeña Empresa
-- 20 empleados
-- Red WiFi para invitados
-- Servidor web básico
-- **Pregunta**: ¿Qué amenazas son más críticas?
+**Tarjetas Relacionadas:** 8, 3, 4
 
-### Escenario 2: Hospital
-- Sistemas médicos críticos
-- Datos de pacientes confidenciales
-- Redes separadas por departamento
-- **Pregunta**: ¿Cómo proteger cada sistema?
+**Ejercicio de Aplicación:**
+```
+┌─────────────────────────────────────────────────────────────┐
+│                EJERCICIO CASO 3: UNIVERSIDAD               │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  PREGUNTA: ¿Cómo balancearías seguridad y accesibilidad   │
+│  aplicando las contramedidas de las tarjetas 8, 3 y 4?     │
+│                                                             │
+│  ANÁLISIS REQUERIDO:                                        │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │                                                     │   │
+│  │ 1. TARJETA 8 (Beacon Flooding):                     │   │
+│  │    • PROBLEMA: Múltiples SSIDs falsos              │   │
+│  │    • SOLUCIÓN: WIDS/WIPS + Rate limiting              │   │
+│  │    • BALANCE: Permitir redes legítimas                 │   │
+│  │    • EDUCACIÓN: Informar a estudiantes                 │   │
+│  │                                                     │   │
+│  │ 2. TARJETA 3 (DDoS):                               │   │
+│  │    • PROBLEMA: Servidores académicos caídos        │   │
+│  │    • SOLUCIÓN: DDoS protection + Rate limiting        │   │
+│  │    • BALANCE: Mantener acceso para estudiantes        │   │
+│  │    • MONITOREO: Detectar patrones anómalos            │   │
+│  │                                                     │   │
+│  │ 3. TARJETA 4 (Auth Server):                        │   │
+│  │    • PROBLEMA: Servidor de autenticación sobrecargado│   │
+│  │    • SOLUCIÓN: Rate limiting + Timeouts               │   │
+│  │    • BALANCE: No bloquear usuarios legítimos           │   │
+│  │    • ESCALABILIDAD: Múltiples servidores auth         │   │
+│  │                                                     │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
 
-### Escenario 3: Universidad
-- Red WiFi pública
-- Estudiantes con dispositivos personales
-- Investigación académica
-- **Pregunta**: ¿Qué controles implementarías?
+#### Caso 4: TelecomLatina (Infraestructura Crítica)
 
-## Conclusiones del Ejercicio
+**Tarjetas Relacionadas:** 7, 6, 3
 
-Este ejercicio demuestra que:
+**Ejercicio de Aplicación:**
+```
+┌─────────────────────────────────────────────────────────────┐
+│                EJERCICIO CASO 4: TELECOMLATINA             │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  PREGUNTA: ¿Qué contramedidas de las tarjetas 7, 6 y 3     │
+│  son más críticas para infraestructura nacional?           │
+│                                                             │
+│  ANÁLISIS REQUERIDO:                                        │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │                                                     │   │
+│  │ 1. TARJETA 7 (WiFi Jamming):                        │   │
+│  │    • CRÍTICO: 80% usuarios sin Internet             │   │
+│  │    • PRIORIDAD: Backup cableado inmediato              │   │
+│  │    • DETECCIÓN: Monitoreo RF nacional                   │   │
+│  │    • COORDINACIÓN: Otros ISP afectados                 │   │
+│  │                                                     │   │
+│  │ 2. TARJETA 6 (ARP Poisoning):                       │   │
+│  │    • CRÍTICO: Tráfico redirigido incorrectamente   │   │
+│  │    • PRIORIDAD: ARP monitoring en routers principales │   │
+│  │    • SEGMENTACIÓN: VLANs críticas                      │   │
+│  │    • AISLAMIENTO: Redes de servicios críticos          │   │
+│  │                                                     │   │
+│  │ 3. TARJETA 3 (DDoS):                               │   │
+│  │    • CRÍTICO: Centros de datos offline              │   │
+│  │    • PRIORIDAD: DDoS protection services               │   │
+│  │    • ESCALABILIDAD: Múltiples proveedores             │   │
+│  │    • COORDINACIÓN: CSIRT Chile                         │   │
+│  │                                                     │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
 
-1. **La seguridad en redes requiere comprensión de múltiples capas**
-2. **Las amenazas pueden operar en diferentes niveles simultáneamente**
-3. **La defensa en profundidad es esencial para protección efectiva**
-4. **El monitoreo continuo es crucial para detectar amenazas**
-5. **La respuesta rápida puede minimizar el impacto de ataques**
+### Evaluación de la Fase 5
 
-**Nota**: Este ejercicio se centra en conceptos básicos de seguridad en redes. Los temas avanzados como análisis forense, malware sofisticado y APTs se cubrirán en unidades posteriores del curso.
+#### Criterios de Evaluación:
 
-El ejercicio fomenta el aprendizaje activo y la comprensión profunda de los conceptos de seguridad de redes.
+| Criterio | Puntuación | Descripción |
+|----------|------------|-------------|
+| **Identificación de Conexiones** | 30% | Correcta relación entre tarjetas y casos |
+| **Aplicación de Contramedidas** | 30% | Propuesta realista de implementación |
+| **Análisis de Contexto** | 20% | Comprensión de especificidades del caso |
+| **Pensamiento Estratégico** | 20% | Consideración de prioridades y recursos |
+
+#### Rúbrica de Evaluación:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                RÚBRICA FASE 5                                │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  EXCELENTE (90-100%):                                      │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │                                                     │   │
+│  │ • Identifica todas las conexiones relevantes       │   │
+│  │ • Propone contramedidas específicas y realistas     │   │
+│  │ • Considera el contexto específico del caso        │   │
+│  │ • Demuestra pensamiento estratégico                 │   │
+│  │                                                     │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                             │
+│  BUENO (80-89%):                                           │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │                                                     │   │
+│  │ • Identifica la mayoría de conexiones              │   │
+│  │ • Propone contramedidas apropiadas                  │   │
+│  │ • Considera algunos aspectos del contexto          │   │
+│  │ • Muestra pensamiento básico                        │   │
+│  │                                                     │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                             │
+│  SATISFACTORIO (70-79%):                                   │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │                                                     │   │
+│  │ • Identifica algunas conexiones                    │   │
+│  │ • Propone contramedidas básicas                     │   │
+│  │ • Considera limitadamente el contexto              │   │
+│  │ • Pensamiento superficial                           │   │
+│  │                                                     │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Beneficios de la Fase 5
+
+1. **Aplicación Práctica:** Los estudiantes ven cómo la teoría se aplica a situaciones reales
+2. **Pensamiento Crítico:** Desarrollan habilidades de análisis y síntesis
+3. **Comprensión Profunda:** Entienden la complejidad de los ataques reales
+4. **Preparación Profesional:** Se preparan para situaciones laborales reales
+5. **Integración de Conocimientos:** Conectan diferentes conceptos aprendidos
+
+### Notas para Docentes
+
+- **Flexibilidad:** Los estudiantes pueden identificar conexiones adicionales válidas
+- **Contexto:** Considerar el nivel de experiencia de los estudiantes
+- **Tiempo:** Ajustar el tiempo según la complejidad del grupo
+- **Recursos:** Proporcionar acceso a los casos prácticos durante el ejercicio
