@@ -1,0 +1,753 @@
+\documentclass[a4paper]{article}
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+
+\usepackage{tikz}
+
+\newcommand{\dottedlines}[1]{%
+  \foreach \i in {1,...,#1} {%
+    \noindent
+    \begin{tikzpicture}
+      \draw[dotted] (0,0) -- (15,0);
+    \end{tikzpicture}\\[0.4cm]
+  }%
+}
+
+\usepackage{pgffor} 
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{longtable}  % Para manejar tablas largas si es necesario
+\usepackage{titlesec}   % Para personalizar los títulos
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+
+\titleformat{\section}[block]{\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+\begin{document}
+\begin{center}
+    \vspace*{-2cm}
+    \includegraphics[width=1\textwidth]{Pictures/UAI_35.png} \
+    %\textbf{FACULTAD DE INGENIERÍA Y CIENCIAS} \\
+    %\textbf{UNIVERSIDAD ADOLFO IBÁÑEZ} \\
+    \vspace{0.5cm} % Espacio vertical para separar la imagen
+    Control\# 1 \\
+    TICS413 Seguridad TI \\
+    Profesores: Romina Torres \\
+    Fecha: 14/04/2025
+\end{center}
+
+\vspace{0.6cm}
+
+\begin{flushleft}
+    \makebox[16cm]{\textbf{Nombre}:\ \hrulefill} \\
+    \medskip
+    \makebox[16cm]{\textbf{Rut}:\ \hrulefill}
+\end{flushleft}
+Esta prueba contiene X preguntas de X puntos cada una,  totalizando X puntos. Recuerde responder con letra clara y legible.
+
+
+%\vspace{1cm} 
+\textbf{Código de honor (extracto):} Constituyen infracciones gravísimas al deber de honestidad hacer pasar como propia, exclusivamente o con otro, una obra ajena o parte de ella para obtener una evaluación favorable. Emplear o facilitar a otro estudiante información de un modo prohibido por las reglas o instrucciones aplicables a esa actividad o que sea incompatible con el sentido de esa actividad.
+
+Por favor \textbf{NO comenzar}, hasta que se lo indiquen.
+
+
+\section*{Selección múltiple - 30 puntos (60 minutos)}
+
+\begin{enumerate}
+    \item ¿Qué tipo de ataque utiliza mensajes fraudulentos para engañar a las víctimas y obtener información confidencial? 
+    \begin{itemize}
+        \item a. Phishing
+        \item b. Malware
+        %\item c. Cross-Site Scripting (XSS)
+        \item d. Denial of Service (DoS)
+        \item e. Man-in-the-middle
+    \end{itemize}
+    %\textcolor{white}{Respuesta: a. Phishing. Justificación: El phishing es un ataque que utiliza mensajes fraudulentos para engañar a las víctimas y obtener información confidencial. Las otras opciones no se centran en el engaño a través de mensajes.}
+    %\vspace{1cm} % Espacio para que los estudiantes justifiquen su respuesta
+    
+    \item ¿Cuál es una buena práctica para proteger un servidor web contra ataques comunes? 
+    \begin{itemize}
+        \item a. Utilizar un Web Application Firewall (WAF)
+        \item b. Permitir el tráfico entrante únicamente por el puerto 80
+        \item c. Configurar únicamente acceso SSH
+       % \item d. Verificar los campos antes de enviarlos a la API
+        \item e. Evitar almacenar contraseñas en texto plano
+    \end{itemize}
+    %\textcolor{white}{Respuesta: a. Utilizar un Web Application Firewall (WAF) y d. Verificar los campos antes de enviarlos a la API. Justificación: Un WAF ayuda a proteger contra ataques web como inyección SQL y XSS, y verificar los campos es crucial para evitar inyecciones.}
+    %\vspace{1cm}
+    
+    \item ¿Qué describe mejor el propósito de un ataque de fuerza bruta? 
+    \begin{itemize}
+        \item a. Obtener acceso a un sistema probando todas las combinaciones posibles de contraseñas
+        \item b. Interceptar datos entre el cliente y el servidor
+        \item c. Saturar un servidor para hacerlo inaccesible
+        \item d. Modificar datos en una base de datos
+    \end{itemize}
+    %\textcolor{white}{Respuesta: a. Obtener acceso a un sistema probando todas las combinaciones posibles de contraseñas. Justificación: Un ataque de fuerza bruta intenta todas las combinaciones posibles para acceder a un sistema. Las otras opciones no describen este método.}
+    %\vspace{1cm}
+    
+    \item ¿Qué tipo de malware bloquea el acceso a los datos del usuario y exige un rescate para liberarlos? 
+    \begin{itemize}
+        \item a. Ransomware
+        \item b. Spyware
+        \item c. Worm
+        \item d. Keylogger
+    \end{itemize}
+    %\textcolor{white}{Respuesta: a. Ransomware. Justificación: El ransomware cifra los datos del usuario y exige un rescate para liberarlos. Los otros tipos de malware no tienen este comportamiento.}
+    %\vspace{1cm}
+    
+    % \item ¿Cuál de las siguientes vulnerabilidades aprovecha la especulación en la ejecución de instrucciones del procesador para acceder a datos sensibles? Seleccione todas las correctas.
+    % \begin{itemize}
+    %     \item a. Spectre
+    %     \item b. SQL Injection
+    %     \item c. Phishing
+    %     \item d. Meltdown
+    % \end{itemize}
+    % %\textcolor{white}{Respuesta: a. Spectre y d. Meltdown. Justificación: Ambas vulnerabilidades explotan la especulación en la ejecución de instrucciones del procesador. Las otras opciones no están relacionadas con este tipo de vulnerabilidad.}
+    % %\vspace{1cm}
+    
+    % \item ¿Qué ataque implica modificar las respuestas del DNS para redirigir a las víctimas a sitios fraudulentos? Seleccione todas las correctas.
+    % \begin{itemize}
+    %     \item a. Spoofing
+    %     \item b. Ataque de envenenamiento de caché DNS
+    %     \item c. Cross-Site Scripting (XSS)
+    %     \item d. Denial of Service (DoS)
+    % \end{itemize}
+    % %\textcolor{white}{Respuesta: b. Ataque de envenenamiento de caché DNS. Justificación: Este ataque modifica las respuestas del DNS para redirigir a las víctimas. Las otras opciones no se centran en el DNS.}
+    % %\vspace{1cm}
+    
+    \item ¿Qué tipo de ataque podría mitigarse mejor con la implementación de un límite de tasa (Rate Limiting) o reintentos? 
+    \begin{itemize}
+        \item a. Fuerza bruta
+        \item b. Ransomware
+        %\item c. Inyección SQL
+        %\item d. Cross-Site Scripting
+    \end{itemize}
+    %\textcolor{white}{Respuesta: a. Fuerza bruta. Justificación: El límite de tasa puede reducir la efectividad de un ataque de fuerza bruta al limitar el número de intentos en un período de tiempo.}
+    %\vspace{1cm}
+    
+    \item ¿Qué herramientas son comunes para detectar intrusiones en una red? Seleccione todas las correctas.
+    \begin{itemize}
+        \item a. IDS (Sistema de detección de intrusiones)
+        \item b. VPN
+        \item c. Firewall
+        %\item d. SSH
+    \end{itemize}
+    %\textcolor{white}{Respuesta: a. IDS (Sistema de detección de intrusiones). Justificación: Un IDS está diseñado específicamente para detectar intrusiones en una red. Las otras opciones no tienen esta función principal.}
+    %\vspace{1cm}
+    
+    \item Un atacante ha accedido a una red y está interceptando comunicaciones entre dos dispositivos para robar credenciales. ¿Qué técnica está utilizando? %Seleccione todas las correctas.
+    \begin{itemize}
+        \item a. Man-in-the-Middle (MitM)
+        \item b. Phishing
+        \item c. DoS (Denial of Service)
+        %\item d. SQL Injection
+    \end{itemize}
+    %\textcolor{white}{Respuesta: a. Man-in-the-Middle (MitM). Justificación: Un ataque MitM intercepta y potencialmente altera la comunicación entre dos partes. Las otras opciones no describen este tipo de ataque.}
+    %\vspace{1cm}
+    
+    \item Un administrador de red configura un servidor web. ¿Qué combinación de configuraciones debe implementar para garantizar que solo se permita tráfico HTTPS hacia el servidor? Seleccione todas las correctas.
+    \begin{itemize}
+        \item I. Permitir solo el puerto 443 en el firewall.
+        \item II. Configurar un certificado SSL/TLS válido.
+        \item III. Deshabilitar todos los puertos excepto el 22.
+        \item IV. Implementar autenticación de dos factores (2FA) para los usuarios del sitio.
+    \end{itemize}
+    \begin{itemize}
+        \item A. Solo I y II
+        \item B. Solo II y III
+        \item C. Solo I, II y IV
+        \item D. Solo III y IV
+        \item E. Otra combinación (ninguna de las anteriores)
+    \end{itemize}
+    %\textcolor{white}{Respuesta: A. Solo I y II. Justificación: Permitir solo el puerto 443 y configurar un certificado SSL/TLS válido asegura que solo el tráfico HTTPS sea permitido.}
+    %\vspace{1cm}
+
+    \item ¿Qué tipo de ataque implica engañar a una persona para que revele información confidencial?
+    \begin{itemize}
+        \item a. Phishing
+        \item b. DoS (Denial of Service)
+        \item c. DDoS
+        \item d. Man-in-the-Middle
+        %\item e. SQL Injection
+    \end{itemize}
+    %\textcolor{white}{Respuesta: a. Phishing. Justificación: El phishing engaña a las personas para que revelen información confidencial. Las otras opciones no se centran en el engaño directo a personas.}
+    %\vspace{1cm}
+
+    \item ¿Cuál es el propósito principal de un ataque de ransomware?
+    \begin{itemize}
+        \item a. Interrumpir el servicio
+        \item b. Secuestrar datos a cambio de un rescate
+        \item c. Obtener acceso no autorizado
+        \item d. Destruir los datos del sistema
+    \end{itemize}
+    %\textcolor{white}{Respuesta: b. Secuestrar datos a cambio de un rescate. Justificación: El ransomware cifra los datos y exige un rescate para liberarlos. Las otras opciones no describen el propósito principal del ransomware.}
+    %\vspace{1cm}
+
+    \item ¿Qué describe mejor un ataque de "Denial of Service" (DoS)?
+    \begin{itemize}
+        \item a. Saturar un servidor con tráfico para interrumpir su funcionamiento
+        \item b. Interceptar comunicaciones entre dos partes
+        \item c. Explorar vulnerabilidades de software
+        \item d. Robar información de cuentas bancarias
+    \end{itemize}
+    %\textcolor{white}{Respuesta: a. Saturar un servidor con tráfico para interrumpir su funcionamiento. Justificación: Un ataque DoS busca agotar los recursos de un sistema para interrumpir su funcionamiento.}
+    %\vspace{1cm}
+
+    % \item ¿Cuál de los siguientes ataques explota vulnerabilidades en el navegador para ejecutar código malicioso en el lado del cliente?
+    % \begin{itemize}
+    %     \item a. Cross-Site Scripting (XSS)
+    %     \item b. Ransomware
+    %     \item c. SQL Injection
+    %     \item d. Man-in-the-Middle
+    % \end{itemize}
+    % %\textcolor{white}{Respuesta: a. Cross-Site Scripting (XSS). Justificación: XSS explota vulnerabilidades en el navegador para ejecutar código malicioso en el lado del cliente.}
+    % %\vspace{1cm}
+
+    \item ¿Qué ataque utiliza la técnica de fuerza bruta para descifrar contraseñas mediante la prueba de múltiples combinaciones?
+    \begin{itemize}
+        \item a. Phishing
+        %\item b. SQL Injection
+        \item c. Ataque de Fuerza Bruta
+        \item d. Man-in-the-Middle
+    \end{itemize}
+    %\textcolor{white}{Respuesta: c. Ataque de Fuerza Bruta. Justificación: Un ataque de fuerza bruta prueba múltiples combinaciones de contraseñas para descifrarlas.}
+    %\vspace{1cm}
+    %
+    % \item ¿Qué significa un ataque de "Zero Day"?
+    % \begin{itemize}
+    %     \item a. Un ataque descubierto el mismo día que ocurre
+    %     \item b. Un ataque que explota una vulnerabilidad antes de que se publique un parche
+    %     \item c. Un ataque que tiene lugar el primer día del mes
+    %     \item d. Un ataque que se dirige a software de código abierto
+    % \end{itemize}
+    %\textcolor{white}{Respuesta: b. Un ataque que explota una vulnerabilidad antes de que se publique un parche. Justificación: Un ataque de "Zero Day" explota vulnerabilidades desconocidas antes de que se publiquen parches.}
+    %\vspace{1cm}
+    %
+    % \item ¿Cuál es el objetivo principal de un ataque de ingeniería social?
+    % \begin{itemize}
+    %     \item a. Manipular a las personas para que revelen información confidencial
+    %     \item b. Obtener acceso físico a un sistema
+    %     \item c. Infectar con malware
+    %     \item d. Desencriptar datos cifrados
+    % \end{itemize}
+    % %\textcolor{white}{Respuesta: a. Manipular a las personas para que revelen información confidencial. Justificación: La ingeniería social se centra en manipular a las personas para obtener información.}
+    % %\vspace{1cm}
+
+    \item ¿Qué tipo de ataque consiste en infectar múltiples dispositivos para crear una red controlada por el atacante, conocida como botnet?
+    \begin{itemize}
+        \item a. Phishing
+        \item b. Ataque de Botnet
+        %\item c. Cross-Site Scripting
+        \item d. Man-in-the-Middle
+    \end{itemize}
+    %\textcolor{white}{Respuesta: b. Ataque de Botnet. Justificación: Un ataque de botnet infecta múltiples dispositivos para crear una red controlada por el atacante.}
+    %\vspace{1cm}
+
+    % \item ¿Cuál de los siguientes es un ataque que afecta la disponibilidad de un sistema en la tríada CIA?
+    % \begin{itemize}
+    %     \item a. Ataque de denegación de servicio (DoS)
+    %     %\item b. Inyección SQL
+    %     %\item c. Cross-Site Scripting (XSS)
+    %     \item d. Phishing
+    % \end{itemize}
+    % %\textcolor{white}{Respuesta: a. Ataque de denegación de servicio (DoS). Justificación: Un ataque DoS afecta la disponibilidad de un sistema al agotar sus recursos.}
+    % %\vspace{1cm}
+
+    \item ¿Cuál de los siguientes es un ataque que afecta la integridad de un sistema en la tríada CIA?
+    \begin{itemize}
+        \item a. Phishing para robar credenciales
+        \item b. Ataque de denegación de servicio (DoS)
+        \item c. Sniffing de contraseñas en tránsito
+        \item d. Ninguna de las anteriores %Alteración de datos mediante un ataque de inyección SQL
+    \end{itemize}
+    %\textcolor{white}{Respuesta: a. Alteración de datos mediante un ataque de inyección SQL. Justificación: La inyección SQL puede alterar datos, afectando la integridad del sistema. - cambia a ninguna de las anteriores}
+    %\vspace{1cm}
+
+    \item ¿Cuáles de las siguientes son buenas prácticas para proteger la integridad y confidencialidad de los datos en tránsito?
+    \begin{itemize}
+        \item I. Utilizar protocolos de cifrado como TLS (Transport Layer Security) para proteger la comunicación.
+        \item II. Enviar datos sensibles en texto plano a través de la red para mejorar el rendimiento.
+        \item III. Implementar firmas digitales para verificar la autenticidad e integridad de los datos transmitidos.
+        \item IV. Desactivar el cifrado en redes privadas para facilitar el monitoreo del tráfico.
+        %\item V. Configurar VPNs (Redes Privadas Virtuales) para crear un túnel seguro entre redes externas e internas.
+    \end{itemize}
+    \begin{itemize}
+        \item a. Solo I y III
+        \item b. Solo I, III 
+        \item c. Solo II, IV 
+        \item d. Solo I, II y IV
+        \item e. Solo III 
+    \end{itemize}
+    %\textcolor{white}{Respuesta: b. Solo I, III . Justificación: Utilizar TLS, implementar firmas digitales y configurar VPNs son buenas prácticas para proteger datos en tránsito.}
+    %\vspace{1cm}
+    %
+    % \item Análisis de Autenticación y Autorización: 
+    % Situación:
+    % \begin{itemize}
+    %     \item Todos los empleados utilizan contraseñas simples para sus cuentas.
+    %     \item No hay autenticación de dos factores (2FA) habilitada en las cuentas críticas.
+    % \end{itemize}
+    % ¿Cuál es el impacto de una posible fuga de contraseñas?
+    % \begin{itemize}
+    %     \item a. No hay impacto significativo en la seguridad.
+    %     \item b. Riesgo de acceso no autorizado a cuentas críticas.
+    %    % \item c. Mejora la seguridad al cambiar las contraseñas regularmente.
+    %     \item d. Las contraseñas no son relevantes para la seguridad.
+    % \end{itemize}
+    % %\textcolor{white}{Respuesta: b. Riesgo de acceso no autorizado a cuentas críticas. Justificación: Las contraseñas simples aumentan el riesgo de acceso no autorizado.}
+    % %\vspace{1cm}
+    %
+    % ¿Qué políticas de autenticación más seguras se podrían implementar?
+    % \begin{itemize}
+    %     \item a. Implementar autenticación de dos factores (2FA).
+    %     \item b. Usar contraseñas simples para facilitar el acceso.
+    %     \item c. No cambiar las políticas actuales.
+    %     \item d. Desactivar la autenticación para simplificar el acceso.
+    % \end{itemize}
+    % %\textcolor{white}{Respuesta: a. Implementar autenticación de dos factores (2FA). Justificación: La implementación de 2FA mejora la seguridad al requerir un segundo factor de autenticación.}
+    % %\vspace{1cm}
+    %
+    % \item Explica el concepto de ciberseguridad. 
+    % ¿Por qué es importante para individuos y organizaciones proteger su información digital?
+    % \begin{itemize}
+    %     \item a. No es importante proteger la información digital.
+    %     \item b. Protege contra el acceso no autorizado y pérdida de datos.
+    %     \item c. Solo las grandes empresas necesitan preocuparse por la ciberseguridad.
+    %     \item d. La ciberseguridad es solo una moda pasajera.
+    % \end{itemize}
+    %\textcolor{white}{Respuesta: b. Protege contra el acceso no autorizado y pérdida de datos. Justificación: La ciberseguridad es crucial para proteger la información digital de accesos no autorizados y pérdidas.}
+    %\vspace{1cm}
+    %
+    % \item Describe qué es un ataque de phishing. 
+    % Proporciona un ejemplo práctico y explica cómo alguien puede identificar y evitar caer en este tipo de ataque.
+    % \begin{itemize}
+    %     \item a. Un ataque que utiliza software malicioso para dañar sistemas.
+    %     \item b. Un intento de obtener información confidencial haciéndose pasar por una entidad confiable.
+    %     \item c. Un método para mejorar la seguridad de las contraseñas.
+    %     \item d. No es un tipo de ataque relevante.
+    % \end{itemize}
+    %\textcolor{white}{Respuesta: b. Un intento de obtener información confidencial haciéndose pasar por una entidad confiable. Justificación: El phishing engaña a las personas para obtener información confidencial.}
+    %\vspace{1cm}
+    
+    \item ¿Cuáles son las buenas prácticas más importantes para crear y almacenar contraseñas seguras? 
+    Justifica por qué cada práctica es crucial para la protección de datos.
+    \begin{itemize}
+        \item a. Usar contraseñas cortas y fáciles de recordar.
+        \item b. Cambiar contraseñas regularmente y usar combinaciones complejas.
+        \item c. Compartir contraseñas con compañeros de trabajo para mayor seguridad.
+        \item d. No es necesario preocuparse por la seguridad de las contraseñas.
+    \end{itemize}
+    %\textcolor{white}{Respuesta: b. Cambiar contraseñas regularmente y usar combinaciones complejas. Justificación: Contraseñas complejas y cambios regulares mejoran la seguridad de las cuentas.}
+    %\vspace{1cm}
+    
+    \item ¿Qué es el malware y cuáles son los tipos más comunes? 
+    Describe las características de al menos dos tipos de malware y cómo pueden afectar a un sistema.
+    \begin{itemize}
+        \item a. Software diseñado para proteger sistemas.
+        \item b. Software malicioso que incluye virus y troyanos.
+        \item c. Herramientas de seguridad para mejorar el rendimiento del sistema.
+        \item d. No tiene impacto en los sistemas modernos.
+    \end{itemize}
+    %\textcolor{white}{Respuesta: b. Software malicioso que incluye virus y troyanos. Justificación: Virus y troyanos son tipos comunes de malware que pueden dañar sistemas.}
+    %\vspace{1cm}
+    
+    \item Explica el papel de un firewall en la protección de una red. 
+    ¿Cómo funciona y qué diferencias existen entre un firewall de hardware y uno de software?
+    \begin{itemize}
+        \item a. No tiene un papel importante en la seguridad de la red.
+        \item b. Filtra el tráfico de red y protege contra accesos no autorizados.
+        \item c. Solo los firewalls de hardware son efectivos.
+        \item d. No hay diferencias entre firewalls de hardware y software.
+    \end{itemize}
+    %\textcolor{white}{Respuesta: b. Filtra el tráfico de red y protege contra accesos no autorizados. Justificación: Los firewalls filtran el tráfico y protegen la red de accesos no autorizados.}
+    %\vspace{1cm}
+    
+    \item ¿Cuál es la función principal de una VPN (Red Privada Virtual) en un entorno de red?
+    \begin{itemize}
+        \item a) Cifrar todos los archivos almacenados en el dispositivo.
+        \item b) Conectar una red local a otra red sin cifrado.
+        \item c) Conectar una red con cifrado.
+        \item d) Proporcionar acceso solo a la red local sin salir a internet.
+        \item e) Mejorar la velocidad de conexión de internet.
+        \item f) Evitar ataques de fuerza bruta en aplicaciones web.
+    \end{itemize}
+    %\textcolor{white}{Respuesta: c) Conectar una red con cifrado. Justificación: Una VPN conecta redes de forma segura mediante cifrado.}
+    %\vspace{1cm}
+    
+    \item En relación a los ataques de Denegación de Servicio (DoS) y Denegación de Servicio Distribuida (DDoS):
+    \begin{itemize}
+        \item I. Un ataque DoS busca abrumar/saturar a un sistema con una única fuente de tráfico excesivo. - Verdadero
+        \item II. Un ataque DDoS utiliza múltiples fuentes para generar un tráfico masivo coordinado. - D extra viene de "Distributed"
+        \item III. Los ataques DoS y DDoS pueden ser mitigados únicamente con firewalls básicos. - Falso "únicamente", necesitamos más que solo un firewall básico
+        \item IV. Hemos visto que los últimos ataques DDoS se componen de millones de paquetes por segundo, saturando el tráfico en su totalidad.
+    \end{itemize}
+    \begin{itemize}
+        \item a) Solo I y II
+        \item b) Solo I, II y IV
+        \item c) Solo II y III
+        \item d) I, II, III y IV
+        \item e) Ninguna de las anteriores
+    \end{itemize}
+    %\textcolor{white}{Respuesta: b) Solo I, II y IV. Justificación: Las afirmaciones I, II y IV son correctas sobre DoS y DDoS.}
+    %\vspace{1cm}
+    
+    \item Durante un análisis de tráfico de red con Wireshark, se observan numerosos paquetes SYN provenientes de una sola dirección IP sin las respuestas correspondientes (SYN/ACK). ¿Qué tipo de ataque es más probable que esté ocurriendo?
+    \begin{itemize}
+        \item a) Ataque Man-in-the-Middle
+        \item b) Ataque de IP Spoofing
+        \item c) Ataque de Phishing - Video, Audio, ya no solo texto.
+        \item d) Ataque SYN Flood (DoS)
+        \item e) Ninguna de las anteriores
+    \end{itemize}
+    %\textcolor{white}{Respuesta: d) Ataque SYN Flood (DoS). Justificación: Un SYN Flood envía múltiples solicitudes SYN sin completar el handshake, saturando la tabla de conexiones.}
+    %\vspace{1cm}
+    % \item Sobre el enfoque de seguridad Zero-Trust:
+    % \begin{itemize}
+    %     \item I. El principio de ``verificación explícita'' implica siempre autenticar y autorizar antes de conceder acceso.
+    %     \item II. ``Acceso con privilegios mínimos'' significa que los usuarios tienen el acceso necesario para cumplir solo con sus tareas.
+    %     \item III. Zero-Trust asume siempre que la red interna es segura. - Es lo opuesto! Desconfías de todos y de todo
+    %     \item IV. La suposición de ``violation'' implica planificar como si el entorno ya hubiera sido comprometido.
+    % \end{itemize}
+    % \begin{itemize}
+    %     \item a) Solo I y II
+    %     \item b) I, II y IV
+    %     \item c) Solo II y III
+    %     \item d) I, II, III y IV
+    %     \item e) Ninguna de las anteriores
+    % \end{itemize}
+    %\textcolor{white}{Respuesta: b) I, II y IV. Justificación: Zero-Trust se basa en verificación explícita, acceso mínimo y planificación para compromisos.}
+    %\vspace{1cm}
+    
+    \item ¿Cuál de los siguientes controles de seguridad se clasifica como un control técnico?
+    \begin{itemize}
+        \item a) Políticas de acceso y uso aceptable
+        \item b) Controles físicos como cerraduras y sistemas de vigilancia
+        \item c) Autenticación de dos factores (2FA)
+        \item d) Entrenamiento de concienciación en seguridad
+        \item e) Evaluación de riesgos
+    \end{itemize}
+    %\textcolor{white}{Respuesta: c) Autenticación de dos factores (2FA). Justificación: 2FA es un control técnico que mejora la seguridad de acceso.}
+    %\vspace{1cm}
+    
+    \item En el contexto de un ataque de "Man-in-the-Middle" (MITM):
+    \begin{itemize}
+        \item I. El atacante intercepta y potencialmente altera la comunicación entre dos partes sin que estas lo sepan.
+        \item II. La autenticación mutua puede ayudar a prevenir los ataques MITM. - Validar comunicación + cifrado
+        \item III. MITM es menos efectivo en conexiones HTTPS debido a la encriptación. - No evita que te estén escuchando - pero lo que ves es ilegible
+        \item IV. Un MITM puede ser fácilmente detectado sin herramientas especializadas. - Necesitas herramientas como WireShark.
+    \end{itemize}
+    \begin{itemize}
+        \item a) Solo I y II
+        \item b) I, II y III
+        \item c) Solo II y IV
+        \item d) I, II, III y IV
+        \item e) Ninguna de las anteriores
+    \end{itemize}
+    %\textcolor{white}{Respuesta: a) Solo I y II. Justificación: MITM intercepta comunicaciones y la autenticación mutua puede prevenirlo.}
+    %\vspace{1cm}
+    
+    % \item ¿Cuál es la diferencia principal entre un firewall y un Web Application Firewall (WAF)?
+    % \begin{itemize}
+    %     \item a) Un firewall solo filtra tráfico HTTP y HTTPS, mientras que un WAF puede filtrar cualquier tráfico de red. - WAF ve solo HTTP y HTTPS (es la web) - Firewall incluye otros protocolos como SSH, Telnet…
+    %     \item b) Un firewall protege las redes contra ataques de malware, mientras que un WAF protege aplicaciones web contra ataques como SQL injection y cross-site scripting (XSS). - Por lo general se requieren los dos, ya que resuelven casos de uso distintos.
+    %     \item c) Un WAF es más fácil de configurar que un firewall tradicional. - No necesariamente. Igual de difíciles / fáciles.
+    %     \item d) Un firewall es solo un software, mientras que un WAF es solo hardware. - Firewall y WAF pueden ser contratados como Software (as a Service). - FIrewall y WAF por detrás igualmente existen en físico - hardware.
+    %     \item e) Ambos son equivalentes y se utilizan indistintamente en cualquier red. - No son lo mismo!
+    % \end{itemize}
+    %\textcolor{white}{Respuesta: b) Un firewall protege las redes contra ataques de malware, mientras que un WAF protege aplicaciones web contra ataques como SQL injection y cross-site scripting (XSS). Justificación: Los firewalls y WAFs tienen diferentes enfoques de protección.}
+    %\vspace{1cm}
+    
+    % \item En la fase de 'Mantener el Acceso' durante un ataque cibernético, el atacante puede:
+    % \begin{itemize}
+    %     \item I. Instalar backdoors para asegurar el acceso continuo.
+    %     \item II. Utilizar rootkits para ocultar su presencia en el sistema.
+    %     \item III. Explotar vulnerabilidades para ganar acceso inicial al sistema. - Estamos en la fase donde ya tengo acceso
+    %     \item IV. Borrar logs para evitar la detección. - No afecta el hecho de tener acceso
+    % \end{itemize}
+    % \begin{itemize}
+    %     \item a) Solo I y II
+    %     \item b) I, II y IV
+    %     \item c) Solo III y IV
+    %     \item d) I, II, III y IV
+    %     \item e) Ninguna de las anteriores
+    % \end{itemize}
+    % %\textcolor{white}{Respuesta: a) Solo I y II. Justificación: Durante la fase de mantener el acceso, los atacantes instalan backdoors y rootkits.}
+    % %\vspace{1cm}
+    
+    \item Un atacante envía correos electrónicos fraudulentos que parecen provenir de un banco legítimo, solicitando a los destinatarios que ingresen sus credenciales de inicio de sesión en un sitio web falso que parece auténtico.
+    ¿Qué vector de ataque describe mejor este escenario?
+    \begin{itemize}
+        \item a) Phishing
+        \item b) Ataque de diccionario
+        \item c) Ransomware
+        \item d) Malware
+        \item e) Keylogging
+    \end{itemize}
+    %\textcolor{white}{Respuesta: a) Phishing. Justificación: El phishing utiliza correos fraudulentos para engañar a las personas y obtener sus credenciales.}
+    %\vspace{1cm}
+    
+    \item Un atacante utiliza un programa malicioso que registra las pulsaciones de teclas de un usuario y envía esta información a un servidor remoto sin que el usuario lo sepa.
+    ¿Qué vector de ataque se está utilizando aquí?
+    \begin{itemize}
+        \item a) Ataque Man-in-the-Middle (MITM)
+        \item b) Keylogging - No se puede confiar ni en el teclado (puede venir instalado el malware)
+        \item c) Spoofing
+        %\item d) SQL Injection
+        %\item e) Cross-Site Scripting (XSS)
+    \end{itemize}
+    %\textcolor{white}{Respuesta: b) Keylogging. Justificación: El keylogging registra las pulsaciones de teclas y envía la información a un servidor remoto.}
+    %\vspace{1cm}
+    
+    \item Una empresa descubre que un atacante ha explotado una vulnerabilidad en su software de servidor web, permitiendo al atacante ejecutar comandos arbitrarios en el servidor, obteniendo acceso no autorizado a la base de datos.
+    ¿Qué vector de ataque describe mejor este escenario?
+    \begin{itemize}
+        \item a) Phishing
+        \item b) Ejecución remota de código (RCE)
+        \item c) Fuerza bruta
+        \item d) Ataque de repetición (replay attack)
+        \item e) Exfiltración de datos
+    \end{itemize}
+    %\textcolor{white}{Respuesta: b) Ejecución remota de código (RCE). Justificación: La ejecución remota de código permite al atacante ejecutar comandos arbitrarios en el servidor.}
+    %\vspace{1cm}
+    
+    \item ¿Qué es la seguridad computacional?
+    \begin{itemize}
+        \item a) Protección de sistemas informáticos contra amenazas físicas y lógicas.
+        \item b) Protección de la información almacenada digitalmente.
+        \item c) Protección de redes contra ataques cibernéticos.
+        \item d) Ninguna de las anteriores.
+    \end{itemize}
+    %\textcolor{white}{Respuesta: a) Protección de sistemas informáticos contra amenazas físicas y lógicas. Justificación: La seguridad computacional se centra en proteger sistemas informáticos de amenazas físicas y lógicas.}
+    %\vspace{1cm}
+    
+    \item ¿Cuál es el enfoque principal de la ciberseguridad?
+    \begin{itemize}
+        \item a) Proteger la información en formato físico.
+        \item b) Proteger sistemas informáticos y redes contra ataques cibernéticos.
+        \item c) Proteger la confidencialidad de los datos.
+        \item d) Proteger la integridad de los datos.
+    \end{itemize}
+    %\textcolor{white}{Respuesta: b) Proteger sistemas informáticos y redes contra ataques cibernéticos. Justificación: La ciberseguridad se enfoca en proteger sistemas y redes de ataques cibernéticos.}
+    %\vspace{1cm}
+    
+    \item ¿Qué es un evento según el NIST SP 800?
+    \begin{itemize}
+        \item a) Un ataque cibernético exitoso.
+        \item b) Cualquier ocurrencia observable en una red o sistema.
+        \item c) Una vulnerabilidad en un sistema de información.
+        \item d) Un acceso no autorizado a un sistema.
+    \end{itemize}
+    %\textcolor{white}{Respuesta: b) Cualquier ocurrencia observable en una red o sistema. Justificación: Según el NIST SP 800, un evento es cualquier ocurrencia observable en una red o sistema.}
+    %\vspace{1cm}
+    
+    \item ¿Qué es un exploit?
+    \begin{itemize}
+        \item a) Un tipo de malware que se propaga automáticamente.
+        \item b) Un ataque que aprovecha vulnerabilidades del sistema.
+        \item c) Un programa que protege contra malware.
+        \item d) Un método de cifrado de datos.
+    \end{itemize}
+    %\textcolor{white}{Respuesta: b) Un ataque que aprovecha vulnerabilidades del sistema. Justificación: Un exploit es un ataque que aprovecha vulnerabilidades del sistema para comprometerlo.}
+    %\vspace{1cm}
+    
+    \item ¿Qué garantiza la disponibilidad en seguridad informática?
+    \begin{itemize}
+        \item a) Que la información esté protegida contra accesos no autorizados.
+        \item b) Que los datos no sean alterados de manera no autorizada.
+        \item c) Que la información esté accesible cuando se necesite.
+        \item d) Que los datos estén cifrados.
+    \end{itemize}
+    %\textcolor{white}{Respuesta: c) Que la información esté accesible cuando se necesite. Justificación: La disponibilidad garantiza que la información esté accesible cuando se necesite.}
+    %\vspace{1cm}
+    
+    \item ¿Qué es la autenticación multifactor (MFA)?
+    \begin{itemize}
+        \item a) Uso de contraseñas y PINs para acceder a sistemas.
+        \item b) Combinación de contraseñas con tokens o biometría.
+        \item c) Uso de tokens físicos para acceder a áreas críticas.
+        \item d) Uso de reconocimiento facial para autenticar usuarios.
+    \end{itemize}
+    %\textcolor{white}{Respuesta: b) Combinación de contraseñas con tokens o biometría. Justificación: La autenticación multifactor combina múltiples métodos de autenticación para aumentar la seguridad.}
+    %\vspace{1cm}
+    
+    \item ¿Qué es un ataque de fuerza bruta?
+    \begin{itemize}
+        \item a) Un ataque que utiliza software malicioso para dañar sistemas.
+        \item b) Un intento de obtener información confidencial haciéndose pasar por una entidad confiable.
+        \item c) Un método para mejorar la seguridad de las contraseñas.
+        \item d) Un ataque que prueba múltiples combinaciones de contraseñas.
+    \end{itemize}
+    %\textcolor{white}{Respuesta: d) Un ataque que prueba múltiples combinaciones de contraseñas. Justificación: Un ataque de fuerza bruta prueba múltiples combinaciones de contraseñas para acceder a un sistema.}
+    %\vspace{1cm}
+
+    % \item ¿Qué es un hash en seguridad informática?
+    % \begin{itemize}
+    %     \item a) Un método de cifrado de datos.
+    %     \item b) Una función que convierte una entrada en una salida de longitud fija.
+    %     \item c) Un tipo de malware que se propaga automáticamente.
+    %     \item d) Un programa que protege contra malware.
+    % \end{itemize}
+    % %\textcolor{white}{Respuesta: b) Una función que convierte una entrada en una salida de longitud fija. Justificación: Un hash es una función que convierte una entrada en una salida de longitud fija, utilizada para verificar la integridad de los datos.}
+    % %\vspace{1cm}
+
+    % \item ¿Qué es un ataque de phishing?
+    % \begin{itemize}
+    %     \item a) Un ataque que utiliza software malicioso para dañar sistemas.
+    %     \item b) Un intento de obtener información confidencial haciéndose pasar por una entidad confiable.
+    %     \item c) Un método para mejorar la seguridad de las contraseñas.
+    %     \item d) Un ataque que prueba múltiples combinaciones de contraseñas.
+    % \end{itemize}
+    %\textcolor{white}{Respuesta: b) Un intento de obtener información confidencial haciéndose pasar por una entidad confiable. Justificación: El phishing engaña a las personas para obtener información confidencial.}
+    %\vspace{1cm}
+    
+    \item ¿Qué es un ataque de denegación de servicio (DoS)?
+    \begin{itemize}
+        \item a) Un ataque que utiliza software malicioso para dañar sistemas.
+        \item b) Un intento de obtener información confidencial haciéndose pasar por una entidad confiable.
+        \item c) Un ataque que busca agotar los recursos de un sistema.
+        \item d) Un ataque que prueba múltiples combinaciones de contraseñas.
+    \end{itemize}
+    %\textcolor{white}{Respuesta: c) Un ataque que busca agotar los recursos de un sistema. Justificación: Un ataque DoS busca agotar los recursos de un sistema para interrumpir su funcionamiento.}
+    %\vspace{1cm}
+
+    % \textbf{Preguntas de Verdadero/Falso}
+
+    % \item La seguridad de la información se enfoca en la protección de la información almacenada digitalmente. (Falso)
+    % %\textcolor{white}{Justificación: La seguridad de la información abarca la protección de la información en todos los formatos, no solo digitalmente.}
+    % %\vspace{1cm}
+
+    % \item Un incidente es un evento que pone en peligro la confidencialidad, integridad o disponibilidad de un sistema de información. (Verdadero)
+    % %\textcolor{white}{Justificación: Un incidente afecta la confidencialidad, integridad o disponibilidad de un sistema de información.}
+    % %\vspace{1cm}
+
+    % \item La confidencialidad se refiere a la protección de la información contra accesos no autorizados. (Verdadero)
+    % %\textcolor{white}{Justificación: La confidencialidad asegura que solo las partes autorizadas puedan acceder a la información.}
+    % %\vspace{1cm}
+
+    % \item La integridad asegura que los datos no sean alterados de manera no autorizada. (Verdadero)
+    % %\textcolor{white}{Justificación: La integridad garantiza que los datos se mantengan sin cambios no autorizados.}
+    % %\vspace{1cm}
+
+    % \item La disponibilidad garantiza que la información esté accesible cuando se necesite. (Verdadero)
+    % %\textcolor{white}{Justificación: La disponibilidad asegura que la información esté disponible para su uso cuando se requiera.}
+    % %\vspace{1cm}
+
+    % \item La autenticación es un proceso que verifica la identidad de un usuario o sistema. (Verdadero)
+    % %\textcolor{white}{Justificación: La autenticación verifica la identidad de usuarios o sistemas para asegurar el acceso autorizado.}
+    % %\vspace{1cm}
+
+    % \item Las contraseñas son el método de autenticación más utilizado, pero presentan varios riesgos de seguridad. (Verdadero)
+    % %\textcolor{white}{Justificación: Las contraseñas son comunes pero pueden ser vulnerables a ataques como el phishing y la fuerza bruta.}
+    % %\vspace{1cm}
+
+    % \item Un hash es una función que convierte una entrada en una salida de longitud fija. (Verdadero)
+    % %\textcolor{white}{Justificación: Un hash convierte una entrada en una salida de longitud fija, útil para verificar la integridad de los datos.}
+    % %\vspace{1cm}
+
+    % \item El phishing es una técnica en la que los atacantes engañan a los usuarios para que revelen sus credenciales. (Verdadero)
+    % %\textcolor{white}{Justificación: El phishing engaña a los usuarios para obtener sus credenciales mediante correos o sitios falsos.}
+    % %\vspace{1cm}
+
+    % \item Un ataque de denegación de servicio (DoS) busca agotar los recursos de un sistema. (Verdadero)
+    % %\textcolor{white}{Justificación: Un ataque DoS agota los recursos de un sistema para interrumpir su funcionamiento.}
+    % %\vspace{1cm}
+
+    % \textbf{Preguntas Adicionales}
+
+    % \item ¿Qué es un ataque de inyección SQL?
+    % \begin{itemize}
+    %     \item a) Un ataque que utiliza software malicioso para dañar sistemas.
+    %     \item b) Un intento de obtener información confidencial haciéndose pasar por una entidad confiable.
+    %     \item c) Un ataque que inserta código SQL malicioso en un campo de entrada.
+    %     \item d) Un ataque que prueba múltiples combinaciones de contraseñas.
+    % \end{itemize}
+    % %\textcolor{white}{Respuesta: c) Un ataque que inserta código SQL malicioso en un campo de entrada. Justificación: La inyección SQL inserta código malicioso en campos de entrada para manipular bases de datos.}
+    % %\vspace{1cm}
+    
+    % \item ¿Qué es un ataque de botnet?
+    % \begin{itemize}
+    %     \item a) Un ataque que utiliza software malicioso para dañar sistemas.
+    %     \item b) Un intento de obtener información confidencial haciéndose pasar por una entidad confiable.
+    %     \item c) Un ataque que utiliza una red de computadoras infectadas para realizar ataques coordinados.
+    %     \item d) Un ataque que prueba múltiples combinaciones de contraseñas.
+    % \end{itemize}
+    % %\textcolor{white}{Respuesta: c) Un ataque que utiliza una red de computadoras infectadas para realizar ataques coordinados. Justificación: Un botnet utiliza múltiples dispositivos infectados para realizar ataques coordinados.}
+    % %\vspace{1cm}
+    
+    % \item ¿Qué es un ataque de ransomware?
+    % \begin{itemize}
+    %     \item a) Un ataque que utiliza software malicioso para dañar sistemas.
+    %     \item b) Un intento de obtener información confidencial haciéndose pasar por una entidad confiable.
+    %     \item c) Un ataque que cifra los datos de un sistema y exige un rescate para liberarlos.
+    %     \item d) Un ataque que prueba múltiples combinaciones de contraseñas.
+    % \end{itemize}
+    % %\textcolor{white}{Respuesta: c) Un ataque que cifra los datos de un sistema y exige un rescate para liberarlos. Justificación: El ransomware cifra datos y exige un rescate para liberarlos.}
+    % %\vspace{1cm}
+    
+    % \item ¿Qué es un ataque de ingeniería social?
+    % \begin{itemize}
+    %     \item a) Un ataque que utiliza software malicioso para dañar sistemas.
+    %     \item b) Un intento de manipular a las personas para que revelen información confidencial.
+    %     \item c) Un ataque que cifra los datos de un sistema y exige un rescate para liberarlos.
+    %     \item d) Un ataque que prueba múltiples combinaciones de contraseñas.
+    % \end{itemize}
+    % %\textcolor{white}{Respuesta: b) Un intento de manipular a las personas para que revelen información confidencial. Justificación: La ingeniería social manipula a las personas para obtener información confidencial.}
+    % %\vspace{1cm}
+    
+    \item ¿Qué es un ataque de spoofing?
+    \begin{itemize}
+        \item a) Un ataque que utiliza software malicioso para dañar sistemas.
+        \item b) Un intento de obtener información confidencial haciéndose pasar por una entidad confiable.
+        \item c) Un ataque que falsifica la identidad de un dispositivo o usuario.
+        \item d) Un ataque que prueba múltiples combinaciones de contraseñas.
+    \end{itemize}
+    %\textcolor{white}{Respuesta: c) Un ataque que falsifica la identidad de un dispositivo o usuario. Justificación: El spoofing falsifica identidades para engañar a sistemas o usuarios.}
+    %\vspace{1cm}
+    % \item ¿Qué es un ataque de día cero?
+    % \begin{itemize}
+    %     \item a) Un ataque que utiliza software malicioso para dañar sistemas.
+    %     \item b) Un intento de obtener información confidencial haciéndose pasar por una entidad confiable.
+    %     \item c) Un ataque que explota una vulnerabilidad del sistema previamente desconocida.
+    %     \item d) Un ataque que prueba múltiples combinaciones de contraseñas.
+    % \end{itemize}
+    % %\textcolor{white}{Respuesta: c) Un ataque que explota una vulnerabilidad del sistema previamente desconocida. Justificación: Un ataque de día cero explota vulnerabilidades desconocidas antes de que se publiquen parches.}
+    % %\vspace{1cm}
+    
+    % \item ¿Qué es un ataque de denegación de servicio distribuida (DDoS)?
+    % \begin{itemize}
+    %     \item a) Un ataque que utiliza software malicioso para dañar sistemas.
+    %     \item b) Un intento de obtener información confidencial haciéndose pasar por una entidad confiable.
+    %     \item c) Un ataque que utiliza múltiples sistemas para agotar los recursos de un sistema objetivo.
+    %     \item d) Un ataque que prueba múltiples combinaciones de contraseñas.
+    % \end{itemize}
+    % %\textcolor{white}{Respuesta: c) Un ataque que utiliza múltiples sistemas para agotar los recursos de un sistema objetivo. Justificación: Un DDoS utiliza múltiples sistemas para agotar los recursos de un sistema objetivo.}
+    % %\vspace{1cm}
+    
+    % \item ¿Qué es un ataque de cross-site scripting (XSS)?
+    % \begin{itemize}
+    %     \item a) Un ataque que utiliza software malicioso para dañar sistemas.
+    %     \item b) Un intento de obtener información confidencial haciéndose pasar por una entidad confiable.
+    %     \item c) Un ataque que inserta scripts maliciosos en páginas web para ejecutar en el navegador del usuario.
+    %     \item d) Un ataque que prueba múltiples combinaciones de contraseñas.
+    % \end{itemize}
+    % %\textcolor{white}{Respuesta: c) Un ataque que inserta scripts maliciosos en páginas web para ejecutar en el navegador del usuario. Justificación: XSS inserta scripts maliciosos en páginas web para ejecutar en el navegador del usuario.}
+    % %\vspace{1cm}
+
+    \item ¿Qué es un ataque de man-in-the-middle (MitM)?
+    \begin{itemize}
+        \item a) Un ataque que utiliza software malicioso para dañar sistemas.
+        \item b) Un intento de obtener información confidencial haciéndose pasar por una entidad confiable.
+        \item c) Un ataque que intercepta y potencialmente altera la comunicación entre dos partes.
+        \item d) Un ataque que prueba múltiples combinaciones de contraseñas.
+    \end{itemize}
+    %\textcolor{white}{Respuesta: c) Un ataque que intercepta y potencialmente altera la comunicación entre dos partes. Justificación: Un ataque MitM intercepta y potencialmente altera la comunicación entre dos partes.}
+    %\vspace{1cm}
+\end{enumerate}
+
+
+  
+
+\end{document} 

@@ -1,0 +1,1159 @@
+\chapterimage{Pictures/networks.jpg}
+\chapter{Repaso: Fundamentos de Redes para Seguridad de TI}
+\vspace{65px}
+\begin{flushright}
+    \textit{Las redes son la columna vertebral de la comunicación digital moderna.}
+\end{flushright}
+
+
+
+Una red de computadoras es un grupo de computadoras y dispositivos conectados entre sí para compartir datos, información o recursos. 
+Las redes y las telecomunicaciones son fundamentales para permitir la interacción y transacciones. Los componentes de hardware (HW) y software (SW) proveen estas funciones de comunicación y son críticas para la infraestructura del negocio, sumándose actualmente kits de servicios basados en nube. 
+
+En 1966 existe la primera red que conectó dos computadores. El Gobierno de Estados Unidos inicia el proyecto ARPANET. Fue en octubre de 1969 cuando se envió el primer mensaje host-to-host desde el laboratorio de Kleinrock en la UCLA para SRI. Pronto otros dos nodos fueron agregados en la UC Santa Barbara y la Universidad de Utah. Al final de ese año las cuatro computadoras estaban conectadas en ARPANET, y con ello nacía la internet. 
+
+\section{Modelo de capas y arquitectura de red}
+
+\subsection{El problema de la complejidad}
+
+Las redes enfrentan varios desafíos fundamentales de complejidad que requieren enfoques sistemáticos para su resolución. El número extremadamente grande de computadoras conectadas, que asciende a miles de millones de dispositivos en todo el mundo, presenta un desafío logístico y técnico sin precedentes. Esta escala masiva requiere arquitecturas que puedan manejar eficientemente la comunicación entre un número prácticamente ilimitado de dispositivos.
+
+La variedad increíble de tecnologías utilizadas en las redes modernas añade otra capa de complejidad significativa. Cada tecnología presenta diferentes restricciones técnicas, limitaciones de ancho de banda, y características de latencia que deben ser consideradas en el diseño de protocolos de comunicación. Esta diversidad tecnológica incluye desde conexiones de fibra óptica de alta velocidad hasta comunicaciones satelitales con latencia elevada.
+
+La ausencia de una entidad administrativa única en Internet representa un desafío fundamental, ya que Internet es esencialmente una red de redes donde cada organización mantiene control sobre su propia infraestructura. Esta descentralización requiere protocolos y estándares que permitan la interoperabilidad sin necesidad de coordinación centralizada. Finalmente, las demandas y aplicaciones en evolución constante presentan nuevos requisitos de rendimiento, seguridad y funcionalidad que deben ser atendidos por la infraestructura de red existente.
+
+\subsection{Solución: Capas de abstracción}
+
+Para manejar la complejidad inherente de las redes modernas, se utiliza el concepto fundamental de capas de abstracción, que proporciona una metodología sistemática para dividir y conquistar problemas complejos. La separación de preocupaciones es el principio rector que permite dividir el problema de comunicación de red en partes separadas y manejables, donde cada componente se enfoca en una función específica sin preocuparse por los detalles de implementación de otras partes.
+
+La solución independiente de cada capa permite que los desarrolladores y ingenieros resuelvan cada parte por separado, optimizando cada componente según sus requisitos específicos sin afectar la funcionalidad de otras capas. Las interfaces comunes establecen contratos bien definidos entre capas, permitiendo que diferentes implementaciones coexistan siempre que respeten estos acuerdos de interfaz. Este enfoque facilita la interoperabilidad entre sistemas de diferentes fabricantes y tecnologías.
+
+La encapsulación es un concepto crucial donde los datos de una capa se encapsulan dentro de la capa inferior, creando una estructura jerárquica donde cada nivel añade su propia información de control sin exponer los detalles internos a las capas superiores. Finalmente, la evolución independiente permite que cada capa evolucione por separado, facilitando la innovación tecnológica sin requerir cambios en toda la pila de protocolos.
+
+\textbf{Regla importante}: "Sé estricto en lo que envías y verifica cuidadosamente lo que recibes"
+
+\subsection{Modelo de referencia OSI}
+
+El modelo OSI (Open Systems Interconnection) define siete capas de abstracción:
+
+\begin{enumerate}
+    \item \textbf{Capa 7 - Aplicación}: Interfaz con aplicaciones de usuario
+    \item \textbf{Capa 6 - Presentación}: Codificación, compresión y encriptación
+    \item \textbf{Capa 5 - Sesión}: Gestión de sesiones de comunicación
+    \item \textbf{Capa 4 - Transporte}: Comunicación confiable entre procesos
+    \item \textbf{Capa 3 - Red}: Enrutamiento entre redes
+    \item \textbf{Capa 2 - Enlace de datos}: Transmisión en red local
+    \item \textbf{Capa 1 - Física}: Transmisión de bits por medio físico
+\end{enumerate}
+
+\subsection{Modelo TCP/IP}
+
+El modelo TCP/IP es más simple y práctico, con cuatro capas:
+
+\begin{enumerate}
+    \item \textbf{Capa de Aplicación}: Combina las capas 5, 6 y 7 del OSI
+    \item \textbf{Capa de Transporte}: Corresponde a la capa 4 del OSI
+    \item \textbf{Capa de Internet}: Corresponde a la capa 3 del OSI
+    \item \textbf{Capa de Acceso a Red}: Combina las capas 1 y 2 del OSI
+\end{enumerate}
+
+\subsection{Capas 1 y 2: Física y Enlace de Datos}
+
+\subsubsection{Capa 1: Capa Física}
+
+La capa física representa la base fundamental de toda comunicación de red, siendo responsable de la codificación de bits para enviar por un enlace físico único. Esta capa define las características específicas del hardware y medio de transmisión, estableciendo los estándares que gobiernan cómo los datos se convierten en señales físicas que pueden viajar a través de diferentes medios.
+
+Los ejemplos más comunes incluyen Ethernet para redes cableadas, que especifica cómo enviar bits a través de cables de cobre, y el estándar 802.11 WiFi para comunicaciones inalámbricas, que define cómo los datos se transmiten como ondas de radio. Esta capa es crucial porque determina las limitaciones fundamentales de velocidad, distancia y confiabilidad de la comunicación, estableciendo los parámetros básicos que todas las capas superiores deben respetar.
+
+\subsubsection{Capa 2: Capa de Enlace}
+
+La capa de enlace maneja el encapsulado y transmisión de bits en mensajes individuales enviados a través de una subred única, proporcionando el mecanismo para que los dispositivos en la misma red local se comuniquen de manera efectiva. Esta capa es responsable del direccionamiento local mediante direcciones MAC, que identifican únicamente cada dispositivo en la red local.
+
+Una característica importante de esta capa es que a menudo la tecnología soporta broadcast, permitiendo que un mensaje sea enviado a todos los dispositivos en la red simultáneamente. Los ejemplos incluyen Ethernet para redes cableadas y 802.11 WiFi para redes inalámbricas, ambos especificando cómo enviar paquetes a un host específico en esta red. Esta capa también maneja la detección y corrección de errores a nivel de enlace, asegurando que los datos lleguen intactos al siguiente salto en la red.
+
+\subsubsection{Direcciones MAC}
+
+Las direcciones MAC (Media Access Control) representan identificadores únicos de 48 bits asignados a cada interfaz de red, proporcionando un mecanismo fundamental para la identificación de dispositivos en el nivel de enlace de datos. El formato estándar de estas direcciones permite una identificación precisa del fabricante del dispositivo, ya que los primeros 3 bytes, conocidos como OUI (Organizationally Unique Identifier), indican específicamente qué empresa manufacturó la interfaz de red.
+
+Los últimos 3 bytes de la dirección MAC son únicos por fabricante, garantizando que no existan conflictos de direcciones dentro de la infraestructura de red de una empresa específica. La escritura convencional utiliza formato hexadecimal delimitado por dos puntos, como en el ejemplo BC:5F:F4:2B:E9:68, facilitando la lectura y manipulación por parte de administradores de red y herramientas de diagnóstico.
+
+Es importante destacar que el alcance de las direcciones MAC es limitado, siendo significativas únicamente dentro de una red local, ya sea cableada o inalámbrica. Esta limitación de alcance es una característica de diseño que previene conflictos de direcciones en redes globales y simplifica la administración de redes locales.
+
+\subsubsection{Protocolo ARP}
+
+El Protocolo de Resolución de Direcciones (ARP) es fundamental para el funcionamiento de las redes IP, permitiendo encontrar la dirección MAC correspondiente a una dirección IP dada. Este protocolo establece un mapeo dinámico entre direcciones IP y direcciones MAC, resolviendo la diferencia fundamental entre el direccionamiento lógico de la capa de red y el direccionamiento físico de la capa de enlace.
+
+El proceso de resolución ARP funciona mediante consultas a dispositivos en la red local, donde un dispositivo que necesita comunicarse con una dirección IP específica envía una solicitud broadcast preguntando qué dispositivo posee esa dirección IP. La información obtenida a través de ARP permite identificar no solo la dirección MAC del dispositivo destino, sino también información sobre el fabricante del dispositivo, ya que el OUI de la dirección MAC revela qué empresa manufacturó el hardware.
+
+Por ejemplo, un dispositivo identificado como "TB-Galaxy-S7" puede ser reconocido por su OUI específico, proporcionando información valiosa para la administración de red y la seguridad. Este protocolo es esencial para el funcionamiento de cualquier red IP, ya que sin él, los dispositivos no podrían determinar cómo enviar paquetes a destinos específicos en la red local.
+
+\subsection{Capa 3: Red}
+
+\subsubsection{Protocolo de Internet (IP)}
+
+El Protocolo de Internet (IP) es el componente fundamental que permite conectar múltiples subredes para proporcionar conectividad de extremo a extremo a través de redes heterogéneas. Este protocolo proporciona direccionamiento global mediante direcciones IP únicas, permitiendo que cualquier dispositivo en Internet pueda ser identificado y alcanzado desde cualquier otro punto de la red global.
+
+Una característica importante del protocolo IP es que solo proporciona entrega de mejor esfuerzo, lo que significa que no garantiza la llegada de paquetes ni su orden de llegada. Esta característica de diseño permite que IP funcione de manera eficiente a través de diferentes tecnologías de enlace, desde conexiones de alta velocidad hasta enlaces lentos e inestables, adaptándose a las condiciones cambiantes de la red.
+
+La flexibilidad del protocolo IP para funcionar sobre diferentes tecnologías de enlace es una de sus fortalezas principales, permitiendo que la misma infraestructura de red soporte desde conexiones Ethernet de alta velocidad hasta comunicaciones satelitales con latencia elevada. Esta versatilidad ha sido fundamental para el éxito y la expansión global de Internet.
+
+\subsubsection{Direcciones IPv4}
+
+Las direcciones IPv4 representan el esquema de direccionamiento fundamental de Internet, utilizando un formato de 32 bits que teóricamente proporciona direcciones únicas globalmente. La escritura convencional utiliza formato decimal punteado de cuatro bytes, como en el ejemplo "141.9.68.24", donde cada octeto puede tener valores entre 0 y 255, proporcionando un rango total de direcciones desde 0.0.0.0 hasta 255.255.255.255.
+
+El sistema de direccionamiento IPv4 implementa un esquema de subredes donde los bits se dividen en porciones de red y host, permitiendo una organización jerárquica de las direcciones. La notación CIDR, como 181.41.0.0/18, indica específicamente cuántos bits están reservados para la porción de red, determinando el número de hosts disponibles en esa subred. El cálculo del número de hosts disponibles sigue la fórmula $2^{(32-n)} - 2$, donde n es el número de bits de red y se restan 2 direcciones reservadas para la dirección de red y la dirección de broadcast.
+
+Este esquema de direccionamiento ha sido fundamental para el crecimiento de Internet, aunque la limitación de 32 bits ha llevado al desarrollo de IPv6 para abordar la escasez de direcciones que se ha vuelto crítica con la proliferación de dispositivos conectados.
+
+\subsubsection{Direcciones especiales IPv4}
+
+El esquema de direccionamiento IPv4 incluye varias categorías de direcciones especiales que cumplen funciones específicas en el funcionamiento de las redes. La dirección de loopback, 127.0.0.1, siempre se refiere a la máquina local, permitiendo que las aplicaciones se comuniquen consigo mismas sin necesidad de utilizar la red física. Esta dirección es fundamental para el desarrollo y testing de aplicaciones de red.
+
+Las direcciones privadas, que incluyen los rangos 10.0.0.0/8, 172.16.0.0/12, y 192.168.0.0/16, están reservadas para uso interno en redes privadas y no son enrutadas en Internet público. Estas direcciones permiten que múltiples organizaciones utilicen el mismo espacio de direcciones sin conflictos, facilitando la implementación de redes internas sin consumir direcciones públicas limitadas.
+
+Las direcciones link-local, en el rango 169.254.0.0/16, son auto-asignadas por dispositivos cuando no pueden obtener una dirección IP a través de DHCP, proporcionando conectividad básica en situaciones donde no hay un servidor de configuración disponible. Finalmente, NAT (Network Address Translation) es una técnica fundamental que permite traducir direcciones privadas a direcciones públicas, conservando el limitado espacio de direcciones IPv4 públicas mientras permite que múltiples dispositivos privados accedan a Internet.
+
+\subsubsection{IPv6}
+
+IPv6 representa la nueva iteración del esquema de direccionamiento del Protocolo de Internet, diseñada específicamente para abordar la escasez crítica de direcciones IPv4. Con un tamaño de 128 bits en lugar de los 32 bits de IPv4, IPv6 proporciona un espacio de direcciones prácticamente ilimitado, con capacidad para $2^{128}$ direcciones únicas, resolviendo definitivamente los problemas de agotamiento de direcciones que enfrenta IPv4.
+
+La escritura de direcciones IPv6 utiliza palabras hexadecimales de 16 bits delimitadas por dos puntos, como en el ejemplo 2001:0db8:85a3:0000:0000:8a2e:0370:7334. Este formato más largo permite una representación más clara de la jerarquía de direcciones y facilita la implementación de características avanzadas como autoconfiguración y movilidad.
+
+El despliegue de IPv6 ha estado en progreso durante los últimos 25 años, con una transición gradual desde IPv4 que ha requerido la implementación de tecnologías de transición como túneles y traducción de direcciones. A pesar de los desafíos de migración, IPv6 es esencial para el futuro crecimiento de Internet y la proliferación de dispositivos IoT, proporcionando la base para una conectividad verdaderamente global y escalable.
+
+\subsection{Capa 4: Transporte}
+
+\subsubsection{Tipos de servicios}
+
+La capa de transporte proporciona dos tipos principales de servicios que satisfacen diferentes necesidades de las aplicaciones. UDP (User Datagram Protocol) ofrece datagramas no confiables, priorizando la velocidad y eficiencia sobre la garantía de entrega, siendo ideal para aplicaciones donde la pérdida ocasional de datos es aceptable, como streaming de video o juegos en línea.
+
+TCP (Transmission Control Protocol) proporciona un flujo de bytes confiable, garantizando que todos los datos lleguen al destino en el orden correcto y sin errores. Este protocolo mantiene un registro detallado de los datos recibidos y retransmite automáticamente cualquier segmento que se pierda o llegue corrupto, siendo esencial para aplicaciones donde la integridad de los datos es crítica, como transferencia de archivos, correo electrónico y navegación web.
+
+La confiabilidad en TCP se logra mediante mecanismos sofisticados de control de flujo, control de congestión y recuperación de errores, que trabajan en conjunto para asegurar una comunicación robusta incluso en condiciones de red adversas.
+
+\subsubsection{Comunicación sin conexión vs. orientada a conexión}
+
+La comunicación sin conexión, implementada por UDP, es similar a IP plano, proporcionando poco servicio adicional más allá del direccionamiento básico. En este modo, cada paquete se envía independientemente sin establecer una conexión previa, siendo ideal para aplicaciones donde la simplicidad y la velocidad son más importantes que la confiabilidad.
+
+La comunicación orientada a conexión, implementada por TCP, proporciona comunicación confiable y sin errores mediante el establecimiento de una conexión virtual entre el origen y el destino antes de transmitir datos. Este enfoque incluye mecanismos de control de flujo, control de congestión y recuperación de errores, asegurando que los datos lleguen completos y en el orden correcto.
+
+\subsubsection{Protocolo UDP}
+
+El Protocolo de Datagramas de Usuario (UDP) permite a las aplicaciones enviar datagramas IP de manera simple y eficiente, proporcionando un servicio mínimo de transporte que prioriza la velocidad sobre la confiabilidad. La encapsulación en UDP es extremadamente ligera, con solo 8 bytes de encabezado seguidos directamente por la carga útil de datos, minimizando la sobrecarga de procesamiento y permitiendo transmisiones rápidas.
+
+Las características distintivas de UDP incluyen la ausencia de control de flujo, lo que significa que no regula la velocidad de transmisión para evitar saturar al receptor, y la falta de control de errores, ya que no detecta ni corrige errores de transmisión automáticamente. Además, UDP no implementa retransmisión de paquetes perdidos, confiando en que las aplicaciones de nivel superior manejen estos aspectos si son necesarios.
+
+UDP encuentra su aplicación ideal en situaciones cliente-servidor simples donde la simplicidad y la velocidad son más importantes que la confiabilidad, como en consultas DNS, donde una respuesta rápida es más valiosa que garantizar que cada consulta llegue perfectamente. Este protocolo también es fundamental para aplicaciones de tiempo real donde la latencia baja es crítica y la pérdida ocasional de datos es aceptable.
+
+\subsubsection{Puertos}
+
+Los puertos representan un mecanismo fundamental de multiplexación a nivel de aplicación, permitiendo que múltiples servicios y aplicaciones coexistan en un mismo dispositivo sin conflictos. Cada proceso que necesita utilizar servicios de red se adjunta a un puerto específico mediante la operación BIND, estableciendo un punto de entrada único para las comunicaciones destinadas a esa aplicación.
+
+Cuando llega un paquete UDP o TCP, el puerto destino determina a qué proceso específico se debe entregar la carga útil del paquete, permitiendo que un solo dispositivo pueda ejecutar simultáneamente un servidor web, un servidor de correo, y otros servicios sin interferencia. El puerto origen es utilizado principalmente cuando se necesita una respuesta, permitiendo que el proceso destino sepa a qué puerto debe enviar su respuesta.
+
+Este sistema de puertos es esencial para el funcionamiento de Internet, ya que permite que miles de aplicaciones diferentes funcionen simultáneamente en millones de dispositivos, cada una identificada únicamente por la combinación de dirección IP y número de puerto. Los puertos están numerados del 0 al 65535, con rangos específicos reservados para diferentes tipos de servicios y aplicaciones.
+
+\subsubsection{Protocolo TCP}
+
+El Protocolo de Control de Transmisión (TCP) está diseñado específicamente para proporcionar flujo de bytes confiable de extremo a extremo sobre redes que pueden ser no confiables, incorporando mecanismos sofisticados para garantizar la integridad y orden de los datos transmitidos. Este protocolo es robusto contra fallas y cambios en las propiedades de red, adaptándose dinámicamente a condiciones cambiantes como congestión, pérdida de paquetes y variaciones en la latencia.
+
+TCP maneja flujos TCP e interfa eficientemente con la capa IP, aceptando flujos de datos de procesos de aplicación y dividiéndolos en piezas no mayores a 64 KB para su transmisión. El tamaño típico de segmento TCP es de 1460 bytes de datos, optimizado para caber eficientemente en un frame Ethernet estándar de 1500 bytes, maximizando la utilización del ancho de banda disponible.
+
+Este protocolo se utiliza para situaciones donde la precisión y completitud de los datos son críticas, como compartir archivos, navegar por Internet o enviar correo electrónico. En estos casos, tener solo una porción parcial de los datos puede hacer que toda la información sea inútil, por lo que TCP garantiza que los datos sean precisos y completos antes de entregarlos a la aplicación.
+
+\subsection{Sistema de nombres de dominio (DNS)}
+
+El Sistema de Nombres de Dominio (DNS) es fundamental para el funcionamiento de Internet, ya que traduce nombres de dominio legibles por humanos en direcciones IP numéricas.
+
+\subsubsection{Jerarquía de servidores DNS}
+
+El DNS utiliza una estructura jerárquica de servidores que permite una distribución eficiente de la responsabilidad de resolución de nombres. Los servidores raíz representan el nivel más alto de esta jerarquía, manteniendo información sobre cómo encontrar servidores autoritativos para todas las zonas de nivel superior como .com, .org, .edu y .gov. Estos servidores son fundamentales para el funcionamiento global de Internet, ya que proporcionan el punto de entrada inicial para cualquier consulta DNS.
+
+Los servidores de nivel superior manejan dominios específicos como .com, .org, .edu, .gov, y otros dominios de país como .cl, .ar, .mx. Estos servidores conocen la ubicación de los servidores autoritativos para cada dominio específico dentro de su zona de responsabilidad. Los servidores autoritativos son responsables de zonas específicas de dominio, manteniendo la información precisa sobre las direcciones IP correspondientes a los nombres de dominio en su zona.
+
+Los servidores locales, también conocidos como resolvers, son los que consultan otros servidores DNS en nombre de las aplicaciones cliente. Estos servidores suelen ser proporcionados por los proveedores de servicios de Internet o configurados localmente en redes corporativas, actuando como intermediarios entre las aplicaciones y la infraestructura DNS global.
+
+\subsubsection{Resolución de nombres}
+
+El proceso de resolución DNS sigue una secuencia específica de pasos diseñada para encontrar eficientemente la dirección IP correspondiente a un nombre de dominio. El proceso comienza cuando un programa solicita la IP de un nombre de dominio, iniciando una cadena de consultas que involucra múltiples servidores DNS en la jerarquía global.
+
+La consulta local es el primer paso, donde el resolver local consulta su servidor DNS configurado, que suele ser proporcionado por el proveedor de servicios de Internet. El servidor verifica si puede responder directamente a la consulta, lo cual es posible si la información está en su caché local o si es autoritativo para ese dominio específico.
+
+Si el servidor local no puede responder directamente, inicia una consulta recursiva que sigue la jerarquía DNS desde la raíz hacia abajo. Esta consulta puede involucrar múltiples servidores DNS, cada uno proporcionando información sobre el siguiente paso en la cadena de resolución. Finalmente, cuando se obtiene la respuesta, se envía de vuelta al resolver original, que la entrega a la aplicación que hizo la consulta inicial.
+
+\subsubsection{Configuración de DNS}
+
+Cada zona DNS requiere una configuración específica que incluye múltiples servidores para garantizar la redundancia y disponibilidad del servicio. El servidor primario mantiene el archivo de zona con toda la información autoritativa sobre los nombres de dominio en esa zona específica. Este servidor es responsable de las actualizaciones y modificaciones en la información de la zona, siendo el punto de autoridad definitivo para esa porción del espacio de nombres DNS.
+
+El servidor secundario proporciona redundancia crítica al copiar los datos del servidor primario, asegurando que el servicio DNS continúe funcionando incluso si el servidor primario falla. Esta configuración de respaldo es esencial para la confiabilidad del sistema DNS, ya que permite que las consultas se resuelvan desde múltiples ubicaciones geográficas y administrativas.
+
+Las actualizaciones en la información DNS se realizan siempre en el servidor primario, que luego replica automáticamente estos cambios al servidor secundario mediante un proceso de transferencia de zona. Este mecanismo de replicación asegura que todos los servidores DNS para una zona específica mantengan información consistente y actualizada.
+
+\subsubsection{Seguridad DNS}
+
+El DNS presenta varias vulnerabilidades de seguridad críticas que pueden comprometer la integridad y confidencialidad de las comunicaciones de red. El DNS spoofing es una técnica donde los atacantes falsifican respuestas DNS, redirigiendo a los usuarios a sitios web maliciosos que imitan sitios legítimos. Esta técnica es particularmente peligrosa porque puede permitir el robo de credenciales y datos sensibles sin que el usuario se dé cuenta de que está en un sitio falso.
+
+El DNS cache poisoning es otra amenaza significativa donde los atacantes contaminan la caché DNS de servidores legítimos, causando que múltiples usuarios sean redirigidos a sitios maliciosos durante períodos prolongados. El DNS tunneling es una técnica más sofisticada donde los atacantes utilizan el protocolo DNS para evadir firewalls y otros controles de seguridad, transmitiendo datos maliciosos a través de consultas DNS aparentemente legítimas.
+
+Los ataques DNS amplification representan una amenaza de denegación de servicio, donde los atacantes utilizan servidores DNS públicos para amplificar el tráfico malicioso, causando interrupciones significativas en servicios críticos. Estos ataques pueden ser especialmente devastadores porque pueden generar volúmenes de tráfico extremadamente altos con relativamente poco esfuerzo del atacante.
+
+\subsubsection{Medidas de protección DNS}
+
+Para proteger contra los ataques DNS, se han desarrollado varias medidas de seguridad que abordan las vulnerabilidades específicas del protocolo. DNSSEC (DNS Security Extensions) es una extensión fundamental que proporciona autenticación y verificación de integridad para las respuestas DNS, utilizando criptografía de clave pública para asegurar que las respuestas provengan de servidores autorizados y no hayan sido modificadas en tránsito.
+
+DNS over HTTPS (DoH) y DNS over TLS (DoT) son tecnologías que encriptan las consultas DNS, previniendo que los atacantes intercepten y manipulen las comunicaciones DNS. Estas tecnologías son especialmente importantes en redes públicas donde las consultas DNS pueden ser interceptadas fácilmente. El filtrado de DNS es otra medida importante que bloquea dominios maliciosos conocidos, previniendo que los usuarios accedan a sitios web peligrosos.
+
+Estas medidas de protección trabajan en conjunto para crear múltiples capas de seguridad que hacen más difícil para los atacantes comprometer el sistema DNS. La implementación de estas medidas es esencial para mantener la confiabilidad y seguridad de las comunicaciones de red modernas.
+
+\begin{itemize}
+    \item \textbf{Dirección MAC}: Identificador único del hardware
+    \item \textbf{Dirección IPv6}: Link local - no enrutada a internet
+    \item \textbf{Dirección IPv4}: IP privada enrutada por NAT
+    \item \textbf{Máscara de subred}: Muestra que es una red /24
+    \item \textbf{Información DHCP}: Información de arrendamiento
+    \item \textbf{Puerta de enlace}: IP a la que enviamos para llegar a internet
+    \item \textbf{Servidor DNS}: IP para buscar nombres
+\end{itemize}
+
+\subsubsection{Configuración Linux}
+
+\begin{itemize}
+    \item \textbf{Dirección MAC}: Identificador único del hardware
+    \item \textbf{Máscara de subred}: Muestra que es una red /24
+    \item \textbf{Dirección IPv4}: IP privada enrutada por NAT
+    \item \textbf{Dirección IPv6}: Link local - no enrutada a internet
+    \item \textbf{Servidor DNS}: IP para buscar nombres
+    \item \textbf{Puerta de enlace}: IP a la que enviamos para llegar a internet
+\end{itemize}
+
+
+
+A medida que se conectan más y más dispositivos, se vuelve cada vez más difícil obtener una dirección pública que no esté ya en uso. Por ejemplo, Cisco, un gigante de la industria en el mundo de las redes, estimó que habría aproximadamente 50 mil millones de dispositivos conectados a Internet para fines de 2021. (Cisco., 2021) . Utilizando el esquema de direccionamiento del Protocolo de Internet conocido como IPv4, que utiliza un sistema de numeración de 2\^32 direcciones IP se tienen 4,29 mil millones de puntos. 
+IPv6 es una nueva iteración del esquema de direccionamiento del Protocolo de Internet para ayudar a abordar este problema. 
+Admite hasta 2\^128 de direcciones IP (más de 340 billones), resolviendo los problemas que enfrenta IPv4. Ejemplo:\\
+ IPv4 $192.168.10.150 $ vs  \\IPv6 $3002:0bd6:0000:0000:0000:ee00:0033:6778$
+
+
+La división en subredes se logra dividiendo la cantidad de hosts que pueden caber dentro de la red, representados por un número llamado máscara de subred.  una máscara de subred que también se representa como un número de cuatro bytes (32 bits), que van de 0 a 255 (0-255). Las subredes usan direcciones IP de tres maneras diferentes:
+\begin{itemize}
+    \item Identificar la dirección de red: identifica el inicio de la red real y se utiliza para identificar la existencia de una red. Por ejemplo, un dispositivo con la dirección IP 192.168.1.100 estará en la red identificada por 192.168.1.0 
+\item Identificar la dirección del host: se usa para identificar un dispositivo en la subred. 
+\item Identificar la puerta de enlace predeterminada: dirección especial asignada a un dispositivo en la red que es capaz de enviar información a otra red. Estos dispositivos pueden usar cualquier dirección de host, pero generalmente usan la primera o la última dirección de host en una red (.1 o .254). 
+
+\end{itemize}
+
+
+\textbf{El protocolo ARP o protocolo de resolución de direcciones} para abreviar, es la tecnología que se encarga de permitir que los dispositivos se identifiquen en una red. Permite que un dispositivo asocie su dirección MAC con una dirección IP en la red. Cada dispositivo en una red mantendrá un registro de las direcciones MAC asociadas con otros dispositivos.
+Cuando los dispositivos deseen comunicarse con otros, enviarán una transmisión a toda la red en busca del dispositivo específico. Los dispositivos pueden usar el protocolo ARP para encontrar la dirección MAC (y por lo tanto el identificador físico) de un dispositivo para la comunicación.
+
+Cada dispositivo dentro de una red tiene un registro para almacenar información, que se denomina caché. En el contexto del  protocolo ARP  , este caché almacena los identificadores de otros dispositivos en la red.
+%
+Para mapear estos dos identificadores juntos (dirección IP y dirección MAC ), el protocolo ARP envía dos tipos de mensajes:
+Solicitud ARP y 
+Respuesta ARP. \\
+Cuando se envía una solicitud ARP , se transmite un mensaje a todos los demás dispositivos encontrados en una red por el dispositivo, preguntando si la dirección MAC del dispositivo coincide o no con la dirección IP solicitada. Si el dispositivo tiene la dirección IP solicitada, se devuelve una respuesta ARP al dispositivo inicial para confirmarlo. El dispositivo inicial ahora recordará esto y lo almacenará dentro de su caché (una entrada ARP ). 
+
+Las direcciones IP se pueden asignar de forma manual, introduciéndolas físicamente en un dispositivo, o de forma automática y más comúnmente mediante el uso de un servidor DHCP ( D ynamic H ost C onfiguration P rotocol). Cuando un dispositivo se conecta a una red, si aún no se le ha asignado manualmente una dirección IP, envía una solicitud ( DHCP Discover) para ver si hay algún servidor DHCP en la red. Luego, el servidor DHCP responde con una dirección IP que el dispositivo podría usar (oferta de DHCP). Luego, el dispositivo envía una respuesta confirmando que desea la dirección IP ofrecida (solicitud DHCP) y, por último, el servidor DHCP envía una respuesta reconociendo que esto se ha completado y que el dispositivo puede comenzar a usar la dirección IP (DHCP ACK).
+
+
+
+
+Hay múltiples métodos para conectarse a Internet. ISP  - usando fibra óptica lo que permite conexiones más rápidas que otras opciones. Depende de donde la persona vive. Existe mediante satélite y a la antigua con servicios de dialup, o inalámbricamente. 
+
+Smartphones se conectan a redes móviles de múltiples generaciones, evolucionando desde la 3ra generación hasta la actual 5ta generación, con desarrollo activo de la 6ta generación. Ellos se conectan a redes Wi-Fi usando estándar 802.11. 
+
+\subsubsection{Evolución de las redes móviles}
+
+\begin{itemize}
+    \item \textbf{3G (Tercera Generación)}: Introdujo Internet móvil de alta velocidad, videollamadas y navegación web móvil. Velocidades típicas: 384 Kbps - 2 Mbps.
+    
+    \item \textbf{4G/LTE (Cuarta Generación)}: Revolucionó la conectividad móvil con velocidades de hasta 100 Mbps, streaming de video HD, y aplicaciones móviles avanzadas. Tecnología Long Term Evolution (LTE) como estándar principal.
+    
+    \item \textbf{5G (Quinta Generación)}: Tecnología actual que ofrece velocidades de hasta 10 Gbps, latencia ultra-baja (1ms), y soporte para IoT masivo. Habilita aplicaciones como vehículos autónomos, cirugía remota, y realidad aumentada.
+    
+    \item \textbf{6G (Sexta Generación)}: En desarrollo activo, se espera que esté disponible comercialmente hacia 2030. Promete velocidades de hasta 1 Tbps, latencia de microsegundos, y soporte para tecnologías emergentes como hologramas, telepresencia inmersiva, y computación cuántica distribuida.
+\end{itemize}
+
+Redes Celulares 3G/4G/5G proveen Internet y comunicación por voz estable en un área amplia. Con servicio celular, la conexión a Internet parece continua al usuario, incluso si los dispositivos se mueven de celda a celda. Sin embargo, muchos proveedores imponen límite de transferencia y cargos por acceso o definitivamente bajan la velocidad de conexión cuando los usuarios exceden el límite.
+
+\subsubsection{Características de la 6G}
+
+La sexta generación de redes móviles se enfoca en:
+
+\begin{itemize}
+    \item \textbf{Velocidades extremas}: Hasta 1 Tbps (1000 Gbps), 100 veces más rápido que 5G
+    \item \textbf{Latencia ultra-baja}: Menos de 1 microsegundo para aplicaciones críticas
+    \item \textbf{Conectividad masiva}: Soporte para 10 millones de dispositivos por km²
+    \item \textbf{Inteligencia artificial integrada}: Redes autónomas que se optimizan automáticamente
+    \item \textbf{Sostenibilidad}: Eficiencia energética extrema y reducción de huella de carbono
+    \item \textbf{Seguridad cuántica}: Encriptación resistente a computación cuántica
+\end{itemize}
+
+\subsubsection{Aplicaciones futuras de la 6G}
+
+\begin{itemize}
+    \item \textbf{Telepresencia holográfica}: Comunicación tridimensional en tiempo real
+    \item \textbf{Internet táctil}: Transmisión de sensaciones físicas a través de la red
+    \item \textbf{Computación cuántica distribuida}: Redes que conectan computadores cuánticos
+    \item \textbf{Realidad extendida}: Fusión perfecta entre mundo físico y digital
+    \item \textbf{Medicina remota avanzada}: Cirugía robótica con latencia imperceptible
+    \item \textbf{Transporte inteligente}: Sistemas de tráfico autónomos y coordinados
+\end{itemize}
+Dispositivos celulares pueden actuar como puntos de acceso a otros dispositivos. Estos se conectan a la Internet usando una conexión celular y la convierten a una conexión Wi-Fi para que otros dispositivos se puedan conectar mientras el carrier tenga cobertura. 
+
+\subsubsection{Seguridad en redes móviles vs WiFi}
+
+Aunque 3G, 4G o 5G sean más lentas que una Wi-Fi - son mucho más seguras debido a:
+
+\begin{itemize}
+    \item \textbf{Encriptación robusta}: Las redes móviles utilizan algoritmos de encriptación avanzados (AES-256, ChaCha20-Poly1305)
+    \item \textbf{Autenticación de red}: Verificación de identidad del operador móvil antes de permitir conexión
+    \item \textbf{Aislamiento de tráfico}: Cada usuario tiene su propio canal de comunicación
+    \item \textbf{Monitoreo continuo}: Los operadores móviles monitorean constantemente el tráfico en busca de anomalías
+    \item \textbf{Actualizaciones de seguridad}: Mejoras continuas en protocolos de seguridad
+\end{itemize}
+
+\subsubsection{Vulnerabilidades en redes WiFi}
+
+Las redes WiFi presentan mayores riesgos de seguridad:
+
+\begin{itemize}
+    \item \textbf{Evil Twin}: Atacantes crean redes WiFi falsas con nombres similares a redes legítimas
+    \item \textbf{Man-in-the-Middle}: Interceptación de tráfico entre el dispositivo y el punto de acceso
+    \item \textbf{Wardriving}: Búsqueda de redes WiFi vulnerables para explotación
+    \item \textbf{Deauthentication}: Ataques que desconectan dispositivos de la red
+    \item \textbf{KRACK}: Vulnerabilidades en el protocolo WPA2
+\end{itemize}
+
+\subsubsection{Medidas de seguridad para WiFi}
+
+Para mitigar los riesgos en redes WiFi:
+
+\begin{itemize}
+    \item \textbf{Encriptación WPA3}: Último estándar de seguridad WiFi
+    \item \textbf{Redes privadas virtuales (VPN)}: Encriptación adicional del tráfico
+    \item \textbf{Autenticación 802.1X}: Verificación de identidad antes de permitir acceso
+    \item \textbf{Segmentación de red}: Separación de dispositivos IoT y críticos
+    \item \textbf{Monitoreo de tráfico}: Detección de dispositivos no autorizados
+    \item \textbf{Actualizaciones regulares}: Parches de seguridad para routers y dispositivos
+\end{itemize} 
+
+
+\subsection{Tipos y Topologías de redes}
+
+Redes pueden ser públicas o privadas. 
+
+Las redes WANs conectan sistemas sobre áreas grandes geográficamente. Usualmente conecta redes independientes que permite a las personas comunicarse fácilmente entre otros. La Internet oculta los detalles de este proceso del usuario final. Si se envía un correo el usuario no debe preocuparse de cómo se mueve los datos. El Ingeniero en Seguridad si. En este caso encriptación o utilizar redes privadas. 
+
+A pesar que al final del siglo 20 muchos tipos de redes LAN existían, hoy la mayoría ha convergido a una única tecnología llamada Ethernet. Todos los computadores conectados a un "cable" debían pelear entre ellas para turnarse el uso de la red, lo cual era ineficiente. Afortunadamente, tecnología evolucionó, de manera que cada red tiene un cable dedicado, que conecta cada uno a un switch que controla una porción de la red. 
+
+
+Una VLAN es una LAN virtual que es creada en el router y switch es una colección de dispositivos de red relacionados logicamente que son vistos como un segmento de una red. Da a administradores la capacidad de separar los segmentos de red sin tener que separar físicamente la red cableando y pueden tambien aislar grupos lógicos de dispositivos para reducir el tráfico de red y aumentar la seguridad.  \textbf{Ejemplo:} una VLAN para HR - toda la información sensible que ciaje en esa red de un computador a otro, queda oculta de computadores no HR. 
+
+\subsection{Topologías}
+\begin{itemize}
+    \item \textbf{Topología de estrellas:} dispositivos se conectan individualmente a través de un dispositivo de red central, como un conmutador o concentrador. Esta topología es la más común hoy en día debido a su confiabilidad y escalabilidad (vs mantenimiento), a pesar del costo ( más cableado y la compra de equipos de red dedicados). Single point of failure (aunque actualmente son bastante robustos). 
+    \item \textbf{Topología de bus: } los datos destinados a cada dispositivo viajan a lo largo del mismo cable, es muy probable que se vuelvan lentos y se produzcan cuellos de botella si los dispositivos dentro de la topología solicitan datos simultáneamente. difícil identificar qué dispositivo está experimentando problemas con los datos que viajan por la misma ruta. Mejor costo. poca redundancia en caso de fallas. 
+    \item \textbf{Topología de anillo: } computadores se conectan entre si.  funciona mediante el envío de datos a través del bucle hasta que llega al dispositivo de destino, utilizando otros dispositivos a lo largo del bucle para reenviar los datos. Un dispositivo solo enviará datos recibidos de otro dispositivo en esta topología si no tiene ninguno para enviarse a sí mismo. Si el dispositivo tiene datos para enviar, primero enviará sus propios datos antes de enviar datos desde otro dispositivo. aunque  menos propensas a los cuellos de botella, como dentro de una topología de bus - no es una forma eficiente de que los datos viajen a través de una red
+\end{itemize}
+
+
+\section{Protocolos de Red}
+
+\subsection{Conceptos fundamentales}
+
+\textbf{Protocolo}: conjunto de reglas que gobiernan el formato de mensajes que los computadores intercambian. Gobierna como el equipamiento de red interactúa para entregar la data cruzando la red.
+
+Esto es necesario porque los computadores necesitan un lenguaje común para comunicarse. Hoy la mayoría habla al menos un estándar: 
+TCP – Protocolo de control de transmisión, y  
+IP – Protocolo de Internet. 
+
+\textbf{TCP/IP} es una suite de protocolos que operan en las capas de red y transporte del modelo de referencia OSI y gobiernan todas las actividades sobre la Internet y la mayoría de las redes de casa y corporaciones. Desarrollado por el departamento de Defensa de Estados Unidos para proveer una infraestructura de red altamente confiable y tolerante a fallos.
+
+\subsection{Arquitectura TCP/IP}
+
+La suite TCP/IP se organiza en cuatro capas principales que corresponden al modelo OSI:
+
+\begin{itemize}
+    \item \textbf{Capa de Aplicación}: Corresponde a las capas 5, 6 y 7 del modelo OSI
+    \item \textbf{Capa de Transporte}: Corresponde a la capa 4 del modelo OSI
+    \item \textbf{Capa de Internet}: Corresponde a la capa 3 del modelo OSI
+    \item \textbf{Capa de Acceso a Red}: Corresponde a las capas 1 y 2 del modelo OSI
+\end{itemize}
+
+\subsection{Protocolos de la capa de aplicación}
+
+\begin{itemize}
+    \item \textbf{HTTP (Puerto 80)}: Protocolo de transferencia de hipertexto para la World Wide Web
+    \item \textbf{HTTPS (Puerto 443)}: Versión segura de HTTP con encriptación SSL/TLS
+    \item \textbf{FTP (Puerto 21)}: Protocolo de transferencia de archivos
+    \item \textbf{SFTP (Puerto 22)}: FTP seguro sobre SSH
+    \item \textbf{SMTP (Puerto 25)}: Protocolo de envío de correo electrónico
+    \item \textbf{POP3 (Puerto 110)}: Protocolo de recepción de correo electrónico
+    \item \textbf{IMAP (Puerto 143)}: Protocolo de acceso a correo electrónico
+    \item \textbf{DNS (Puerto 53)}: Sistema de nombres de dominio
+    \item \textbf{DHCP (Puertos 67/68)}: Protocolo de configuración dinámica de hosts
+    \item \textbf{SNMP (Puerto 161)}: Protocolo simple de administración de red
+    \item \textbf{Telnet (Puerto 23)}: Protocolo de terminal virtual (inseguro)
+    \item \textbf{SSH (Puerto 22)}: Shell seguro para acceso remoto
+\end{itemize}
+
+\subsection{Protocolos de la capa de transporte}
+
+\begin{itemize}
+    \item \textbf{TCP (Protocolo de Control de Transmisión)}: Protocolo orientado a conexión que garantiza la entrega confiable de datos
+    \item \textbf{UDP (Protocolo de Datagramas de Usuario)}: Protocolo no orientado a conexión que prioriza la velocidad sobre la confiabilidad
+    \item \textbf{SCTP (Protocolo de Control de Transmisión de Stream)}: Protocolo híbrido que combina características de TCP y UDP
+    \item \textbf{DCCP (Protocolo de Control de Congestión de Datagramas)}: Protocolo para aplicaciones multimedia en tiempo real
+\end{itemize}
+
+\subsection{Protocolos de la capa de Internet}
+
+\begin{itemize}
+    \item \textbf{IP (Protocolo de Internet)}: Protocolo principal para el direccionamiento y enrutamiento de paquetes
+    \item \textbf{ICMP (Protocolo de Mensajes de Control de Internet)}: Protocolo para mensajes de control y diagnóstico
+    \item \textbf{IGMP (Protocolo de Gestión de Grupos de Internet)}: Protocolo para gestión de grupos multicast
+    \item \textbf{ARP (Protocolo de Resolución de Direcciones)}: Protocolo para mapear direcciones IP a direcciones MAC
+    \item \textbf{RARP (Protocolo de Resolución de Direcciones Inverso)}: Protocolo para mapear direcciones MAC a direcciones IP
+\end{itemize}
+
+\subsection{Protocolos de la capa de acceso a red}
+
+\begin{itemize}
+    \item \textbf{Ethernet (IEEE 802.3)}: Estándar para redes cableadas de área local
+    \item \textbf{WiFi (IEEE 802.11)}: Estándar para redes inalámbricas de área local
+    \item \textbf{PPP (Protocolo Punto a Punto)}: Protocolo para conexiones punto a punto
+    \item \textbf{Frame Relay}: Protocolo para redes de área amplia
+    \item \textbf{ATM (Modo de Transferencia Asíncrona)}: Protocolo para redes de alta velocidad
+\end{itemize}
+
+\subsection{Protocolo TCP en detalle}
+
+El \textbf{Protocolo de Control de Transmisión} (TCP) está diseñado teniendo en cuenta la confiabilidad y la garantía. Este protocolo reserva una conexión constante entre los dos dispositivos durante el tiempo que se tarda en enviar y recibir los datos. Incorpora la comprobación de errores en su diseño. La verificación de errores es la forma en que TCP puede garantizar que los datos enviados se hayan recibido y vuelto a ensamblar en el mismo orden.
+
+TCP se utiliza para situaciones como compartir archivos, navegar por Internet o enviar un correo electrónico. Este uso se debe a que estos servicios requieren que los datos sean precisos y completos (¡no es bueno tener medio archivo!).
+
+\subsubsection{Características principales de TCP}
+
+\begin{itemize}
+    \item \textbf{Orientado a conexión}: Establece una conexión virtual entre el origen y el destino antes de transmitir datos
+    \item \textbf{Entrega confiable}: Garantiza que todos los paquetes lleguen al destino en el orden correcto
+    \item \textbf{Control de flujo}: Regula la velocidad de transmisión para evitar saturar al receptor
+    \item \textbf{Control de congestión}: Adapta la velocidad de transmisión según el estado de la red
+    \item \textbf{Recuperación de errores}: Detecta y corrige errores de transmisión automáticamente
+\end{itemize}
+
+\subsubsection{Estados de conexión TCP}
+
+Una conexión TCP pasa por varios estados durante su ciclo de vida:
+
+\begin{enumerate}
+    \item \textbf{CLOSED}: Estado inicial, no hay conexión
+    \item \textbf{LISTEN}: El servidor espera conexiones entrantes
+    \item \textbf{SYN\_SENT}: El cliente ha enviado SYN, espera respuesta
+    \item \textbf{SYN\_RECEIVED}: El servidor ha recibido SYN, ha enviado SYN+ACK
+    \item \textbf{ESTABLISHED}: Conexión establecida, se pueden transmitir datos
+    \item \textbf{FIN\_WAIT\_1}: El cliente ha enviado FIN, espera ACK
+    \item \textbf{FIN\_WAIT\_2}: El cliente ha recibido ACK de FIN, espera FIN del servidor
+    \item \textbf{CLOSE\_WAIT}: El servidor ha recibido FIN, espera que la aplicación cierre
+    \item \textbf{LAST\_ACK}: El servidor ha enviado FIN, espera ACK
+    \item \textbf{TIME\_WAIT}: El cliente espera un tiempo antes de cerrar completamente
+\end{enumerate}
+
+
+
+
+\begin{itemize}
+    \item Ventajas de TCP 
+    \begin{itemize}
+        \item Garantiza la exactitud de los datos.
+        \item Capaz de sincronizar dos dispositivos para evitar que el otro se inunde de datos.
+
+\item Realiza muchos más procesos para mayor confiabilidad.
+
+    \end{itemize}
+    \item Desventajas de TCP
+        \begin{itemize}
+            \item Requiere una conexión confiable entre los dos dispositivos. Si no se recibe una pequeña porción de datos, entonces no se puede usar toda la porción de datos.
+            \item Una conexión lenta puede provocar un cuello de botella en otro dispositivo, ya que la conexión estará reservada en la computadora receptora todo el tiempo.
+%\item 
+        \end{itemize}
+
+
+
+\end{itemize}
+
+
+
+\subsection{Protocolo UDP en detalle}
+
+TCP no es el único protocolo que corre sobre IP. Por ejemplo \textbf{UDP (User Datagram Protocol)} corre en paralelo a TCP en una capa diferente para soportar otros protocolos. Estos dos protocolos comunes proveen diferentes tipos de servicios de transporte útiles para diferentes escenarios. 
+
+UDP no cuenta con las muchas funciones que ofrece TCP, como la verificación de errores y la confiabilidad. De hecho, todos los datos que se envían a través de UDP se envían a la computadora, ya sea que lleguen allí o no. No hay sincronización entre los dos dispositivos ni garantía de entrega.
+
+\subsubsection{Características principales de UDP}
+
+\begin{itemize}
+    \item \textbf{No orientado a conexión}: No establece una conexión antes de transmitir datos
+    \item \textbf{Entrega no confiable}: No garantiza que los paquetes lleguen al destino
+    \item \textbf{Sin control de flujo}: No regula la velocidad de transmisión
+    \item \textbf{Sin control de congestión}: No adapta la velocidad según el estado de la red
+    \item \textbf{Sin recuperación de errores}: No detecta ni corrige errores automáticamente
+    \item \textbf{Transmisión rápida}: Prioriza la velocidad sobre la confiabilidad
+\end{itemize}
+
+\subsubsection{Aplicaciones típicas de UDP}
+
+UDP es ideal para aplicaciones donde la velocidad es más importante que la confiabilidad:
+
+\begin{itemize}
+    \item \textbf{Streaming de video/audio}: Donde la pérdida ocasional de paquetes es aceptable
+    \item \textbf{Juegos en línea}: Donde la latencia baja es crítica
+    \item \textbf{DNS}: Consultas rápidas de nombres de dominio
+    \item \textbf{DHCP}: Configuración automática de red
+    \item \textbf{SNMP}: Monitoreo de red en tiempo real
+    \item \textbf{VoIP}: Comunicación de voz sobre IP
+\end{itemize}
+
+
+\begin{itemize}
+    \item Ventajas de UDP 
+    \begin{itemize}
+        \item UDP es mucho más rápido que TCP.
+        \item UDP deja la capa de aplicación (software de usuario) para decidir si hay algún control sobre la rapidez con que se envían los paquetes.
+
+    \item UDP no reserva una conexión continua en un dispositivo como lo hace TCP.
+
+
+    \end{itemize}
+    \item Desventajas de UDP
+        \begin{itemize}
+            \item A UDP no le importa si se reciben los datos.
+            \item Es bastante flexible para los desarrolladores de software en este sentido.
+            \item Esto significa que las conexiones inestables resultan en una experiencia terrible para el usuario.
+        \end{itemize}
+
+UDP es útil en situaciones en las que se envían pequeños fragmentos de datos. Por ejemplo, los protocolos utilizados para descubrir dispositivos ( ARP y DHCP ) o archivos más grandes como transmisión de video (donde está bien si alguna parte del video está pixelada. Los píxeles son solo piezas perdidas de ¡datos!)
+
+
+
+
+\subsection{Paquetes y transmisión de datos}
+
+Los paquetes y los frames son pequeños fragmentos de datos que, cuando se forman juntos, forman un fragmento de información o mensaje más grande.
+
+\subsubsection{Encabezamiento del paquete}
+
+El encabezamiento del paquete está compuesto por:
+\begin{itemize}
+    \item \textbf{Tiempo para vivir (TTL)}: Este campo establece un temporizador de caducidad para que el paquete no obstruya su red si nunca logra llegar a un host o escapar.
+    \item \textbf{Suma de verificación}: Este campo proporciona verificación de integridad para protocolos como TCP/IP. Si se cambia algún dato, este valor será diferente de lo que se esperaba y, por lo tanto, corrupto.
+    \item \textbf{Dirección de la fuente}: La dirección IP del dispositivo desde el que se envía el paquete para que los datos sepan a dónde regresar.
+    \item \textbf{Dirección de destino}: La dirección IP del dispositivo al que está destinado el paquete para que los datos sepan a dónde viajar a continuación.
+\end{itemize}
+
+\subsubsection{¿Cómo viaja la información por la red?}
+
+Cuando una máquina envía datos a otra, el proceso sigue estos pasos:
+
+\begin{enumerate}
+    \item \textbf{División en paquetes}: Los datos se dividen en paquetes de tamaño fijo (típicamente 1500 bytes para Ethernet)
+    \item \textbf{Encapsulación}: Cada paquete recibe encabezados con información de control
+    \item \textbf{Enrutamiento}: Los routers deciden la mejor ruta hacia el destino
+    \item \textbf{Transmisión física}: Los paquetes se convierten en señales eléctricas/ópticas
+    \item \textbf{Recepción}: La máquina destino recibe y reensambla los paquetes
+\end{enumerate}
+
+\subsubsection{¿Por qué puedo ver paquetes que no son para mí?}
+
+En redes conmutadas (switches), cada dispositivo solo recibe paquetes destinados a él. Sin embargo, en ciertas situaciones puedes ver tráfico de otros:
+
+\begin{itemize}
+    \item \textbf{Redes con hubs}: Los hubs retransmiten todo el tráfico a todos los puertos
+    \item \textbf{Modo promiscuo}: Tu tarjeta de red puede configurarse para capturar todo el tráfico
+    \item \textbf{ARP poisoning}: Técnica que redirige tráfico a través de tu máquina
+    \item \textbf{Port mirroring}: El switch puede configurarse para duplicar tráfico a un puerto específico
+\end{itemize}
+
+\textbf{IMPORTANTE}: En este curso, solo se recomienda analizar tráfico de tu propia máquina por razones de seguridad y ética.
+
+\subsection{¿Cómo funciona la transmisión física de datos?}
+
+\subsubsection{Del software al cable}
+
+Cuando envías un email o visitas una página web, los datos pasan por esta transformación:
+
+\begin{enumerate}
+    \item \textbf{Aplicación}: Tu programa (navegador, email) genera los datos
+    \item \textbf{Encapsulación TCP/IP}: Los datos se dividen y empaquetan
+    \item \textbf{Driver de red}: El sistema operativo prepara los paquetes
+    \item \textbf{Tarjeta de red}: Convierte datos digitales en señales físicas
+    \item \textbf{Medio físico}: Cable de cobre, fibra óptica o ondas de radio
+\end{enumerate}
+
+\subsubsection{Señales en diferentes medios}
+
+\begin{itemize}
+    \item \textbf{Cable de cobre (Ethernet)}: Los datos se convierten en impulsos eléctricos que varían entre 0V y 5V
+    \item \textbf{Fibra óptica}: Los datos se convierten en pulsos de luz (fotones) que se encienden y apagan
+    \item \textbf{WiFi}: Los datos se convierten en ondas de radio que varían en frecuencia y amplitud
+\end{itemize}
+
+\subsubsection{¿Por qué 1500 bytes por paquete?}
+
+El tamaño máximo de paquete Ethernet (MTU) está limitado por:
+
+\begin{itemize}
+    \item \textbf{Limitaciones físicas}: Capacidad del medio de transmisión
+    \item \textbf{Control de errores}: Paquetes más pequeños son más fáciles de retransmitir
+    \item \textbf{Latencia}: Paquetes grandes pueden bloquear la red
+    \item \textbf{Memoria del hardware}: Los switches y routers tienen buffers limitados
+\end{itemize}
+
+\subsubsection{El viaje de un paquete}
+
+Imagina que envías un email a alguien en otro país:
+
+\begin{enumerate}
+    \item \textbf{Tu computadora}: Divide el email en paquetes de 1500 bytes
+    \item \textbf{Tu router}: Recibe los paquetes y decide la mejor ruta
+    \item \textbf{Internet}: Los paquetes viajan por múltiples routers
+    \item \textbf{Router destino}: Recibe los paquetes y los envía a la red local
+    \item \textbf{Computadora destino}: Reensambla los paquetes en el email original
+\end{enumerate}
+
+\textbf{NOTA IMPORTANTE}: Cada paquete puede tomar una ruta diferente, pero todos llegan al mismo destino y se reensamblan en el orden correcto.
+
+\section{Comandos de terminal para análisis de red (macOS)}
+
+\subsection{Información básica de red}
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!60!gray,title=Comandos básicos]
+\textbf{Nota}: Todos estos comandos funcionan en macOS, Linux y otros sistemas Unix.
+\end{tcolorbox}
+
+\subsubsection{Configuración de red}
+
+\begin{itemize}
+    \item \textbf{ifconfig}: Muestra la configuración de todas las interfaces de red
+    \begin{verbatim}
+    ifconfig en0    # Información de la interfaz WiFi
+    ifconfig en1    # Información de la interfaz Ethernet
+    \end{verbatim}
+    
+    \item \textbf{networksetup}: Configuración avanzada de red en macOS
+    \begin{verbatim}
+    networksetup -listallnetworkservices    # Lista todos los servicios
+    networksetup -getinfo "Wi-Fi"          # Info del WiFi
+    \end{verbatim}
+    
+    \item \textbf{scutil}: Herramienta de configuración del sistema
+    \begin{verbatim}
+    scutil --proxy    # Configuración de proxy
+    scutil --dns      # Configuración DNS
+    \end{verbatim}
+\end{itemize}
+
+\subsubsection{Conectividad y diagnóstico}
+
+\begin{itemize}
+    \item \textbf{ping}: Prueba conectividad con un host
+    \begin{verbatim}
+    ping -c 4 google.com    # 4 pings a Google
+    ping -i 0.2 8.8.8.8     # Ping cada 0.2 segundos
+    \end{verbatim}
+    
+    \item \textbf{traceroute}: Ruta que siguen los paquetes
+    \begin{verbatim}
+    traceroute google.com    # Ruta a Google
+    traceroute -n 8.8.8.8    # Sin resolución DNS
+    \end{verbatim}
+    
+    \item \textbf{nslookup}: Consultas DNS
+    \begin{verbatim}
+    nslookup google.com      # Resolución directa
+    nslookup -type=mx gmail.com  # Registros MX
+    \end{verbatim}
+    
+    \item \textbf{dig}: Herramienta DNS más avanzada
+    \begin{verbatim}
+    dig google.com           # Información DNS completa
+    dig +short google.com    # Solo la IP
+    \end{verbatim}
+\end{itemize}
+
+\subsubsection{Análisis de tráfico}
+
+\begin{itemize}
+    \item \textbf{netstat}: Estadísticas de red y conexiones
+    \begin{verbatim}
+    netstat -an              # Todas las conexiones
+    netstat -an | grep LISTEN # Solo puertos escuchando
+    netstat -i                # Estadísticas de interfaces
+    \end{verbatim}
+    
+    \item \textbf{lsof}: Lista archivos abiertos (incluye conexiones de red)
+    \begin{verbatim}
+    lsof -i                  # Todas las conexiones de red
+    lsof -i :80              # Conexiones en puerto 80
+    lsof -i tcp              # Solo conexiones TCP
+    \end{verbatim}
+    
+    \item \textbf{tcpdump}: Captura de paquetes (requiere permisos de administrador)
+    \begin{verbatim}
+    sudo tcpdump -i en0      # Captura en interfaz WiFi
+    sudo tcpdump port 80     # Solo tráfico HTTP
+    sudo tcpdump -w capture.pcap  # Guarda en archivo
+    \end{verbatim}
+\end{itemize}
+
+\subsubsection{Información del sistema}
+
+\begin{itemize}
+    \item \textbf{ps}: Procesos del sistema
+    \begin{verbatim}
+    ps aux | grep -i network # Procesos relacionados con red
+    ps -ef | grep -i http    # Procesos HTTP
+    \end{verbatim}
+    
+    \item \textbf{top}: Monitoreo en tiempo real
+    \begin{verbatim}
+    top                       # Monitoreo general
+    top -pid $(pgrep -f "http")  # Solo proceso HTTP
+    \end{verbatim}
+    
+    \item \textbf{system\_profiler}: Información detallada del sistema
+    \begin{verbatim}
+    system_profiler SPNetworkDataType  # Info de red
+    system_profiler SPHardwareDataType  # Info de hardware
+    \end{verbatim}
+\end{itemize}
+
+\section{Ejercicios prácticos de análisis de red}
+
+\subsection{Ejercicio 1: Análisis de conexiones activas}
+
+\textbf{Objetivo}: Identificar qué servicios están ejecutándose en tu máquina y qué conexiones están activas.
+
+\textbf{Pasos}:
+\begin{enumerate}
+    \item Abre Terminal en macOS
+    \item Ejecuta: \texttt{netstat -an | grep LISTEN}
+    \item Identifica los puertos abiertos y su estado
+    \item Ejecuta: \texttt{lsof -i | grep LISTEN}
+    \item Correlaciona los puertos con los procesos
+\end{enumerate}
+
+\textbf{Análisis}:
+\begin{itemize}
+    \item ¿Qué puertos están abiertos?
+    \item ¿Qué servicios están ejecutándose?
+    \item ¿Hay puertos que no esperabas?
+\end{itemize}
+
+\subsection{Ejercicio 2: Captura de tráfico HTTP}
+
+\textbf{Objetivo}: Capturar y analizar tráfico HTTP de tu navegador.
+
+\textbf{Pasos}:
+\begin{enumerate}
+    \item Abre Terminal como administrador
+    \item Ejecuta: \texttt{sudo tcpdump -i en0 -w http\_capture.pcap port 80}
+    \item Abre tu navegador y visita una página HTTP (no HTTPS)
+    \item Detén la captura con Ctrl+C
+    \item Analiza el archivo con: \texttt{tcpdump -r http\_capture.pcap -A}
+\end{enumerate}
+
+\textbf{Análisis}:
+\begin{itemize}
+    \item ¿Puedes ver el contenido de las páginas web?
+    \item ¿Qué información se transmite en texto plano?
+    \item ¿Por qué es importante HTTPS?
+\end{itemize}
+
+\subsection{Ejercicio 3: Análisis de DNS}
+
+\textbf{Objetivo}: Entender cómo funciona la resolución de nombres de dominio.
+
+\textbf{Pasos}:
+\begin{enumerate}
+    \item Ejecuta: \texttt{dig google.com}
+    \item Ejecuta: \texttt{dig +trace google.com}
+    \item Compara los resultados
+    \item Ejecuta: \texttt{nslookup google.com 8.8.8.8}
+\end{enumerate}
+
+\textbf{Análisis}:
+\begin{itemize}
+    \item ¿Cuántos servidores DNS están involucrados?
+    \item ¿Qué información proporciona cada respuesta?
+    \item ¿Por qué hay múltiples servidores DNS?
+\end{itemize}
+
+\subsection{Ejercicio 4: Monitoreo de tráfico en tiempo real}
+
+\textbf{Objetivo}: Observar el tráfico de red en tiempo real.
+
+\textbf{Pasos}:
+\begin{enumerate}
+    \item Ejecuta: \texttt{sudo tcpdump -i en0 -n}
+    \item Abre diferentes aplicaciones (navegador, email, etc.)
+    \item Observa los paquetes que se generan
+    \item Identifica patrones de tráfico
+\end{enumerate}
+
+\textbf{Análisis}:
+\begin{itemize}
+    \item ¿Qué tipos de paquetes ves?
+    \item ¿Cómo varía el tráfico según la aplicación?
+    \item ¿Puedes identificar el protocolo por el patrón?
+\end{itemize}
+
+\subsection{Ejercicio 5: Análisis de seguridad básico}
+
+\textbf{Objetivo}: Identificar posibles vulnerabilidades en tu configuración de red.
+
+\textbf{Pasos}:
+\begin{enumerate}
+    \item Ejecuta: \texttt{netstat -an | grep LISTEN}
+    \item Verifica qué servicios están expuestos
+    \item Ejecuta: \texttt{ps aux | grep -i network}
+    \item Revisa la configuración de firewall
+\end{enumerate}
+
+\textbf{Análisis}:
+\begin{itemize}
+    \item ¿Hay servicios innecesarios ejecutándose?
+    \item ¿Qué puertos están abiertos al exterior?
+    \item ¿Cómo podrías mejorar la seguridad?
+\end{itemize}
+
+\subsection{Herramientas adicionales recomendadas}
+
+\begin{itemize}
+    \item \textbf{Wireshark}: Interfaz gráfica para análisis de paquetes
+    \item \textbf{Network Utility}: Herramienta gráfica incluida en macOS
+    \item \textbf{Activity Monitor}: Monitoreo visual de procesos y red
+    \item \textbf{Console}: Logs del sistema para análisis de red
+\end{itemize}
+
+\textbf{NOTA DE SEGURIDAD}: Estos ejercicios están diseñados para análisis educativo. Solo analiza tráfico de tu propia máquina y redes autorizadas.
+
+\section{Limitaciones y consideraciones éticas}
+
+\subsection{¿Qué NO puedes ver desde tu computadora?}
+
+Es importante entender las limitaciones técnicas y legales:
+
+\begin{itemize}
+    \item \textbf{Tráfico de otros dispositivos}: En redes modernas con switches, solo ves tráfico destinado a ti
+    \item \textbf{Redes aisladas}: No puedes acceder a redes completamente separadas
+    \item \textbf{Tráfico encriptado}: El contenido de HTTPS, VPNs y otros protocolos seguros está oculto
+    \item \textbf{Redes corporativas}: Muchas empresas tienen políticas estrictas contra el análisis de tráfico
+\end{itemize}
+
+\subsection{¿Qué SÍ puedes ver?}
+
+Desde tu propia máquina puedes analizar:
+
+\begin{itemize}
+    \item \textbf{Tráfico saliente}: Todo lo que envías a Internet
+    \item \textbf{Tráfico entrante}: Respuestas a tus solicitudes
+    \item \textbf{Tráfico localhost}: Comunicación entre aplicaciones en tu máquina
+    \item \textbf{Tráfico de red local}: Si estás en una red doméstica o universitaria
+\end{itemize}
+
+\subsection{Consideraciones éticas y legales}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!60!gray,title=\textbf{ADVERTENCIA IMPORTANTE}]
+\textbf{NUNCA} analices tráfico de redes ajenas sin autorización explícita. Esto puede ser ilegal y resultar en consecuencias graves.
+\end{tcolorbox}
+
+\begin{itemize}
+    \item \textbf{Privacidad}: Los datos de otros usuarios son confidenciales
+    \item \textbf{Leyes locales}: Las leyes sobre interceptación de comunicaciones varían por país
+    \item \textbf{Políticas de red}: Muchas redes tienen términos de servicio específicos
+    \item \textbf{Responsabilidad profesional}: Como estudiante de seguridad, debes ser un ejemplo de ética
+\end{itemize}
+
+\subsection{Cuándo SÍ está permitido el análisis}
+
+\begin{itemize} 
+    \item \textbf{Tu propia máquina}: Análisis completo de tu tráfico
+    \item \textbf{Redes propias}: Si eres administrador de la red
+    \item \textbf{Redes autorizadas}: Con permiso explícito por escrito
+    \item \textbf{Entornos de laboratorio}: Redes aisladas para aprendizaje
+    \item \textbf{Investigación académica}: Con aprobación del comité de ética
+\end{itemize}
+
+\subsection{Alternativas seguras para aprendizaje}
+
+Si quieres practicar análisis de red de manera segura:
+
+\begin{itemize}
+    \item \textbf{Entornos virtuales}: Máquinas virtuales con tráfico simulado
+    \item \textbf{Herramientas de simulación}: Software que genera tráfico de red sintético
+    \item \textbf{Capturas públicas}: Archivos de captura disponibles para estudio
+    \item \textbf{Laboratorios online}: Plataformas que proporcionan entornos seguros
+    \item \textbf{Proyectos propios}: Crea tu propia red de prueba
+\end{itemize}
+
+\subsection{Recursos para aprendizaje ético}
+
+\begin{itemize}
+    \item \textbf{Wireshark Sample Captures}: Capturas de tráfico para estudio
+    \item \textbf{PCAP files}: Archivos de captura de diferentes tipos de tráfico
+    \item \textbf{Network simulation tools}: Herramientas para simular redes
+    \item \textbf{Online labs}: Laboratorios virtuales de seguridad
+    \item \textbf{Academic resources}: Materiales educativos aprobados
+\end{itemize}
+
+\textbf{Recuerda}: La seguridad de la información es una responsabilidad. Usa tus conocimientos para proteger, no para explotar.
+
+\subsection{Comunicación cliente-servidor}
+
+\subsection{Comunicación cliente-servidor}
+
+La comunicación en redes sigue principalmente el modelo cliente-servidor, que establece una arquitectura fundamental donde los roles y responsabilidades están claramente definidos. En este modelo, el cliente actúa como solicitante de servicios, enviando peticiones específicas a servidores que están diseñados para responder a múltiples clientes simultáneamente. El servidor proporciona servicios especializados a múltiples clientes, manteniendo la independencia entre las diferentes solicitudes.
+
+Una característica importante de este modelo es la independencia del servidor, que no necesita conocer detalles específicos del cliente para proporcionar sus servicios. Esta separación de responsabilidades permite que los servidores sean altamente especializados y optimizados para sus funciones específicas, mientras que los clientes pueden ser simples y enfocados en la presentación de datos al usuario final.
+
+\subsubsection{Arquitectura de comunicación}
+
+La comunicación cliente-servidor utiliza el modelo de capas para organizar las responsabilidades de manera eficiente. En la capa de aplicación, los programas cliente y servidor implementan la lógica específica de cada servicio, como navegadores web, servidores de correo electrónico o aplicaciones de base de datos. La API de sockets proporciona la interfaz entre las aplicaciones y el kernel del sistema operativo, permitiendo que los programas de usuario accedan a las capacidades de red del sistema.
+
+La capa de transporte utiliza TCP para proporcionar comunicación confiable entre el cliente y el servidor, garantizando que los datos lleguen completos y en el orden correcto. La capa de red implementa IP para el direccionamiento lógico, permitiendo que las comunicaciones atraviesen múltiples redes y routers. Finalmente, la capa de enlace utiliza Ethernet para la transmisión física de los datos, convirtiendo la información digital en señales que pueden viajar por el medio físico.
+
+\subsubsection{API de sockets TCP}
+
+\subsubsection{API de sockets TCP}
+
+Los sockets TCP siguen un patrón específico que establece una secuencia de operaciones bien definida para establecer y mantener comunicaciones confiables. El servidor TCP inicia el proceso creando un socket mediante la función socket(), que asigna los recursos del sistema necesarios para la comunicación de red. Luego, el servidor utiliza bind() para asociar el socket a una dirección IP y puerto específicos, estableciendo el punto de entrada para las conexiones entrantes.
+
+El servidor continúa con listen() para comenzar a escuchar conexiones entrantes, configurando el socket para aceptar múltiples conexiones simultáneas. Cuando llega una conexión, accept() crea un nuevo socket para manejar esa conexión específica, permitiendo que el servidor continúe escuchando nuevas conexiones mientras procesa las existentes. Durante la comunicación activa, read() y write() permiten el intercambio de datos entre el cliente y el servidor, y finalmente close() cierra la conexión de manera ordenada.
+
+El cliente TCP sigue un patrón más simple, comenzando también con socket() para crear su socket de comunicación. Luego utiliza connect() para establecer la conexión con el servidor, especificando la dirección IP y puerto del servidor destino. Una vez establecida la conexión, write() y read() permiten el intercambio de datos, y close() termina la comunicación de manera limpia.
+
+\subsubsection{Puertos y multiplexación}
+
+\subsubsection{Puertos y multiplexación}
+
+Los puertos representan un mecanismo fundamental de multiplexación que permite que múltiples servicios y aplicaciones coexistan en un mismo dispositivo sin conflictos. Cada interfaz de red tiene 65536 puertos disponibles, numerados del 0 al 65535, proporcionando un espacio de direccionamiento amplio para diferentes servicios. Esta multiplexación permite que múltiples servicios funcionen simultáneamente en una misma dirección IP, cada uno identificado únicamente por su número de puerto.
+
+Los puertos estándar son números predefinidos que están reservados para servicios específicos y ampliamente reconocidos. Por ejemplo, el puerto 80 está reservado para HTTP, el puerto 22 para SSH, el puerto 443 para HTTPS, y el puerto 53 para DNS. Estos puertos estándar facilitan la configuración y el descubrimiento de servicios, ya que las aplicaciones pueden asumir que ciertos servicios estarán disponibles en puertos específicos.
+
+La operación bind() es fundamental en este proceso, ya que permite que un proceso se adjunte a un puerto específico, estableciendo un punto de entrada único para las comunicaciones destinadas a esa aplicación. Esta operación es esencial para que los servidores puedan recibir conexiones entrantes en puertos específicos, mientras que los clientes pueden conectarse a servicios conocidos utilizando los puertos estándar correspondientes.
+
+\subsection{Configuraciones reales de red}
+
+\subsubsection{Configuración Windows}
+
+La configuración de red en sistemas Windows proporciona información detallada sobre los parámetros de conectividad del dispositivo. La dirección MAC representa el identificador único del hardware de red, siendo un valor de 48 bits que identifica específicamente la interfaz de red física. La dirección IPv6 link-local es una dirección auto-configurada que no se enruta a Internet, utilizada para comunicación local dentro de la red.
+
+La dirección IPv4 privada es asignada por el router o servidor DHCP local y se enruta a Internet a través de NAT (Network Address Translation), permitiendo que múltiples dispositivos en la red local compartan una sola dirección IP pública. La máscara de subred, mostrada como /24 en este ejemplo, indica que es una red de clase C con capacidad para 254 hosts.
+
+La información DHCP incluye detalles sobre el arrendamiento de la dirección IP, incluyendo cuándo se obtuvo y cuándo expira. La puerta de enlace es la dirección IP del router que proporciona acceso a Internet, siendo el punto de salida para todo el tráfico destinado a redes externas. El servidor DNS es la dirección IP del servidor que resuelve nombres de dominio a direcciones IP, siendo fundamental para la navegación web y otras aplicaciones de red.
+
+\subsubsection{Configuración Linux}
+
+La configuración de red en sistemas Linux sigue principios similares a Windows pero con algunas diferencias en la presentación y gestión. La dirección MAC mantiene su función como identificador único del hardware de red, siendo esencial para la comunicación a nivel de enlace de datos. La máscara de subred, también mostrada como /24, indica una red de clase C estándar.
+
+La dirección IPv4 privada funciona de manera idéntica a Windows, siendo asignada por DHCP y enrutada a Internet a través de NAT. La dirección IPv6 link-local es auto-configurada y utilizada para comunicación local, no siendo enrutada a Internet. El servidor DNS proporciona resolución de nombres de dominio, siendo configurado típicamente por el proveedor de servicios de Internet o el administrador de red.
+
+La puerta de enlace representa el router que proporciona acceso a Internet, siendo el punto de salida para todo el tráfico externo. Esta configuración es fundamental para el funcionamiento de cualquier dispositivo conectado a una red TCP/IP moderna.
+
+\subsection{Principios de seguridad en redes}
+
+Basado en el material de Duke University, es fundamental recordar que:
+
+\textbf{Regla importante}: "Sé estricto en lo que envías y verifica cuidadosamente lo que recibes"
+
+Esta regla es crucial porque el layering mal implementado invita vulnerabilidades de seguridad que pueden comprometer toda la infraestructura de red. Muchas vulnerabilidades surgen de asunciones implícitas entre capas, donde una capa asume incorrectamente que otra capa ha validado o procesado los datos de manera específica. La validación de entrada debe realizarse siempre antes de procesar los datos recibidos, independientemente de la confianza que se tenga en la fuente.
+
+La modularidad es beneficiosa solo si no se hacen asunciones peligrosas sobre el comportamiento de otras capas. Cada capa debe ser estricta en lo que envía y verificar cuidadosamente lo que recibe, sin confiar en que otras capas hayan realizado validaciones o procesamientos específicos. Este principio es fundamental para prevenir vulnerabilidades de seguridad que pueden explotarse mediante manipulación de datos en diferentes niveles del stack de protocolos.
+
+\textbf{Ejemplo de vulnerabilidad}: Un paquete con tamaño de frame Ethernet en conflicto con el tamaño del paquete TCP puede causar que código de red defectuoso falle (segfault), demostrando cómo las asunciones entre capas pueden llevar a comportamientos inesperados y potencialmente peligrosos.
+
+El modelo OSI (Open Systems Interconnection) es un modelo conceptual que permite caracterizar y estandarizar las funciones de un sistema de comunicaciones en cascada o capas para construir una red y usar sus recursos conectados. Este modelo:
+
+\begin{itemize}
+    \item Particiona la comunicación en 7 capas de abstracción
+    \item Permite el desarrollo de tecnologías que actúen por cada capa independientemente de las contiguas
+    \item Cada capa funciona como un servicio para la capa subyacente
+    \item Cada capa agrega datos de encabezado (encapsulación hacia abajo, desencapsulación hacia arriba)
+\end{itemize}
+
+\subsection{Descripción detallada de las capas del modelo OSI}
+
+\subsubsection{Capa 7: Aplicación}
+
+Esta capa es responsable de interactuar con los usuarios finales mediante software de aplicación. Incluye todos los programas en un computador que permiten a los usuarios interactuar con la red.
+
+\textbf{Función}: Define los protocolos estandarizados de interacción entre equipos.
+
+\textbf{Protocolos principales}:
+Los protocolos de la capa de aplicación incluyen FTP y SFTP para transferencia de archivos, NFS para sistemas de archivos distribuidos, POP3/IMAP y SMTP para correo electrónico, DNS para resolución de nombres, TELNET y SSH para administración remota, y HTTP/HTTPS para servicios web. Cada uno de estos protocolos define estándares específicos para la interacción entre equipos en diferentes contextos de aplicación.
+
+\textbf{Vulnerabilidades típicas}:
+Las vulnerabilidades en la capa de aplicación incluyen problemas de diseño que permiten el uso de recursos por usuarios no autenticados, puertas traseras y defectos de diseño que permiten evadir controles de seguridad, y controles inadecuados de seguridad estilo "todo o nada" que no proporcionan granularidad adecuada. Los fallos de programación pueden ser aprovechados para causar comportamiento no deseado, y los ataques de replay en SSH pueden comprometer la seguridad de las comunicaciones remotas.
+
+\textbf{Medidas de mitigación}:
+Las medidas de mitigación incluyen controles a nivel de aplicación para definir y hacer cumplir políticas de acceso específicas, estándares de testing y compliance para código y funcionalidad de aplicaciones, firewalls de aplicación (WAF) para detectar y prevenir ataques específicos, cifrado para confidencialidad e integridad de datos, y firmas digitales para autenticación, no rechazo e integridad de las comunicaciones.
+
+\subsubsection{Capa 6: Presentación}
+
+Esta capa se encarga de métodos de codificación, cifrado y compresión para los hosts que realizan la comunicación.
+
+\textbf{Función}: Organizar los datos enviados y homogeneizar las comunicaciones entre diferentes dispositivos y sistemas de codificación (ASCII, UTF-8, etc.).
+
+\textbf{Protocolos principales}: SSL/TLS, MIME, JPEG, MPEG, XML
+
+\textbf{Vulnerabilidades típicas}:
+\begin{itemize}
+    \item Tácticas de ingeniería social para engañar usuarios
+    \item Robo de credenciales de inicio de sesión e información de tarjetas de crédito
+    \item Instalación de malware en el sistema de la víctima
+    \item Ataques a codificación y descodificación de datos
+    \item Mal manejo de entradas inesperadas
+    \item Vulnerabilidades en SSL/TLS
+\end{itemize}
+
+\textbf{Medidas de mitigación}:
+\begin{itemize}
+    \item Chequeo de entradas
+    \item Revisión de sistemas criptográficos (SSL/TLS)
+    \item Validación de certificados
+    \item Monitoreo de protocolos de seguridad
+\end{itemize}
+
+\subsubsection{Capa 5: Sesión}
+
+Esta capa se encarga de la apertura, cierre y manejo de sesiones abiertas de comunicación, así como de interrupciones en la comunicación.
+
+\textbf{Protocolos principales}: Remote Procedure Call (RPC), NetBIOS, SQL*Net, PPTP, L2TP, SOCKS
+
+\textbf{Vulnerabilidades típicas}:
+\begin{itemize}
+    \item Interceptación de información sensible (passwords, identificadores de sesión)
+    \item Spoofing de identificadores de sesión
+    \item Filtración de información mediante intentos fallidos de autenticación
+    \item Fuerza bruta sobre credenciales de autenticación
+    \item Ataques de secuestro de sesión (activos y pasivos)
+\end{itemize}
+
+\textbf{Medidas de mitigación}:
+\begin{itemize}
+    \item SSL/TLS para cifrar comunicaciones
+    \item Tiempo de expiración de sesiones
+    \item Nivel de corte (cantidad de intentos de autenticación antes de bloquear)
+    \item Tokens de sesión únicos
+    \item Regeneración de IDs de sesión
+    \item Encriptación de sesiones
+\end{itemize}
+
+\subsubsection{Capa 4: Transporte}
+
+Esta capa es responsable de romper datos en paquetes y transmitirlos apropiadamente por la red, realizando control de flujo y de error.
+
+\textbf{Función}: Reordenamiento de paquetes, confiabilidad (que la información llegue sin errores), multiplexación (uso de múltiples servicios).
+
+\textbf{Protocolos principales}: TCP, UDP, SCTP, DCCP
+
+\textbf{Vulnerabilidades típicas}:
+Las vulnerabilidades en la capa de transporte incluyen diferencias en la implementación de protocolos que pueden llevar a fingerprinting, donde los atacantes identifican sistemas operativos específicos basándose en respuestas únicas de los protocolos. Los ataques de Denial-of-Service (DoS) son particularmente problemáticos en esta capa, ya que pueden agotar los recursos del sistema objetivo. La amplificación en respuestas de servidores puede ser explotada para generar tráfico malicioso masivo, mientras que el escaneo de puertos permite a los atacantes identificar servicios vulnerables.
+
+Ataques específicos como SYN Flooding, Port Scanning y Session Hijacking representan amenazas significativas que pueden comprometer la confidencialidad e integridad de las comunicaciones. Estos ataques aprovechan las características específicas de los protocolos de transporte para obtener acceso no autorizado o interrumpir servicios.
+
+\textbf{Medidas de mitigación}:
+Las medidas de mitigación incluyen la implementación de firewalls junto con sistemas de detección y prevención de intrusiones (IPS/IDS) que pueden identificar y bloquear patrones de tráfico sospechosos. Es fundamental mantener los sistemas actualizados con los últimos parches de seguridad para cerrar vulnerabilidades conocidas. El rate limiting y SYN cookies proporcionan protección específica contra ataques de inundación, mientras que el monitoreo continuo de conexiones permite detectar actividad anómala en tiempo real.
+
+\subsubsection{Capa 3: Red}
+
+Esta capa se encarga principalmente del enrutamiento de paquetes. Su misión es que el paquete llegue a su destino aunque no haya una conexión directa.
+
+\textbf{Función}: Enrutamiento de paquetes entre redes diferentes, direccionamiento lógico.
+
+\textbf{Protocolos principales}: IP (IPv4, IPv6), IGMP (multicasting), ICMP (ping), OSPF, BGP, RIP, EIGRP
+
+\textbf{Vulnerabilidades típicas}:
+Las vulnerabilidades en la capa de red incluyen ataques Man-in-the-Middle (MITM) que utilizan suplantación de identidad ARP para interceptar comunicaciones entre dispositivos. El spoofing de direcciones IP permite a los atacantes falsificar su origen, mientras que el flooding de paquetes ICMP, como el famoso "ping de la muerte", puede causar interrupciones en servicios críticos. Otros ataques incluyen IP Spoofing, DDoS/DoS y Route Poisoning, que pueden comprometer la integridad de las tablas de enrutamiento.
+
+Los ataques de enrutamiento representan una amenaza particularmente sofisticada que puede redirigir el tráfico de red hacia destinos maliciosos, comprometiendo la confidencialidad de las comunicaciones y permitiendo interceptación masiva de datos.
+
+\textbf{Medidas de mitigación}:
+Las medidas de mitigación incluyen la minimización del abuso de ICMP/IGMP mediante filtrado estricto de estos protocolos. Los firewalls de red proporcionan protección fundamental mediante el filtrado de paquetes basado en reglas específicas. Los sistemas de detección y prevención de intrusiones (IDS/IPS) monitorean el tráfico en busca de patrones maliciosos, mientras que los servicios de mitigación de DDoS protegen contra ataques distribuidos. El filtrado de paquetes y el monitoreo continuo de tráfico completan la estrategia de defensa en esta capa.
+
+\subsubsection{Capa 2: Enlace de Datos}
+
+En esta capa los datos se preparan para su uso en la capa física. Su objetivo es conseguir que la información fluya libre de errores entre 2 equipos.
+
+\textbf{Función}: Finaliza la comunicación entre los nodos de red y divide paquetes en tramas.
+
+\textbf{Protocolos principales}: Ethernet, WiFi (802.11), PPP, Frame Relay, ATM, VLAN
+
+\textbf{Vulnerabilidades típicas}:
+Las vulnerabilidades en la capa de enlace incluyen spoofing de direcciones MAC, donde los atacantes falsifican la dirección física de un dispositivo para obtener acceso no autorizado a la red. Las suplantaciones de DHCP y ARP permiten a los atacantes redirigir el tráfico hacia dispositivos maliciosos, mientras que técnicas como VLAN Hopping y MAC Flooding pueden comprometer la segmentación de red.
+
+Los ataques específicos de redes inalámbricas incluyen Rogue Access Points y Evil Twin Attacks, donde los atacantes crean puntos de acceso falsos para interceptar comunicaciones. Los ataques de sniffing de tráfico son particularmente problemáticos en redes compartidas, ya que permiten la interceptación de datos sensibles sin acceso físico directo.
+
+\textbf{Medidas de mitigación}:
+Las medidas de mitigación incluyen Port Security que controla el acceso a puertos de red basándose en direcciones MAC autorizadas. Las VLANs proporcionan segmentación lógica que aísla diferentes tipos de tráfico, mientras que 802.1X implementa autenticación robusta de dispositivos antes de permitir acceso a la red. El ARP monitoring detecta intentos de suplantación de direcciones, y los switches inteligentes proporcionan funcionalidades avanzadas de seguridad. El monitoreo continuo de dispositivos autorizados completa la estrategia de defensa en esta capa.
+
+\subsubsection{Capa 1: Física}
+
+Esta capa está encargada de conectar adecuadamente los nodos de la red mediante medios cableados o inalámbricos.
+
+\textbf{Función}: Describe el hardware usado (interfaces de red, características físicas y mecánicas de la conexión) y la forma de transmitir bits y bytes de datos.
+
+\textbf{Estándares principales}: Ethernet (IEEE 802.3), WiFi (IEEE 802.11), Fibra Óptica, Cable Coaxial, Par Trenzado
+
+\textbf{Vulnerabilidades típicas}:
+Las vulnerabilidades en la capa física incluyen amenazas directas al hardware y la infraestructura física de la red. El robo físico de equipos puede resultar en pérdida de datos y acceso no autorizado a configuraciones sensibles. La pérdida de energía eléctrica o control ambiental puede interrumpir completamente los servicios de red, mientras que la desconexión de enlaces físicos de datos puede aislar segmentos críticos de la red.
+
+La interceptación de datos mediante acceso físico directo a los cables representa una amenaza significativa, especialmente en entornos donde la infraestructura física no está adecuadamente protegida. El keylogging físico puede capturar credenciales sensibles, mientras que los ataques de olfateo/rastreo pueden revelar información sobre la estructura de la red. El jamming de señales puede interrumpir completamente las comunicaciones inalámbricas.
+
+\textbf{Medidas de mitigación}:
+Las medidas de mitigación incluyen seguridad física robusta con vigilancia vía CCTV y control de acceso estricto a áreas críticas. El blindaje electromagnético, incluyendo cables blindados y jaulas de Faraday, protege contra interceptación de señales. Los bloqueadores de señal GSM previenen comunicaciones no autorizadas en áreas sensibles, mientras que el monitoreo físico continuo detecta intrusiones y anomalías. El análisis de espectro identifica interferencias y señales no autorizadas, y los sensores de movimiento proporcionan alertas inmediatas de actividad física sospechosa.
+
+\subsection{Interacción entre capas y seguridad}
+
+La seguridad en redes debe implementarse en múltiples capas siguiendo el principio de \textbf{defensa en profundidad}. Un ataque exitoso en una capa puede comprometer toda la comunicación, por lo que es esencial proteger cada nivel de manera comprehensiva. La seguridad física incluye control de acceso estricto, monitoreo ambiental continuo y protección contra desastres naturales que pueden afectar la infraestructura crítica.
+
+La seguridad de enlace se enfoca en la autenticación robusta de dispositivos, encriptación de datos en tránsito y control granular de acceso a puertos de red. La seguridad de red implementa filtrado avanzado de paquetes, encriptación IPsec para comunicaciones seguras y monitoreo continuo del tráfico de red. La seguridad de transporte utiliza encriptación TLS/SSL, autenticación mutua de conexiones y control estricto de sesiones activas.
+
+La seguridad de aplicación completa la estrategia con validación rigurosa de entrada de datos, autenticación multifactor de usuarios y autorización granular basada en roles y permisos específicos. Esta aproximación de múltiples capas asegura que incluso si una capa es comprometida, las otras capas proporcionan protección adicional, minimizando el impacto potencial de los ataques.
+
+\subsection{Herramientas de seguridad por capa}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Capa} & \textbf{Herramientas de Seguridad} & \textbf{Funcionalidad} \\
+\hline
+Física & Cámaras, sensores, control de acceso & Monitoreo y control físico \\
+\hline
+Enlace & Switches inteligentes, 802.1X & Control de acceso a puertos \\
+\hline
+Red & Firewalls, IDS/IPS, VPNs & Filtrado y monitoreo de tráfico \\
+\hline
+Transporte & Firewalls de estado, WAF & Control de conexiones \\
+\hline
+Sesión & Gestores de sesión, tokens & Control de sesiones activas \\
+\hline
+Presentación & Analizadores SSL/TLS, validadores & Verificación de protocolos \\
+\hline
+Aplicación & WAF, antivirus, filtros & Protección de aplicaciones \\
+\hline
+\end{tabular}
+\caption{Herramientas de seguridad por capa del modelo OSI}
+\end{table}
+
+\section{Conclusiones}
+
+La comprensión del modelo OSI y las capas de red es fundamental para implementar seguridad efectiva. Cada capa presenta vulnerabilidades específicas que requieren controles de seguridad apropiados y especializados. La defensa en profundidad, aplicando múltiples capas de protección, es esencial para proteger la infraestructura de red moderna contra amenazas cada vez más sofisticadas.
+
+Cada capa del modelo OSI tiene funciones específicas y vulnerabilidades únicas que deben ser comprendidas y abordadas de manera individual. La seguridad debe implementarse en múltiples capas simultáneamente, no solo en una, ya que los atacantes pueden dirigir sus esfuerzos a cualquier nivel del modelo. Las herramientas de seguridad deben ser apropiadas para cada capa específica, proporcionando protección granular y efectiva.
+
+El monitoreo continuo es esencial en todas las capas, permitiendo la detección temprana de amenazas y la respuesta rápida a incidentes de seguridad. Esta aproximación comprehensiva asegura que la infraestructura de red esté protegida contra una amplia gama de amenazas, desde ataques físicos hasta vulnerabilidades de aplicación sofisticadas.
+

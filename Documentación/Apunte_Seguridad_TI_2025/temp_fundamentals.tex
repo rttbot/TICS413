@@ -1,0 +1,188 @@
+\chapterimage{Pictures/map.png}
+\chapter{Introducción}
+\vspace{95px}
+\begin{flushright}
+    \textit{\textit{"x"}. x.}
+\end{flushright}
+%capitulo I y III libro 
+%Y por qué son excusas baratas
+%Consecuencias de un ataque
+%Preliminares
+%Principios de seguridad
+%El señor Hacker
+
+
+
+\section{¿Qué es la Seguridad}
+
+
+La {seguridad computacional}, la seguridad de la información y la ciberseguridad son términos relacionados, pero tienen enfoques y alcances ligeramente diferentes en el ámbito de la protección de la tecnología y la información. 
+
+\textbf{La seguridad computacional  (Computer Security)} se centra en la protección de sistemas informáticos, incluidos hardware, software y redes, contra amenazas físicas y lógicas que podrían afectar su disponibilidad, integridad y confidencialidad. Los aspectos clave de la seguridad computacional incluyen la \textbf{prevención de accesos no autorizados}, el \textbf{control de acceso a los recursos}, la \textbf{protección contra malware} y la \textbf{implementación de medidas para garantizar la continuidad del servicio}.
+Busca proteger los activos tecnológicos y recursos informáticos de una organización o individuo.
+
+La \textbf{Seguridad de la Información} (Information Security) se enfoca en la \textbf{protección de la información}, ya sea almacenada digitalmente o en formato físico. Esta disciplina busca salvaguardar la confidencialidad, integridad y disponibilidad de los datos. Incluye la \textbf{aplicación de controles, políticas y procedimientos para proteger la información sensible y evitar que caiga en manos no autorizadas o se vea comprometida de alguna manera}. Abarca aspectos más amplios que solo los sistemas informáticos y se aplica a todos los aspectos de la información en una organización, como los datos almacenados en bases de datos, archivos, documentos impresos, comunicaciones electrónicas, entre otros.
+
+La \textbf{{Ciberseguridad}} (Cybersecurity) es una rama específica de la seguridad de la información que se enfoca en proteger los sistemas informáticos y las redes contra ataques cibernéticos. Estos ataques pueden provenir de diversas fuentes, como hackers, ciberdelincuentes, gobiernos hostiles o incluso errores humanos.
+%
+Los profesionales de la ciberseguridad trabajan para identificar y mitigar vulnerabilidades en sistemas y redes, implementar medidas preventivas y reactivas para protegerse contra amenazas cibernéticas y también se ocupan de la detección y respuesta a incidentes de seguridad.
+
+Acorde al NIST SP 800, los siguientes conceptos deben ser comprendido por todos los que trabajen en ambientes que potencialmente pueden recibir ataques:
+\begin{itemize}
+    \item \textbf{Evento} es cualquier ocurrencia observable en una red o sistema. 
+
+    \item \textbf{Incumplimiento} (NIST SP 800-53 Rev. 5):  La pérdida de control, el compromiso, la divulgación no autorizada, la adquisición no autorizada o cualquier evento similar en el que: una persona que no sea un usuario autorizado acceda o acceda potencialmente a información de identificación personal; o un usuario autorizado accede a información de identificación personal para un propósito distinto al autorizado. 
+    
+    \item \textbf{incidente}: Un evento que real o potencialmente pone en peligro la confidencialidad, integridad o disponibilidad de un sistema de información o la información que el sistema procesa, almacena o transmite
+   
+    \item \textbf{Intrusión}: Un evento de seguridad, o una combinación de eventos, que constituye un incidente de seguridad deliberado en el que un intruso obtiene o intenta obtener acceso a un sistema o recurso del sistema sin autorización.
+   
+    \item \textbf{Amenaza}: Cualquier circunstancia o evento con el potencial de afectar negativamente las operaciones de la organización (incluyendo la misión, las funciones, la imagen o la reputación), los activos de la organización, las personas, otras organizaciones o la nación a través de un sistema de información a través del acceso no autorizado, la destrucción, la divulgación, la modificación de la información y/ o denegación de servicio
+    \item \textbf{Vulnerabilidad} Debilidad en un sistema de información, procedimientos de seguridad del sistema, controles internos o implementación que podría ser aprovechada por una fuente de amenazas
+    \item \textbf{Día cero}: Una vulnerabilidad del sistema previamente desconocida con el potencial de explotación sin riesgo de detección o prevención porque, en general, no se ajusta a patrones, firmas o métodos reconocidos. 
+    \item \textbf{Exploit} Un ataque particular. Se llama así porque estos ataques aprovechan las vulnerabilidades del sistema.
+\end{itemize}
+
+\subsection{Confidencialidad}
+La confidencialidad se refiere a la protección de la información contra accesos no autorizados. Esto implica el uso de técnicas como el cifrado, que asegura que solo las partes autorizadas puedan acceder a la información. La pérdida de confidencialidad puede resultar en la divulgación de datos sensibles, lo que puede tener consecuencias legales y financieras significativas.
+
+\subsection{Integridad}
+La integridad asegura que los datos no sean alterados de manera no autorizada. Esto es vital para mantener la confianza en la información que se maneja. Las técnicas de control de versiones y los hashes son herramientas comunes para verificar la integridad de los datos. Un ataque que compromete la integridad puede llevar a decisiones erróneas basadas en información manipulada.
+
+\subsection{Disponibilidad}
+La disponibilidad garantiza que la información esté accesible cuando se necesite. Esto es especialmente crítico en entornos empresariales donde la inactividad puede resultar en pérdidas financieras. Los ataques de denegación de servicio (DoS) son un ejemplo de cómo se puede comprometer la disponibilidad, afectando la capacidad de una organización para operar.
+
+
+
+\section{Modelos de Amenazas}
+Al diseñar una defensa, es fundamental conocer el objetivo. Esto incluye definir los activos en riesgo, las vulnerabilidades existentes y las capacidades del atacante. Solo así se puede determinar cómo la defensa puede prevenir el éxito del ataque.
+
+\subsection{Ejemplo de Modelado de Amenazas: HTTPS}
+En el caso de las comunicaciones HTTPS, se negocia una clave en comunicación abierta, conocida solo por el usuario y el servidor. Todo el contenido se cifra con esta clave, lo que protege la información sensible. El proceso de handshake en HTTPS implica varios pasos:
+
+\begin{enumerate}
+    \item \textbf{Conexión Inicial}: El cliente envía un mensaje "ClientHello" al servidor, indicando las versiones de protocolo y los métodos de cifrado que soporta.
+    \item \textbf{Respuesta del Servidor}: El servidor responde con un mensaje "ServerHello", eligiendo la versión de protocolo y el método de cifrado que se utilizará.
+    \item \textbf{Intercambio de Certificados}: El servidor envía su certificado digital al cliente, que contiene la clave pública del servidor. El cliente verifica la autenticidad del certificado.
+    \item \textbf{Generación de Clave de Sesión}: El cliente genera una clave de sesión, la cifra con la clave pública del servidor y la envía al servidor.
+    \item \textbf{Establecimiento de Conexión Segura}: Ambos, cliente y servidor, utilizan la clave de sesión para cifrar la comunicación.
+\end{enumerate}
+
+Este proceso asegura que incluso si un atacante intercepta la comunicación, no podrá descifrar los datos sin la clave de sesión.
+\section{Gestión de Riesgos}
+La gestión de riesgos es un proceso esencial en la seguridad informática que implica identificar, evaluar y tratar los riesgos asociados con las amenazas a los activos de información. Este proceso ayuda a las organizaciones a priorizar sus esfuerzos de seguridad y a asignar recursos de manera efectiva.
+
+\subsection{Análisis de Riesgos}
+El análisis de riesgos comienza con la identificación de activos clave y las amenazas a las que están expuestos. Se busca determinar el nivel de riesgo que cada amenaza representa para la organización. Esto se puede expresar mediante la fórmula:
+
+\[
+\text{Riesgo} = (\text{Probabilidad de que ocurra la amenaza}) \times (\text{Costo para la organización})
+\]
+
+Este enfoque permite a la dirección evaluar los riesgos y decidir cómo tratarlos. La evaluación de riesgos también implica clasificar las amenazas en función de su probabilidad de ocurrencia y el impacto que tendrían en la organización.
+
+\subsection{Determinación de la Probabilidad}
+La probabilidad de que una amenaza ocurra se clasifica generalmente en las siguientes categorías:
+
+\begin{table}[h]
+    \centering
+    \caption{Clasificación de la Probabilidad de Ocurrencia}
+    \begin{tabularx}{\textwidth}{@{}XXX@{}}
+        \toprule
+        \textbf{Rating} & \textbf{Descripción} & \textbf{Definición Expandida} \\ \midrule
+        1 & Rara & Puede ocurrir solo en circunstancias excepcionales y puede considerarse "desafortunado" o muy poco probable. \\
+        2 & Poco Probable & Podría ocurrir en algún momento, pero no se espera dado los controles actuales. \\
+        3 & Posible & Podría ocurrir en algún momento, pero también podría no ocurrir. \\
+        4 & Probable & Probablemente ocurrirá en algunas circunstancias. \\
+        5 & Casi Cierto & Se espera que ocurra en la mayoría de las circunstancias. \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsection{Determinación de Consecuencias}
+Es fundamental especificar las consecuencias de que una amenaza se materialice. Esto no solo se refiere al impacto en el activo afectado, sino también a las repercusiones para la organización en su conjunto. Las consecuencias se pueden clasificar como:
+
+\begin{table}[h]
+    \centering
+    \caption{Clasificación de Consecuencias}
+ \begin{tabularx}{\textwidth}{@{}XXX@{}}
+        \toprule
+        \textbf{Rating} & \textbf{Consecuencia} & \textbf{Definición Expandida} \\ \midrule
+        1 & Insignificante & Resultado de una brecha de seguridad menor. El impacto es breve y requiere poca o ninguna intervención. \\
+        2 & Menor & Resultado de una brecha de seguridad que puede ser manejada sin intervención de la alta dirección. \\
+        3 & Moderado & Brecha de seguridad que requiere intervención significativa y puede tener consecuencias graves. \\
+        4 & Mayor & Brecha de seguridad que requiere intervención significativa y puede resultar en daños severos y prolongados. \\
+        5 & Catastrófico & Brecha de seguridad que resulta en daños severos y prolongados, afectando gravemente a la organización. \\ \bottomrule
+     
+    \end{tabularx}
+  
+\end{table}
+
+ 
+
+
+\section{Superficie de Ataque}
+La superficie de ataque se refiere a las vulnerabilidades accesibles y explotables en un sistema. Incluye el software, la red y los humanos. Por ejemplo, un empleado con acceso a información sensible puede ser vulnerable a un ataque de ingeniería social. La gestión de la superficie de ataque es crucial para proteger los activos de la empresa, ya que cada punto de acceso representa una posible vulnerabilidad que los atacantes pueden explotar.
+
+\subsection{Ejemplos de Superficie de Ataque}
+Los ejemplos de superficie de ataque incluyen puertos abiertos en servidores web, servicios disponibles dentro de un firewall y código que procesa datos entrantes. Cada uno de estos elementos puede ser un punto de entrada para un atacante. Por lo tanto, es esencial realizar auditorías de seguridad periódicas para identificar y mitigar estas vulnerabilidades.
+
+\section{Estrategia de Seguridad}
+La estrategia de seguridad debe incluir especificaciones claras sobre los objetivos, la implementación de mecanismos de prevención y detección, y la evaluación continua de la efectividad de las medidas adoptadas. Esto implica la capacitación de empleados, el uso de sistemas de detección de intrusos (IDS) y la realización de pruebas de seguridad periódicas.
+
+\subsection{Prevención y Detección}
+La prevención es clave, y se deben implementar firewalls y segmentación de red para proteger los sistemas críticos. La detección de intrusos es igualmente importante, y el uso de un IDS permite monitorear la actividad sospechosa en la red, generando alertas automáticas cuando se detectan intentos de acceso no autorizado.
+
+\subsection{Pruebas de Seguridad}
+Las pruebas de seguridad periódicas, como el pentesting, son esenciales para identificar vulnerabilidades antes de que puedan ser explotadas. Estas pruebas simulan ataques reales para evaluar la efectividad de las medidas de seguridad implementadas.
+
+
+\section{ Análisis de Riesgos}
+
+\begin{itemize}
+\item Identificación de Activos: Enumera al menos cinco activos clave de una organización ficticia.
+\item Identificación de Amenazas: Para cada activo, identifica al menos dos amenazas potenciales.
+\item Evaluación de Riesgos: Utiliza la fórmula de riesgo para calcular el nivel de riesgo para cada amenaza, considerando una probabilidad y un costo estimado.
+\item Propuestas de Mitigación: Propón al menos dos medidas de mitigación para cada amenaza identificada.
+\end{itemize}
+
+A continuación, se presenta un ejercicio práctico para aplicar los conceptos: 
+\textbf{Activo}: Base de datos de clientes.\\
+\textbf{Amenazas}: 
+- Inyección SQL.
+- Acceso no autorizado.\\
+\textbf{Evaluación de Riesgos}:
+- Inyección SQL: Probabilidad = 4 (Probable), Costo = \$50,000.\\
+\[
+\text{Riesgo} = 4 \times 50,000 = 200,000
+\]
+
+\textbf{Propuestas de Mitigación}:
+- Implementar validación de entrada.
+- Usar un firewall de aplicaciones web.
+
+
+\subsection{Prioridad de Riesgos}
+Una vez que se han identificado y evaluado los riesgos, es crucial priorizarlos para determinar cuáles requieren atención inmediata. La priorización se basa en la combinación de la probabilidad de ocurrencia y el impacto que tendría cada riesgo en la organización. Esto permite a la dirección enfocar sus recursos en los riesgos más críticos.
+
+La priorización de riesgos se puede realizar mediante un registro de riesgos, que clasifica cada riesgo en función de su probabilidad y consecuencias. Este registro no solo ayuda a visualizar los riesgos, sino que también proporciona una base para la toma de decisiones sobre las medidas de mitigación a implementar.
+
+
+
+
+\section{Ataques}
+
+Irrumpir en una red de destino generalmente incluye una serie de pasos. Según Lockheed Martin , the Cyber Kill Chain consta de siete pasos: 
+\begin{itemize}
+    \item \textbf{Recon:} Recon, abreviatura de reconocimiento, se refiere al paso en el que el atacante intenta aprender tanto como sea posible sobre el objetivo. La información como los tipos de servidores, el sistema operativo, las direcciones IP, los nombres de los usuarios y las direcciones de correo electrónico pueden ayudar al éxito del ataque. 
+    \item \textbf{Armamento}: este paso se refiere a preparar un archivo con un componente malicioso, por ejemplo, para proporcionar acceso remoto al atacante. 
+    \item \textbf{Entrega:} Entrega significa entregar el archivo ``armado'' al objetivo a través de cualquier método factible, como correo electrónico o memoria flash USB. 
+    \item \textbf{Explotación:} cuando el usuario abre el archivo malicioso, su sistema ejecuta el componente malicioso. 
+    \item \textbf{Instalación}: el paso anterior debería instalar el malware en el sistema de destino. 
+    \item \textbf{Comando y control (C2)}: la instalación exitosa del malware proporciona al atacante una capacidad de comando y control sobre el sistema de destino. 
+    \item \textbf{Acciones sobre los objetivos}: después de obtener el control de un sistema de destino, el atacante ha logrado sus objetivos. Un objetivo de ejemplo es la filtración de datos (robar los datos del objetivo).
+
+
+\end{itemize}
+
+
+

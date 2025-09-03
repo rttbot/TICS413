@@ -1,0 +1,1164 @@
+ECE560
+Computer and Information Security
+Fall 2024
+Networking Overview
+Tyler Bletsch
+Duke University
+Some slides adapted from Brian Rogers (Duke)
+
+Network fundamentals
+This course isn’t a networking course, so we’ll just hit the highlights
+• We want to hook computers together
+• There’s a near-infinite number of ways to do this
+• We’ll skip the theory and show you the common case
+
+• Average person’s networking understanding
+Network
+
+“Gateway where I get cat pics”
+
+2
+
+Network organization
+
+3
+
+Connectivity on the Internet
+• A point-to-point mesh?
+• Clearly not sustainable for large networks
+▪ N2 links required
+▪ Add new endpoint: new link added to all existing endpoints
+
+4
+
+Network Structure
+• Need to share infrastructure!
+• Routers and switches (intermediate nodes) allow sharing
+
+Home
+network
+
+Mobile
+network
+
+Regional ISP
+e.g., corporate
+network
+
+Global ISP
+5
+
+Internet Backbone
+• From Wikipedia:
+• Due to sharing, we get a
+structure that looks like
+this
+• Localized “stars”
+connected to others
+
+6
+
+Usage Models
+• Network endpoints run application programs
+▪ Web browser, email client, ssh, etc.
+
+• Client / Server model
+▪ Client endpoints requests a service from a server
+▪ E.g. client / server web page service
+
+• Peer-to-peer (P2P)
+▪ Direct client communication (e.g. Skype, BitTorrent)
+
+7
+
+Packet Switched Routers
+
+Router
+
+• Multiplex w/ queue(s) in the router
+• Demultiplex with packet header info:
+▪ Destination endpoint
+
+8
+
+Managing Complexity
+• Very large number of computers
+• Incredible variety of technologies
+▪ Each with very different constraints
+
+• No single administrative entity
+• Evolving demands, protocols, applications
+▪ Each with very different requirements!
+
+• How do we make sense of all this?
+
+9
+
+Networking layers
+
+10
+
+Layering
+• We see layers of abstraction
+
+• Separation of concerns
+▪ Break problem into separate parts
+▪ Solve each one independently
+▪ Tie together through common interfaces: abstraction
+▪ Encapsulate data from layer above inside data from layer below
+▪ Allow independent evolution
+
+11
+
+Layering
+• We see layers of abstraction
+
+• Separation of concerns
+▪ Break problem into separate parts
+▪ Solve each one independently
+▪ Tie together through common interfaces: abstraction
+▪ Encapsulate data from layer above inside data from layer below
+▪ Allow independent evolution
+
+12
+
+Layering done wrong invites
+security vulnerabilities!
+• Layering is a form of modularity; modularity is good
+IF and ONLY IF
+you don’t make any dangerous assumptions!
+• Networking stack is good, common, but has had lots of
+vulnerabilities
+▪ Many vulnerabilities of the form “layer X makes an implicit assumption about
+data from layer Y”
+▪ Example: Receiving a packet with an Ethernet frame size in conflict with TCP
+packet size -> Buggy network code segfaults
+
+• Rule of thumb:
+Be strict in what you send and check carefully what you receive
+
+13
+
+OSI Reference Model
+
+14
+
+TCP/IP Model
+
+15
+
+Layer 1 & 2
+• Layer 1: Physical Layer
+▪ Encoding of bits to send over a single physical link
+
+Examples: Ethernet, 802.11 WiFi
+(the part of the spec that says how to send bits)
+
+• Layer 2: Link Layer
+▪ Framing and transmission of a collection of bits into individual messages sent
+across a single subnetwork (one physical topology)
+▪ Provides local addressing (MAC)
+▪ May involve multiple physical links
+▪ Often the technology supports broadcast: every “node” connected to the
+subnet receives
+Examples: Ethernet, 802.11 WiFi
+
+(the part of the spec that how to send packets to a host on this network)
+
+16
+
+Ethernet/WiFi and MAC addresses
+• Each network interface has a MAC address (“Media Access
+Control”): a 48-bit value burned into network card; globally unique
+▪ First 3 bytes tell the manufacturer (OUI: Organizationally Unique Identifier)
+▪ Last 3 bytes are made to be unique by that manufacturer
+
+• Usually written as colon-delimited hex: BC:5F:F4:2B:E9:68
+• Only meaningful on a single local area network (wired or wireless)
+• Not transmitted across internet
+Windows
+Linux
+
+17
+
+Layer 1/2 demo: ARP
+• Address Resolution Protocol (ARP): how we figure out the layer 2
+address (MAC address) for a given layer 3 address (IP address)
+▪ Can inquire to see known MAC addresses
+▪ Can use OUI (first 3 bytes) to check manufacturer of devices!
+
+Left: ARP listing for my home server
+Below: Lookup of manufacturer of the “TB-Galaxy-S7” device
+
+http://www.whatsmyip.org/mac-address-lookup/
+
+18
+
+Layer 3
+
+Example: Internet Protocol (IP)
+(how to send packets between networks)
+
+• Bridges multiple “subnets” to provide end-to-end connectivity
+between nodes
+• Provides global addressing (IP addresses)
+• Only provides best-effort delivery of data
+▪ No retransmissions, etc.
+
+• Works across different link technologies
+Below: Diagnostic tool showing the IP addresses passed on the way from my home to duke.edu
+
+19
+
+IPv4 addresses
+• IPv4 address is 32-bit address that is (theroetically) globally unique;
+identifies interface on the internet.
+• Written as “dotted decimal” of the four bytes, e.g. “141.9.68.24”.
+▪ So each number (“octet”) can be 0-255.
+
+• Subnets
+▪ An address can have its bits divided into network and host.
+▪ We describe a network in dotted decimal with a suffix saying how many bits
+are in the network part, e.g.: 181.41.0.0/18 – this is a subnet.
+▪ A mask of one bits covering the network portion is called the netmask;
+for 181.41.0.0/18, the netmask would be 255.255.192.0
+▪ The number of hosts that fit in a subnet is 232-n – 2
+(Minus two is because the all-zeroes host and all-ones host are special)
+▪ IP address assignment is hierarchical: Countries get IP ranges and assign to
+registrars who then divide them among customers (ISPs, companies, etc.).
+▪ The country of Aruba has 181.41.0.0/18 and a few others.
+For a long time, IBM had 9.0.0.0/8.
+20
+
+Modern caveats (1)
+• Some IP addresses are special:
+▪ Loopback: 127.0.0.1 always refers the machine you’re on
+(actually, it’s all of 127.0.0.0/8)
+▪ Private: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 – not allowed on internet
+▪ Link-local: 169.254.0.0/16 – auto-assigned when no network services are up
+▪ Others (see IANA IPv4 Special-Purpose Address Registry)
+
+• We’re running out of 32-bit IP addresses, so
+NAT (Network Address Translation) was invented
+
+Internet
+54.2.3.9
+
+NAT router
+▪ Have just one “real” public IP address at network boundary,
+192.168.0.1
+assign private IP addresses internally and translate at border
+192.168.0.10
+192.168.0.12
+▪ Extremely common – real direct internet connections are rare Host
+Host
+192.168.0.11
+(this is good, as NAT doubles as a firewall)
+Host
+
+21
+
+Modern caveats (2)
+• IP-to-interface mapping is actually more flexible:
+▪ For performance/reliability, an IP may be span multiple interfaces
+▪ For manageability reasons, an interface may have >1 IP address
+
+• All of the above refers to IP version 4 (“IPv4”)
+• IPv6 is being deployed now (and has been for the past 25 years)
+▪ IPv6 addresses are 128 bits (16 bytes) instead of 32 bits (4 bytes)
+▪ Written as colon-delimited 16-bit hex words:
+
+22
+Figure from Wikipedia “IPv6”
+
+Looking at real configs: Windows
+
+•
+•
+•
+•
+•
+•
+•
+
+MAC address
+IPv6 address (link local – not routed to
+internet in this config)
+IPv4 address (NAT routed private IP)
+Subnet mask (shows this is a /24 network)
+DHCP lease info
+Gateway: IP address we sent stuff to go
+get to the internet (NAT router in this
+case)
+DNS server: IP address we look up names
+with (my router does this too in this case)
+
+23
+
+Looking at real configs: Linux
+
+•
+•
+•
+•
+•
+•
+
+MAC address
+Subnet mask (show this is a /24 network)
+IPv4 address (NAT routed private IP)
+IPv6 address (link local – not routed to
+internet in this config)
+DNS server: IP address we look up names
+with (my router does this too in this case)
+Gateway: IP address we sent stuff to go
+get to the internet (NAT router in this
+case)
+
+24
+
+Layer 4
+
+Example: TCP/UDP
+(how to establish a logical channel, maybe even a reliable channel)
+
+• End-to-end communication between processes
+• Different types of services provided:
+▪ UDP: unreliable datagrams
+▪ TCP: reliable byte stream
+
+• “Reliable” = keeps track of what data were received properly and
+retransmits as necessary
+• This is the layer that applications talk with
+Below: Sending data between two computers via a raw TCP socket using the ‘netcat’ (nc) tool.
+
+25
+
+Connectionless vs. Connection
+• Connectionless transport layer
+– Very similar to plain layer 3 (IP)
+– Not much additional service provided on top
+– But less networking stack software overheads as a result
+– Standard example: User Datagram Protocol (UDP)
+
+• Connection-oriented transport layer
+– Provides error-free, reliable communication
+– Like having a UNIX pipe between processes on two different machines
+– Standard example: Transmission Control Protocol (TCP)
+
+26
+
+UDP – Connectionless service
+• User Datagram Protocol
+– Essentially allows applications to send IP datagrams
+– With just slightly more encapsulation
+
+• UDP transmits segments
+– Simply 8 byte header followed by payload
+
+27
+
+Ports
+• Allows application-level multiplexing of network services
+• Processes attach to ports to use network services
+– Port attachment is done with “BIND” operation
+
+• Destination port
+– When a UDP packet arrives, its payload is handed to process attached to the
+destination port specified
+
+• Source port
+– Mainly used when some reply is needed
+– Receiver can use the source port as the dest port in reply msg
+
+28
+
+UDP – What it does NOT do
+• NO Flow control
+• NO Error control
+• NO Retransmission on receipt of bad segment
+• User processes must handle this
+
+• For apps needing precise control over packet flow, error control, or
+timing, UDP is a great fit
+– E.g. client-server situations where client sends short request and expects
+short reply back; client can timeout & retry easily
+– DNS (Domain Name System): For looking up IP addr of host name
+• Client sends host name, receives IP address response
+
+29
+
+TCP – Connection-oriented Service
+• Transmission Control Protocol
+▪ Designed for end-to-end byte stream over unreliable network
+▪ Robust against failures and changing network properties
+
+• TCP interface to user programs
+▪ Manages TCP streams and interfaces to the IP layer
+▪ Accepts user data streams from processes
+▪ Breaks up into pieces not larger than 64 KB
+• Often 1460 data bytes to fit in 1 Ethernet frame w/ IP + TCP headers
+▪ Sends each piece separately as IP datagram
+▪ Destination machine reconstructs original byte stream
+▪ Handles retransmissions & re-ordering
+▪ Provides error-free, reliable communication
+
+• Result:
+▪ Can think of link like a pipe: Put data in one end, other side takes it out
+30
+
+TCP Service Model
+• TCP service setup as follows:
+– Two endpoint processes create endpoints called sockets
+– Each socket has an address: IP address of host + 16-bit port
+– API functions used to create & communicate on sockets
+
+• Ports
+– Numbers below 1024 called “well-known ports”
+• Reserved for standard services, like FTP, HTTP, SMTP
+http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml
+
+31
+
+TCP Service Model (2)
+• TCP connections are full-duplex & point-to-point
+– Simultaneous traffic in both directions
+– Exactly 2 endpoints (no multicast or broadcast)
+
+• TCP connection is a byte stream, not message stream
+– Receiver has no way to know what granularity bytes were sent
+– E.g. 4 x 512 byte writes vs. 1 x 2048 byte write
+– It can just receive some # of bytes at a time
+– Just like UNIX files!
+
+• TCP may buffer data or send it immediately
+– PUSH flag indicates to TCP not to delay transmission
+– TCP tries to make a latency vs. bandwidth tradeoff
+
+32
+
+TCP Protocol
+• TCP sequence number underlies much of the protocol
+– Every byte sent has its own 32-bit sequence number
+
+• TCP exchanges data in segments
+– 20-byte fixed header (w/ optional part)
+– Followed by 0 or more data bytes
+– TCP can merge writes into one segment or split a write up
+– Segment size limitations:
+• Must fit (including header) inside 65,515 byte IP payload
+• Networks have a MTU (max transfer unit)
+– e.g. 1500 bytes for Ethernet payload size
+
+• Uses a sliding window protocol (acks + timeout + seq #)
+– Ack indicates the next seq # the receiver expects to get
+– May be piggy-backed with data going in the other direction
+We’re skipping this sort of stuff. If this were a networking course,
+we’d spend a looooong time on how TCP works.
+
+33
+
+TCP Header
+
+We’re skipping this sort of stuff. If this were a networking course,
+we’d spend a looooong time on how TCP works.
+
+34
+
+Layers 5+
+
+Example: HTTP, lots more
+(fulfill the actual use case)
+
+• Communication of whatever you want
+• Can use whatever transport(s) is(are) convenient/appropriate
+• Freely structured
+• Examples:
+▪ Skype (UDP)
+▪ SMTP = email (TCP)
+▪ HTTP = web (TCP)
+▪ Online games (TCP and/or UDP)
+
+Below: Manually speaking HTTP to request
+http://google.com/ using the ‘netcat’ (nc) tool.
+
+35
+
+Demo: Wireshark
+• Can observe packets in transit with network sniffer, e.g. Wireshark
+Below: Trace of a Firefox request for http://www.gnu.org/
+
+36
+
+Network layer summary
+
+Get http://pics.com/dog.jpg
+(overall goal)
+Transport dog.jpg data stream reliably
+Send packets of data stream across world to
+pics.com
+Send packet to router on my network;
+I assume it can eventually reach pics.com
+Put electrical pulses on wire that represent the
+packet
+
+37
+
+One more thing...
+VLANs
+• Everyone on the same layer 2 network is in one “broadcast domain”
+▪ Equals one IP subnet (e.g. 192.168.0.0/24 would be one network)
+▪ No IP routing to go point-to-point; a network switch delivers directly
+
+• What if we WANT a layer 2 boundary?
+▪ Just buy a physical switch for each network!
+One switch = one network
+
+Two switches = two networks
+
+switch
+
+Host
+
+Host
+
+Host
+
+switch
+
+switch
+
+Host
+
+Host
+
+Host
+
+Host
+
+Host
+
+Host
+
+Host
+
+• But we don’t want to buy a different physical switch for each one!!
+38
+
+One more thing...
+VLANs
+• Logically separate layer 2 networks
+• Switch ports can be:
+▪ Access ports: can only see one VLAN, aren’t aware of VLAN concept
+▪ Trunk ports: end point includes a VLAN tag in packet header to indicate which
+VLAN it wants to talk to; interprets such headers on incoming packets
+
+http://www.examcollection.com/certification-training/ccnp-configure-and-verify-vlans-and-trunking.html
+39
+
+Dynamic Host Configuration Protocol
+(DHCP)
+(It’s just one slide)
+
+40
+
+Dynamic Host Configuration Protocol (DHCP)
+• DHCP: Allow hosts to enter a network and ask “what IP should I use
+for myself?”
+• How it works:
+1.
+2.
+
+3.
+4.
+5.
+
+Client sends an IP broadcast “DISCOVERY” request
+(destination 255.255.255.255 UDP port 67)
+DHCP server on network sends an “OFFER” with
+IP address and other config (gateway router,
+DNS servers, maybe other stuff)
+• Note: multiple offers might be provided by multiple
+DHCP servers (but usually it’s just one)
+Client sends a broadcast REQUEST for one of the offers
+DHCP server sends ACKNOWLEDGE back
+Client now has an IP address and basic config info
+
+• DHCP can also be used to start network-boot (PXE), commonly used
+for diskless clusters, OS auto-install, etc.
+41
+
+Domain Name System (DNS)
+(Many slides)
+
+42
+
+Purpose of DNS
+• Map an easy-to-remember name to an IP address
+• Implications
+▪ Without DNS, to send IP packet, must remember IP addresses manually!
+...and they could change!
+▪ With DNS, we can use the name directly:
+• www.google.com or www.cnn.com
+
+• DNS also provides inverse look-up that maps IP address to name
+
+43
+
+Before there was DNS...
+• There was the HOSTS.TXT file (on Linux today as /etc/hosts)
+• Maintained at SRI Network Information Center (NIC)
+• Before DNS (1985), the name-to-IP address was done by
+downloading this single file from a central server with FTP
+▪ No hierarchical structure to the file
+▪ Still works on most OSes; can be used to define local names
+
+Wait, there’s a file that we can change on a computer to make it
+think a certain DNS name points to whatever IP we say it does?
+Security implications...
+(Do the hosts + netcat demo)
+44
+
+Domain Namespace
+.(root)
+Top-level domains
+org
+
+edu
+
+com
+
+gov
+
+duke mit
+ece
+www
+
+cs
+
+smtp
+
+• Domain namespace is a hierarchical and logical tree structure
+• Label from a node to root in the DNS tree represents a DNS name
+• Each subtree below a node is a DNS domain
+▪ DNS domain can contain hosts or other domains (subdomains)
+
+• Examples of DNS domains: .edu, duke.edu, ece.duke.edu
+
+45
+
+Domain Namespace
+.(root)
+Top-level domains
+org
+
+edu
+
+com
+
+gov
+
+duke mit
+ece
+www
+
+cs
+
+smtp
+
+• Red is managed by Duke
+• Green is managed by ECE
+• Below top-level domain, administration of name space is delegated
+to organizations
+▪ Each organization can further delegate
+
+46
+
+Fully Qualified Domain Names
+.(root)
+Top-level domains
+org
+
+edu
+
+com
+
+gov
+
+duke mit
+ece
+www
+
+cs
+
+smtp
+
+• Every node in the DNS domain tree can be identified by a FQDN
+▪ Fully Qualified Domain Name
+
+• FDQN (from right to left) consists of labels (“ece”, “duke”, “edu”) separated by a
+period from the root to the node
+• Each label can be up to 63 characters; full DNS name <= 255 chars
+• FDQN contains characters, digits, dashes; not case-sensitive
+
+47
+
+Top-Level Domains
+• Three types of top-level domains:
+▪ Generic Top Level Domains (gTLD)
+• 3 char code indicates the function of the organization
+• Use primarily within the US (e.g. gov, mil, edu, org, com, net)
+▪ Country Code Top Level Domain (ccTLD)
+• 2 char country or region code (e.g. us, jp, uk)
+▪ Reverse Domain
+• Special domain used for IP address-to-name mapping
+• in-addr.arpa
+
+• More than 200 top-level domains
+
+48
+
+DNS Architecture
+• Domain name space
+▪ Domain namespace is a hierarchical tree structure, a domain can be
+delegated to an organization
+
+• Name servers
+▪ Domain name hierarchy exists only in the abstract
+▪ A host's name servers are specified in /etc/resolv.conf
+
+• Resource records: (Name, Value, Type, Class, TTL)
+▪ Name (“duke.edu”) and Value (“152.3.72.104”)
+▪ Type specifies how the “Value” should be interpreted. Examples:
+• “NS” = Name Server: name is a domain and value is name of authoritative
+name server for this domain
+• “A” = Address: machine name and IP address
+▪ Class: record type (usually “IN” for Internet)
+▪ TTL: how long should the record be cached
+49
+
+Resource Records
+$TTL 86400
+
+•
+
+Max age of cached data in
+seconds
+
+mylab.com. IN SOA PC4.mylab.com. admin@mylab.com. (
+1 ; serial
+• Start of authority (SOA)
+28800 ; refresh
+record.
+7200 ; retry
+Means: “This name server is
+604800 ; expire
+authoritative for the zone
+86400 ; minimum ttl
+Mylab.com”
+)
+• PC4.mylab.com is the
+;
+name server
+• admin@mylab.com is the
+email address of the person
+mylab.com.
+IN
+NS
+PC4.mylab.com.
+in charge
+;
+
+localhost
+PC4.mylab.com. A
+PC3.mylab.com. A
+PC2.mylab.com. A
+PC1.mylab.com. A
+
+A
+127.0.0.1
+10.0.1.41
+10.0.1.31
+10.0.1.21
+10.0.1.11
+
+•
+
+Name server (NS) record:
+one entry for each authoritative
+name server
+
+•
+
+Address (A) records:
+one entry for each host address
+50
+
+Hierarchy of Name Servers
+• Resolution of the hierarchical
+namespace is done by
+hierarchy of name servers
+• Namespace is partitioned into
+zones. A zone is a contiguous
+portion of the DNS namespace
+• Each server is responsible
+(authoritative for a zone)
+• DNS server answers queries
+about host names in its zone
+
+root server
+
+org server
+
+edu server
+
+uci.edu
+server
+
+gov server
+
+com server
+
+.virginia.edu
+server
+
+cs.virginia.edu
+server
+
+51
+
+Name Servers
+• Each zone has a primary and secondary name server
+▪ For reliability
+▪ Primary server maintains a zone file with zone info
+• Updates made to the primary server
+▪ Secondary server copies data stored at the primary server
+
+• Adding a new host:
+▪ When new host is added (e.g. “newmachine.ece.duke.edu”)
+▪ Administrator adds the IP info on the host (IP address, name) to a
+configuration file on the primary server
+
+52
+
+Root Name Servers
+
+• Root name servers know how to find authoritative name servers for
+all top-level zones
+• There are 13 (virtual) root name servers
+• Root servers are critical for proper functioning of name resolution
+53
+
+Domain Name Resolution
+1.
+
+User program issues a request for
+the IP address of a hostname
+gethostbyname()
+
+2.
+
+Local resolver formulates a DNS
+query to the name server of the host
+
+▪ If yes, it responds.
+▪ Otherwise, it will query other name
+servers, starting at the root tree
+
+4.
+
+When the name server has the
+answer it sends it to the resolver.
+
+IP address (128.143.71.21)
+
+Resolver
+
+Hostname
+(neon.tcpip-lab.edu)
+
+Name server checks if it is
+authorized to answer the query.
+
+HTTP
+
+IP address (128.143.71.21)
+
+3.
+
+Hostname (neon.tcpip-lab.edu)
+
+Name
+server
+
+54
+
+Inverse Query
+.(root)
+org
+
+edu
+
+com
+
+gov
+
+arpa
+
+duke mit
+ece
+www
+
+cs
+
+in-addr
+
+smtp
+150.45.38.128
+
+• What is the host name for IP address 150.45.38.128?
+▪ IP address is converted to domain name:
+128.38.45.150.in-addr.arpa
+▪ Resolver sends query for this address
+
+55
+
+Caching
+• To reduce DNS traffic, name servers cache info
+▪ e.g. Domain name / IP address mappings
+
+• When entry for a query is cached, the server does not contact other
+servers
+• Note: if an entry is sent from a cache, the reply from the server is
+marked as “unauthoritative”
+• Caching-only servers
+▪ Only purpose is to cache results
+▪ Do not contain zone info or a zone database file
+
+• Negative responses will be cached too:
+▪ Caching “name in question does not exist”
+▪ Caching “Name in record exists, but requested data does not”
+56
+
+Modern follow-ons
+• DNS with DHCP integration
+▪ When a new host uses DHCP to get on the network, the DHCP server can tell
+the DNS server about it, then the DNS server can answer requests for that
+host by name
+
+• Multicast DNS (mDNS) and Link-Local Multicast Name Resolution
+(LLMNR)
+▪ Resolve hostnames when there’s no local DNS server
+▪ Allows “automagic” host discovery on individual networks
+▪ Zero configuration – they’re self-organizing protocols
+
+• DNSSEC: DNS security (next slides)
+▪ Provides integrity, not confidentiality
+
+• DNS over HTTPS (DoH): Very new standard, also provides encryption
+▪ Provides integrity and confidentiality
+57
+
+DNSSEC
+• Problem: how do I know this DNS record I got is authentic?
+• DNSSEC: A commonly deployed protocol to provide DNS integrity
+▪ “Sign” the record with asymmetric cryptography,
+use a “chain of trust” to show that the signature is valid.
+▪ (We haven’t covered these concepts yet – we’ll see it when we cover crypto)
+
+• DNSSEC doesn’t encrypt requests
+(eavesdropping attacker can still see requests)
+
+Adapted from “High-Level Awareness of DNSSEC” by Phil Regnauld and Joe Abley, KENIC/NSRC Workshop, 2011
+
+58
+
+DNS security issues covered by DNSSEC
+
+Adapted from “High-Level Awareness of DNSSEC” by Phil Regnauld and Joe Abley, KENIC/NSRC Workshop, 2011
+
+59
+
+Quick intro to socket programming
+
+60
+
+Sockets
+• How do user programs request to interact with networks?
+• We can program using network sockets
+▪ For creating connections and sending / receiving messages
+▪ Often follows a client / server pattern
+
+61
+
+Client-Server Model
+• Common communication model in networked systems
+▪ Client typically communicates with a server
+▪ Server may connect to multiple clients at a time
+
+• Client needs to know:
+▪ Existence of a server providing the desired service
+▪ Address (commonly IP address) of the server
+
+• Server does not need to know either about the client
+
+62
+
+Client-Server Overview
+Client side
+Client app
+
+Server side
+User process
+
+Server app
+
+Application Layer
+
+Socket API
+
+Socket API
+Kernel
+
+TCP
+
+TCP
+
+Transport Layer
+
+IP
+
+IP
+
+Network Layer
+
+Ethernet Driver
+
+Ethernet Driver
+
+Data Link Layer
+
+Ethernet Network
+
+• Client and Server communicating across Ethernet using TCP/IP
+63
+
+Networking concept reminders
+• Network interface is identified by an IP address
+▪ Or a hostname, which translates into an IP address
+▪ E.g. 127.0.0.1, localhost or login.oit.duke.edu
+
+• Interface has 65536 ports (0-65535)
+• Processes attach to ports to use network services
+▪ Port attachment is done with bind() operation
+
+• Allows application-level multiplexing of network services
+▪ E.g. SSH vs. Web vs. Email may all use different ports
+▪ Many ports are standard (e.g. 80 for web server, 22 for SSH)
+▪ You may have seen URLs like http://127.0.0.1:4444
+• 127.0.0.1 is the IP, 4444 is the port
+
+64
+
+TCP Socket API
+TCP Server
+socket()
+bind()
+TCP Client
+listen()
+
+socket()
+
+accept()
+connect()
+
+Establish TCP connection
+Blocks until
+connection from client
+
+write()
+
+Data (request)
+
+read()
+Do work
+
+read()
+close()
+
+Data (response)
+
+write()
+
+EOF notification
+
+read()
+close()
+
+65
+
+Example – UNIX TCP sockets
+• Let’s look at example code…
+• Here is a great reference for use of socket-related calls
+▪ http://beej.us/guide/bgnet/
+Primitive
+
+Meaning
+
+socket()
+
+Create a new communication end point
+
+bind()
+
+Attach a local address to a socket
+
+listen()
+
+Announce willingness to accept connections; give queue size
+
+accept()
+
+Block the caller until a connection attempt arrives
+
+connect()
+
+Actively attempt to establish a connection
+
+send()
+
+Send some data over the connection
+
+recv()
+
+Receive some data from the connection
+
+close()
+
+Release the connection
+
+66
+
+Server-Side Structure
+• Often follows a common pattern to serve incoming requests
+pid_t pid;
+int listenfd, connfd;
+listenfd = socket(...);
+/***fill the socket address with server’s well known port***/
+bind(listenfd, ...);
+listen(listenfd, ...);
+for ( ; ; ) {
+connfd = accept(listenfd, ...); // blocking call
+if ((pid = fork()) == 0) { // create a child process to service
+close(listenfd); // child closes listening socket
+/***process the request doing something using connfd ***/
+/* ................. */
+close(connfd);
+exit(0); // child terminates
+}
+close(connfd); // parent closes connected socket
+}
+
+67
+
+

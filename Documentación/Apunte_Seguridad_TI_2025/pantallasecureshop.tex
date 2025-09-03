@@ -1,0 +1,32 @@
+\usepackage{tikz}
+\usepackage{graphicx}
+
+\begin{document}
+
+\begin{tikzpicture}
+    % Draw the phone outline
+    \draw[rounded corners=15pt, thick] (0,0) rectangle (3,6);
+    
+    % Draw the screen
+    \draw[rounded corners=10pt] (0.3,0.3) rectangle (2.7,5.7);
+    
+    % Add a header
+    \node at (1.5,5.3) {\textbf{SecureShop}};
+    
+    % Add a button
+    \draw[rounded corners=5pt, fill=blue!20] (0.8,1) rectangle (2.2,1.5);
+    \node at (1.5,1.25) {Login};
+    
+    % Add an image placeholder
+    \node at (1.5,3.5) {\includegraphics[width=2cm]{example-image}};
+    
+    % Add text fields
+    \node[anchor=west] at (0.5,4.5) {Username:};
+    \node[anchor=west] at (0.5,4) {Password:};
+    
+    % Draw text field boxes
+    \draw (1.2,4.4) rectangle (2.5,4.6);
+    \draw (1.2,3.9) rectangle (2.5,4.1);
+\end{tikzpicture}
+
+\end{document}

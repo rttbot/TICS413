@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscribir Mascota Rescatada</title>
+</head>
+<body>
+    <h1>Inscribir Mascota Rescatada</h1>
+    <form method="post">
+        <label for="nombre">Nombre de la Mascota:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <button type="submit">Inscribir</button>
+    </form>
+    <a href="{{ url_for('tienda') }}">Volver a la Tienda</a>
+</body>
+</html> 

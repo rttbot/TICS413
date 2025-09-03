@@ -1,0 +1,417 @@
+\chapterimage{imgs/secretos.png}
+\chapter{Guarda los secretos}
+\vspace{95px}
+\begin{flushright}
+    \textit{ }
+\end{flushright}
+
+\vspace{100px}
+
+\section{Objetivo del Capítulo}
+El objetivo de este capítulo es proporcionar una comprensión de los principios y técnicas de criptografía aplicada, incluyendo la criptografía simétrica y asimétrica, así como las firmas digitales.
+\section{Una breve historia de la criptografía}
+
+La criptografía es donde la ingeniería de seguridad se encuentra con las matemáticas. 
+La criptografía se ha usado para proteger información por al menos 4000 años. La Estenografía fue el primer método. Ejemplo de mensajes en cuero cabelludo de personas que cuando arribaban a puerto eran rapadas para poder descubrir el mensaje.  
+
+
+
+En la década de 1970, John Draper, conocido como ``Captain Crunch'', descubrió que un silbato de cereal Cap'n Crunch podía generar un tono de 2600 Hz, permitiendo el acceso gratuito a líneas telefónicas de larga distancia. Este descubrimiento fue un precursor de la cultura hacker y la seguridad informática, destacando la importancia de proteger las comunicaciones y la información.
+
+
+
+La criptografía permite potencialmente abordar cuatro metas básicas: confidencialidad, integridad, autenticación y no repudiación.
+
+\section{Aplicación de Conceptos Criptográficos en Secure Shop}
+
+En esta sección, aplicaremos los conceptos de criptografía discutidos en la próxima al caso de Secure Shop. A continuación, se explican y ejemplifican los conceptos clave en términos simples y complejos.
+
+\subsection{Cifrado Simétrico}
+
+El cifrado simétrico utiliza la misma clave para cifrar y descifrar datos. En Secure Shop, esto se puede aplicar para proteger la información sensible de los clientes, como los datos de pago.
+
+\begin{itemize}
+    \item \textbf{Ejemplo Simple}: Cuando un cliente realiza una compra, su número de tarjeta de crédito se cifra utilizando una clave secreta antes de ser almacenado en la base de datos.
+    \item \textbf{Ejemplo Complejo}: Secure Shop puede implementar el modo de operación CBC (Cipher Block Chaining) para cifrar los datos de pago. En CBC, cada bloque de texto plano se combina con el bloque de texto cifrado anterior antes de ser cifrado, lo que significa que el mismo texto plano producirá diferentes textos cifrados si se encuentra en diferentes posiciones. Esto se logra utilizando un vector de inicialización (IV) para el primer bloque, asegurando que los mismos datos no produzcan el mismo texto cifrado en diferentes transacciones.
+\end{itemize}
+
+\subsection{Cifrado Asimétrico}
+
+El cifrado asimétrico utiliza un par de claves: una clave pública y una clave privada. En Secure Shop, esto se puede utilizar para asegurar la comunicación entre el cliente y el servidor.
+
+\begin{itemize}
+    \item \textbf{Ejemplo Simple}: Cuando un cliente envía su información de pago, se cifra con la clave pública del servidor. Solo el servidor puede descifrar esta información con su clave privada.
+    \item \textbf{Ejemplo Complejo}: Secure Shop puede utilizar el protocolo TLS (Transport Layer Security) para establecer una conexión segura entre el cliente y el servidor. TLS utiliza cifrado asimétrico para intercambiar una clave simétrica que se utiliza para cifrar la comunicación. Este proceso incluye un handshake criptográfico donde se autentican las partes y se acuerda una clave de sesión.
+\end{itemize}
+
+\subsection{Firmas Digitales}
+
+Las firmas digitales garantizan la autenticidad e integridad de los mensajes. En Secure Shop, esto se puede utilizar para verificar que los mensajes no han sido alterados.
+
+\begin{itemize}
+    \item \textbf{Ejemplo Simple}: Cuando el servidor envía una confirmación de pedido al cliente, firma el mensaje con su clave privada. El cliente puede verificar la firma con la clave pública del servidor.
+    \item \textbf{Ejemplo Complejo}: Secure Shop puede implementar HMAC (Hash-based Message Authentication Code) para firmar los mensajes. HMAC utiliza una clave secreta y una función hash para generar una firma que se adjunta al mensaje. Esto asegura que cualquier modificación en el mensaje será detectada, ya que la firma no coincidirá si el contenido ha sido alterado.
+\end{itemize}
+
+\subsection{Gestión de Claves}
+
+La gestión de claves es crucial para mantener la seguridad de los sistemas criptográficos. En Secure Shop, esto implica la generación, almacenamiento y rotación de claves.
+
+\begin{itemize}
+    \item \textbf{Ejemplo Simple}: Las claves de cifrado se almacenan en un archivo seguro en el servidor y se rotan cada 90 días.
+    \item \textbf{Ejemplo Complejo}: Secure Shop puede utilizar un HSM (Hardware Security Module) para generar y almacenar claves de cifrado. El HSM proporciona un entorno seguro y resistente a manipulaciones para la gestión de claves, asegurando que las claves nunca se exponen fuera del módulo.
+\end{itemize}
+
+\subsection{Autenticación y Autorización}
+
+La autenticación y autorización aseguran que solo los usuarios legítimos puedan acceder a los recursos del sistema. En Secure Shop, esto se puede implementar mediante autenticación multifactor y roles de usuario.
+
+\begin{itemize}
+    \item \textbf{Ejemplo Simple}: Los usuarios deben ingresar una contraseña y un código enviado a su teléfono móvil para acceder a su cuenta.
+    \item \textbf{Ejemplo Complejo}: Secure Shop puede implementar OAuth 2.0 para la autenticación y autorización. OAuth 2.0 permite a los usuarios iniciar sesión con sus cuentas de redes sociales y otorga permisos específicos a las aplicaciones, gestionando de manera segura el acceso a los recursos del usuario.
+\end{itemize}
+
+\subsection{Consideraciones de Seguridad}
+
+Además de los conceptos criptográficos, Secure Shop debe considerar otros aspectos de seguridad para proteger los datos y la infraestructura.
+
+\begin{itemize}
+    \item \textbf{Rotación de Claves}: Implementar la rotación automática de claves cada 90 días para minimizar el riesgo de compromisos.
+    \item \textbf{Gestión de Secretos}: Utilizar HSM para almacenar claves maestras y otros secretos críticos.
+    \item \textbf{Auditoría}: Registrar todas las operaciones criptográficas para detectar y responder a incidentes de seguridad.
+    \item \textbf{Cumplimiento}: Alinear las prácticas de seguridad con estándares como PCI-DSS para proteger los datos de pago.
+\end{itemize}
+
+\section{Caso Base: Secure Shop}
+Este caso base introduce el escenario de Secure Shop, una aplicación web utilizada por tiendas de mascotas para gestionar ventas y devoluciones. La figura \ref{fig:ejemplosecuresw} ilustra el flujo de datos y posibles vulnerabilidades.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{imgs/ejemplosecuresw.png}
+\caption{Flujo de datos y vulnerabilidades en Secure Shop}
+\label{fig:ejemplosecuresw}
+\end{figure}
+
+\subsection{Identificación de Riesgos}
+A partir de la imagen, los alumnos deben identificar posibles riesgos de seguridad. Utilicen las tablas a continuación para evaluar la probabilidad e impacto de cada riesgo, y para proponer controles o mitigaciones.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Riesgo} & \textbf{Probabilidad} & \textbf{Impacto} \\
+\hline
+Intercepción de datos & Alta & Alta \\
+\hline
+Modificación de datos & Media & Alta \\
+\hline
+Acceso no autorizado & Baja & Media \\
+\hline
+\end{tabular}
+\caption{Evaluación de Riesgos}
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Riesgo} & \textbf{Control/Mitigación} \\
+\hline
+Intercepción de datos & Uso de HTTPS para cifrar la comunicación \\
+\hline
+Modificación de datos & Implementación de firmas digitales \\
+\hline
+Acceso no autorizado & Autenticación multifactor \\
+\hline
+\end{tabular}
+\caption{Controles y Mitigaciones}
+\end{table}
+
+\subsection{Controles del CISv8}
+Analicen qué controles del CISv8 podrían ser útiles para mitigar los riesgos identificados.
+
+\paragraph{Ejemplo:} Intercepción de datos: Implementar HTTPS y VPNs. (Control 13)
+ Explicación: Un VPN (Red Privada Virtual) es crucial para proteger la comunicación entre las aplicaciones locales de Secure Shop y el servidor central. Aunque el usuario final no interactúa directamente con el servidor central, las aplicaciones locales deben enviar y recibir datos de manera segura. El VPN crea un túnel cifrado que protege estos datos durante su transmisión, asegurando que cualquier intento de interceptación resulte en datos ilegibles para los atacantes. Además, el uso de HTTPS cifra la comunicación entre el navegador del usuario y la aplicación local, proporcionando una capa adicional de seguridad.
+ ¿Otros?
+% Ejemplo: Modificación de datos: Usar cifrado y control de integridad. (Control 14)
+% - Acceso no autorizado: Aplicar políticas de acceso y autenticación fuerte. (Control 5)
+
+\section{Aplicación Práctica en SecureShop}
+
+\subsection{Objetivos de Seguridad en SecureShop}
+La tienda virtual SecureShop maneja información sensible que requiere diferentes niveles de protección:
+
+\begin{itemize}
+    \item Datos de tarjetas de crédito de clientes
+    \item Información personal de usuarios
+    \item Registros de transacciones
+    \item Credenciales de administradores
+\end{itemize}
+
+\subsection{Implementación de Cifrado Simétrico}
+En SecureShop, el cifrado simétrico se aplica en varios contextos:
+
+\begin{lstlisting}[language=Python, caption=Ejemplo de implementación AES en SecureShop]
+from cryptography.fernet import Fernet
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+
+class SecureShopEncryption:
+    def __init__(self):
+        self.key = Fernet.generate_key()
+        self.cipher_suite = Fernet(self.key)
+    
+    def encrypt_payment_data(self, card_number):
+        encrypted_data = self.cipher_suite.encrypt(
+            card_number.encode())
+        return encrypted_data
+    
+    def decrypt_payment_data(self, encrypted_data):
+        decrypted_data = self.cipher_suite.decrypt(
+            encrypted_data)
+        return decrypted_data.decode()
+\end{lstlisting}
+
+\subsection{Análisis de Vulnerabilidades}
+SecureShop debe protegerse contra diversos vectores de ataque:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{3cm}|p{6cm}|p{4cm}|}
+\hline
+\textbf{Vector de Ataque} & \textbf{Descripción} & \textbf{Mitigación} \\
+\hline
+Man-in-the-Middle & Interceptación de datos entre cliente y servidor & TLS 1.3 + Certificados \\
+\hline
+Fuerza Bruta & Intentos repetidos de acceso & Rate Limiting + Claves Robustas \\
+\hline
+Inyección SQL & Manipulación de consultas & Parametrización + Cifrado \\
+\hline
+\end{tabular}
+\caption{Vectores de Ataque en SecureShop}
+\end{table}
+
+\subsection{Implementación de AES}
+SecureShop utiliza AES-256 para el cifrado de datos sensibles:
+
+\begin{lstlisting}[language=Python, caption=Implementación AES-256 en SecureShop]
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.backends import default_backend
+import os
+
+class AESCipher:
+    def __init__(self):
+        self.key = os.urandom(32)  # AES-256
+        self.iv = os.urandom(16)
+    
+    def encrypt(self, plaintext):
+        cipher = Cipher(
+            algorithms.AES(self.key),
+            modes.CBC(self.iv),
+            backend=default_backend()
+        )
+        encryptor = cipher.encryptor()
+        padded_data = self._pad(plaintext)
+        return encryptor.update(padded_data) + encryptor.finalize()
+\end{lstlisting}
+
+\subsection{Modos de Operación en la Práctica}
+SecureShop implementa diferentes modos según el contexto:
+
+\begin{itemize}
+    \item \textbf{CBC Mode}: Para cifrado de datos en reposo
+    \item \textbf{GCM Mode}: Para datos en tránsito
+    \item \textbf{CTR Mode}: Para streaming de datos
+\end{itemize}
+
+\begin{lstlisting}[language=Python, caption=Implementación de diferentes modos]
+def initialize_cipher(self, mode='CBC'):
+    if mode == 'CBC':
+        return modes.CBC(self.iv)
+    elif mode == 'GCM':
+        return modes.GCM(self.iv)
+    elif mode == 'CTR':
+        return modes.CTR(self.iv)
+\end{lstlisting}
+
+\subsection{Autenticación de Mensajes}
+SecureShop implementa HMAC para garantizar la integridad:
+
+\begin{lstlisting}[language=Python, caption=Implementación HMAC]
+from cryptography.hazmat.primitives import hmac
+
+class MessageAuthenticator:
+    def __init__(self, key):
+        self.key = key
+    
+    def create_hmac(self, message):
+        h = hmac.HMAC(self.key, hashes.SHA256())
+        h.update(message.encode())
+        return h.finalize()
+    
+    def verify_hmac(self, message, signature):
+        h = hmac.HMAC(self.key, hashes.SHA256())
+        h.update(message.encode())
+        try:
+            h.verify(signature)
+            return True
+        except InvalidKey:
+            return False
+\end{lstlisting}
+
+\subsection{Gestión de Claves}
+SecureShop implementa una gestión robusta de claves:
+
+\begin{lstlisting}[language=Python, caption=Gestión de Claves]
+class KeyManager:
+    def __init__(self):
+        self.kdf = PBKDF2HMAC(
+            algorithm=hashes.SHA256(),
+            length=32,
+            salt=os.urandom(16),
+            iterations=100000,
+        )
+    
+    def derive_key(self, password):
+        return self.kdf.derive(password.encode())
+    
+    def rotate_keys(self, old_key):
+        # Implementación de rotación de claves
+        new_key = os.urandom(32)
+        # Re-cifrar datos con nueva clave
+        return new_key
+\end{lstlisting}
+
+\subsection{Consideraciones de Seguridad}
+\begin{itemize}
+    \item \textbf{Rotación de Claves}: SecureShop implementa rotación automática cada 90 días
+    \item \textbf{Gestión de Secretos}: Utilización de HSM para claves maestras
+    \item \textbf{Auditoría}: Logging de todas las operaciones criptográficas
+    \item \textbf{Cumplimiento}: Alineación con estándares PCI-DSS
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+% Aquí iría el diagrama de la arquitectura de seguridad
+\end{tikzpicture}
+\caption{Arquitectura de Seguridad de SecureShop}
+\end{figure}
+
+\subsection{Conclusiones y Mejores Prácticas}
+\begin{enumerate}
+    \item Nunca implementar algoritmos criptográficos propios
+    \item Utilizar bibliotecas probadas y actualizadas
+    \item Mantener las claves seguras y rotadas
+    \item Implementar defensa en profundidad
+    \item Realizar auditorías regulares
+\end{enumerate}
+
+\section{Cifrado de Clave Pública}
+
+El cifrado de clave pública, propuesto por Diffie y Hellman en 1976, revolucionó la criptografía al introducir el uso de dos claves separadas: una pública y otra privada. Este enfoque permite la confidencialidad, distribución de claves y autenticación.
+
+\subsection{Estructura del Cifrado de Clave Pública}
+
+En el cifrado de clave pública, cada usuario genera un par de claves. La clave pública se comparte abiertamente, mientras que la clave privada se mantiene en secreto. Este sistema se basa en funciones matemáticas complejas, a diferencia de los patrones de bits utilizados en el cifrado simétrico.
+
+\textbf{Ejemplo en SecureShop:} Cuando un cliente envía información de pago, se cifra con la clave pública del servidor. Solo el servidor puede descifrar esta información con su clave privada, asegurando que los datos permanezcan confidenciales.
+
+\subsection{Proceso de Cifrado y Descifrado}
+
+1. Cada usuario genera un par de claves.
+2. La clave pública se registra en un directorio accesible.
+3. Para enviar un mensaje seguro, se cifra con la clave pública del destinatario.
+4. El destinatario descifra el mensaje con su clave privada.
+
+\textbf{Ejemplo en SecureShop:} Bob quiere enviar un mensaje seguro a Alice. Cifra el mensaje usando la clave pública de Alice. Alice, al recibir el mensaje, lo descifra con su clave privada, garantizando que solo ella pueda leerlo.
+
+\subsection{Aplicaciones del Cifrado de Clave Pública}
+
+El cifrado de clave pública se utiliza en firmas digitales, distribución de claves simétricas y cifrado de claves secretas.
+
+\textbf{Ejemplo en SecureShop:} SecureShop utiliza firmas digitales para verificar la autenticidad de las transacciones. El servidor firma digitalmente cada confirmación de pedido, que los clientes pueden verificar usando la clave pública del servidor.
+
+\section{Firmas Digitales y Gestión de Claves}
+
+Las firmas digitales proporcionan autenticación y no repudio. Una firma digital es un patrón de bits generado por un agente que verifica la integridad y autenticidad de un mensaje.
+
+\subsection{Proceso de Firma Digital}
+
+1. El remitente genera un hash del mensaje.
+2. El hash se cifra con la clave privada del remitente, creando la firma digital.
+3. El receptor descifra la firma con la clave pública del remitente y verifica el hash.
+
+\textbf{Ejemplo en SecureShop:} Bob envía un mensaje firmado digitalmente a Alice. Alice verifica la firma usando la clave pública de Bob, asegurando que el mensaje no ha sido alterado y proviene de Bob.
+
+\subsection{Certificados de Clave Pública}
+
+Los certificados de clave pública resuelven el problema de la autenticidad de las claves públicas. Un certificado incluye la clave pública de un usuario y es firmado por una autoridad de certificación (CA).
+
+\textbf{Ejemplo en SecureShop:} SecureShop utiliza certificados X.509 para asegurar que las claves públicas de los servidores sean auténticas y confiables.
+
+\section{Intercambio de Claves Simétricas}
+
+El intercambio de claves simétricas usando cifrado de clave pública permite a dos partes compartir una clave secreta de manera segura.
+
+\subsection{Sobres Digitales}
+
+Un sobre digital combina cifrado simétrico y de clave pública. El mensaje se cifra con una clave simétrica aleatoria, que a su vez se cifra con la clave pública del receptor.
+
+\textbf{Ejemplo en SecureShop:} Bob quiere enviar un mensaje cifrado a Alice. Genera una clave simétrica aleatoria para cifrar el mensaje y luego cifra esta clave con la clave pública de Alice. Alice descifra la clave simétrica con su clave privada y luego descifra el mensaje.
+
+\subsection{Conclusiones}
+
+El cifrado de clave pública y las firmas digitales son fundamentales para la seguridad de las comunicaciones en SecureShop. Estos métodos aseguran la confidencialidad, autenticidad e integridad de los datos, protegiendo tanto a los clientes como a la empresa.
+
+\textbf{Mejores Prácticas:}
+- Utilizar algoritmos criptográficos probados y actualizados.
+- Implementar una gestión robusta de claves.
+- Realizar auditorías de seguridad regularmente.
+
+\section{Hashing Mejorado}
+
+\subsection{Introducción al Hashing}
+El hashing es una técnica fundamental en criptografía que transforma datos de cualquier tamaño en un valor fijo, conocido como hash. Este proceso es crucial para asegurar la integridad de los datos y proteger contraseñas.
+
+\subsection{Algoritmos de Hash Comunes}
+Los algoritmos de hash más utilizados incluyen MD5, SHA-1, SHA-2, y SHA-3. Aunque MD5 y SHA-1 son considerados inseguros debido a vulnerabilidades conocidas, SHA-2 y SHA-3 ofrecen mayor seguridad. MD5 produce un hash de 128 bits, mientras que SHA-1 produce un hash de 160 bits. SHA-2, con su variante SHA-256, es ampliamente recomendado por su seguridad mejorada.
+
+\subsection{Usos para Hash}
+El hashing se utiliza para verificar la integridad de los datos y proteger contraseñas. Almacenar contraseñas en texto plano es inseguro, por lo que se recomienda almacenar solo el hash de la contraseña. Esto significa que si una base de datos es comprometida, un atacante tendría que descifrar cada hash para obtener las contraseñas originales.
+
+\subsection{Protección contra Tablas Arcoíris}
+Para protegerse contra ataques de tablas arcoíris, se recomienda el uso de sales. Una sal es un valor aleatorio que se añade a la contraseña antes de hashearla, asegurando que incluso contraseñas idénticas tengan hashes diferentes.
+
+\subsection{Reconocimiento de Hashes de Contraseña}
+Existen herramientas para identificar tipos de hashes de contraseña, como hashID. Estas herramientas pueden ayudar a determinar el algoritmo utilizado para generar un hash.
+
+\subsection{Hashing para Comprobar la Integridad}
+El hashing se utiliza para verificar que los archivos no han sido modificados. Si los datos de entrada cambian, el hash resultante también cambiará significativamente, permitiendo detectar alteraciones.
+
+\subsection{Aplicaciones del Hashing}
+El hashing se utiliza para verificar la integridad de los datos y proteger contraseñas. Al almacenar solo el hash de una contraseña, se evita el riesgo de exposición de contraseñas en texto plano.
+
+\subsection{Hashing en SecureShop}
+SecureShop utiliza hashing para proteger datos sensibles, asegurando que cualquier modificación en los datos sea detectable. A continuación, se muestra un ejemplo de implementación de hashing en SecureShop:
+
+\begin{lstlisting}[language=Python, caption=Implementación de Hashing en SecureShop]
+import hashlib
+
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+password = "mi_contraseña_secreta"
+hash_value = hash_password(password)
+print(f"Hash de la contraseña: {hash_value}")
+\end{lstlisting}
+
+\subsection{Consideraciones de Seguridad}
+Es crucial utilizar algoritmos de hash seguros y actualizados para proteger los datos. Evitar el uso de algoritmos obsoletos como MD5 y SHA-1, y considerar el uso de sales para proteger contraseñas contra ataques de tablas arcoíris.
+
+\section{Bibliografía}
+Este capítulo se apoya en las siguientes partes del libro:
+- Capítulo 2.1: Confidencialidad con Cifrado Simétrico
+- Capítulo 2.2: Autenticación de Mensajes
+- Capítulo 2.3: Cifrado de Clave Pública
+- Capítulo 2.4: Firmas Digitales

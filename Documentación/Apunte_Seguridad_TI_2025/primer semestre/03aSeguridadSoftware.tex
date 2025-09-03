@@ -1,0 +1,160 @@
+\chapterimage{ampolletas.png}
+\chapter{Seguridad de Software}
+\begin{flushright}
+    \textit{ }
+\end{flushright}
+\section{SS}
+%capítulo 5 8 
+%capitulo 9
+Seguridad de Software
+    \begin{itemize}
+            \item Principios
+            \item Diseño
+            \item implementación
+            \item análisis y pruebas
+            \item despliegue y mantención
+            \item documentación
+            \item ética
+            
+            
+        \end{itemize}
+Seguridad de componentes
+    \begin{itemize}
+            \item diseño de componentes
+            \item adquisición de componentes
+            \item pruebas de componentes
+            \item ingeniería reversa de componentes
+        \end{itemize}
+\textbf{Seguridad del Sistema}
+    \begin{itemize}
+    
+        \item \textbf{Pensamiento Sistémico}
+        \item Gestión del Sistema
+        \item Acceso y Control del Sistema
+        \item Pruebas del Sistema
+        \item Arquitecturas Comunes del Sistema
+\end{itemize}
+
+
+\section{Principios de Seguridad}
+Jerome Saltzer y Michael D. Schroeder son los autores del influyente artículo titulado "The Protection of Information in Computer Systems" (La protección de la información en sistemas informáticos), publicado en 1975. En este artículo, presentan ocho principios fundamentales para la protección de la información en sistemas informáticos. A continuación, se muestran los principios junto con un ejemplo de mecanismo para cada uno de ellos:\\
+\begin{itemize}
+    \item  \textbf{Principio de Economía de Mecanismo}: Mantener el diseño lo más simple y pequeño posible. Este principio bien conocido se aplica a cualquier aspecto de un sistema, pero merece énfasis en los mecanismos de protección por esta razón: los errores de diseño e implementación que resulten en rutas de acceso no deseadas no se notarán durante el uso normal (ya que el uso normal generalmente no incluye intentos de utilizar rutas de acceso inapropiadas). Como resultado, se necesitan técnicas como la inspección línea por línea del software y el examen físico del hardware que implementa los mecanismos de protección. Para que estas técnicas sean exitosas, un diseño pequeño y simple es esencial.\\ \textbf{Ejemplo}: Mantener el diseño lo más simple y pequeño posible. Este principio bien conocido se aplica a cualquier aspecto de un sistema, pero merece énfasis en los mecanismos de protección. Un ejemplo de implementación sería utilizar un sistema de control de acceso basado en roles y privilegios, donde los usuarios solo tienen acceso a los archivos y carpetas necesarios para sus tareas.
+
+\item  \textbf{Fail-safe defaults}: Basar las decisiones de acceso en permisos en lugar de exclusión. Este principio, sugerido por E. Glaser en 1965, significa que la situación predeterminada es la falta de acceso, y el esquema de protección identifica las condiciones bajo las cuales se permite el acceso. La alternativa, en la que los mecanismos intentan identificar condiciones bajo las cuales se debe denegar el acceso, presenta una base psicológica incorrecta para el diseño seguro del sistema. Un diseño conservador debe basarse en argumentos sobre por qué los objetos deben ser accesibles, en lugar de por qué no deberían serlo. En un sistema grande, algunos objetos pueden no ser considerados adecuadamente, por lo que una falta predeterminada de permiso es más segura. Un error de diseño o implementación en un mecanismo que otorga permiso explícito tiende a fallar al denegar el permiso, una situación segura, ya que se detectará rápidamente. Por otro lado, un error de diseño o implementación en un mecanismo que excluye explícitamente el acceso tiende a fallar permitiendo el acceso, un fallo que puede pasar desapercibido en el uso normal. Este principio se aplica tanto a la apariencia externa del mecanismo de protección como a su implementación subyacente.
+
+\item  \textbf{Principio de Mediación Completa (Complete Mediation)}: Cada acceso a cada objeto debe ser verificado por autoridad. Este principio, cuando se aplica sistemáticamente, es el fundamento principal del sistema de protección. Obliga a una vista del control de acceso a nivel de sistema, que incluye, además del funcionamiento normal, la inicialización, recuperación, apagado y mantenimiento. Implica que se debe idear un método infalible para identificar el origen de cada solicitud. También requiere que se examinen con escepticismo las propuestas para mejorar el rendimiento recordando el resultado de una verificación de autoridad. Si ocurre un cambio en la autoridad, estos resultados recordados deben actualizarse sistemáticamente.
+
+\item  \textbf{Principio de Diseño Abierto (Open Design)}: El diseño no debe ser secreto [27]. Los mecanismos no deben depender de la ignorancia de los posibles atacantes, sino de la posesión de claves o contraseñas específicas, más fáciles de proteger. Esta desvinculación de los mecanismos de protección de las claves de protección permite que los mecanismos sean examinados por muchos revisores sin preocupación de que la revisión pueda comprometer las salvaguardias. Además, cualquier usuario escéptico puede convencerse de que el sistema que está a punto de usar es adecuado para su propósito. Por último, simplemente no es realista intentar mantener en secreto cualquier sistema que reciba amplia distribución.\\
+
+\item  \textbf{Principio de Separación de Privilegios (Separation of Privilege)}: Cuando sea posible, un mecanismo de protección que requiera dos claves para desbloquearlo es más resistente y flexible que uno que permita el acceso al portador de una sola clave. La relevancia de esta observación para los sistemas informáticos fue señalada por R. Needham en 1973. La razón es que, una vez que el mecanismo está bloqueado, las dos claves pueden separarse físicamente y se pueden asignar programas, organizaciones o individuos distintos a cada una. A partir de entonces, ningún accidente, engaño o violación de confianza será suficiente para comprometer la información protegida. Este principio se usa a menudo en cajas de seguridad bancarias. También está presente en el sistema de defensa que dispara un arma nuclear solo si dos personas diferentes dan la orden correcta. En un sistema informático, las claves separadas se aplican a cualquier situación en la que se deban cumplir dos o más condiciones antes de permitir el acceso. Por ejemplo, los sistemas que proporcionan tipos de datos protegidos extensibles por el usuario generalmente dependen de la separación de privilegios para su implementación. \\ \textbf{Ejemplo}: Un mecanismo de protección que requiere dos claves para desbloquearlo es más robusto y flexible que uno que permite acceso a un solo usuario. Implementar esto significa que para tareas críticas se requerirá la autorización de dos usuarios diferentes antes de realizar cambios en el sistema.
+
+\item  \textbf{Principio de Menor Privilegio (Least Privilege)}: Cada programa y cada usuario del sistema deben operar utilizando el conjunto mínimo de privilegios necesarios para completar la tarea. Este principio limita principalmente el daño que puede resultar de un accidente o error. También reduce el número de interacciones potenciales entre programas privilegiados al mínimo necesario para el correcto funcionamiento, de modo que es menos probable que ocurran usos no intencionales, no deseados o incorrectos de privilegios. Por lo tanto, si surge una pregunta relacionada con el mal uso de un privilegio, se minimiza el número de programas que deben ser auditados. Dicho de otra manera, si un mecanismo puede proporcionar "cortafuegos", el principio del menor privilegio proporciona una justificación sobre dónde instalar los cortafuegos. La regla de seguridad militar de "necesidad de saber" es un ejemplo de este principio.
+
+\item  \textbf{Principio de Mecanismo Menos Común (Least Common Mechanism)}: Minimizar la cantidad de mecanismos comunes a más de un usuario y en los que todos los usuarios confían [28]. Cada mecanismo compartido (especialmente uno que implica variables compartidas) representa una posible vía de información entre usuarios y debe diseñarse con mucho cuidado para asegurarse de que no comprometa inadvertidamente la seguridad. Además, cualquier mecanismo que sirva a todos los usuarios debe estar certificado a satisfacción de cada usuario, una tarea presumiblemente más difícil que satisfacer a un solo usuario o a unos pocos. Por ejemplo, dada la opción de implementar una nueva función como un procedimiento de supervisor compartido por todos los usuarios o como un procedimiento de biblioteca que puede manejarse como si fuera propio del usuario, elija la última opción. Entonces, si uno o unos pocos usuarios no están satisfechos con el nivel de certificación de la función, pueden proporcionar un sustituto o no usarlo en absoluto. De cualquier manera, pueden evitar ser perjudicados por un error en ella.
+
+\item  \textbf{Psychological acceptability}: Es esencial que la interfaz humana esté diseñada para facilitar su uso, para que los usuarios apliquen rutinariamente y automáticamente los mecanismos de protección de manera correcta. Además, en la medida en que la imagen mental del usuario de sus objetivos de protección coincida con los mecanismos que debe utilizar, se minimizarán los errores. Si el usuario debe traducir su imagen de sus necesidades de protección en un lenguaje de especificación radicalmente diferente, cometerá errores.
+
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{STRIDE}
+%capítulo 3, 8
+
+\section{X}
+
+Malware significa software malicioso. El software se refiere a programas, documentos y archivos que puede guardar en un disco o enviar a través de la red. El malware incluye muchos tipos, como:
+\begin{itemize}
+    \item Un virus es una pieza de código (parte de un programa) que se adjunta a un programa. Está diseñado para propagarse de una computadora a otra; además, funciona modificando, sobrescribiendo y eliminando archivos una vez que infecta una computadora. El resultado varía desde que la computadora se vuelve lenta hasta inutilizable.
+    \item Trojan Horse es un programa que muestra una función deseable pero oculta una función maliciosa debajo. Por ejemplo, una víctima puede descargar un reproductor de video de un sitio web dudoso que le da al atacante un control total sobre su sistema.
+    \item El ransomware es un programa malicioso que cifra los archivos del usuario. El cifrado hace que los archivos sean ilegibles sin conocer la contraseña de cifrado. El atacante ofrece al usuario la contraseña de cifrado si el usuario está dispuesto a pagar un ``rescate''.\end{itemize}
+
+    El análisis de malware tiene como objetivo aprender acerca de dichos programas maliciosos mediante:
+\begin{itemize}
+    \item El \textbf{análisis estático} funciona al inspeccionar el programa malicioso sin ejecutarlo. Por lo general, esto requiere un conocimiento sólido del lenguaje ensamblador (conjunto de instrucciones del procesador, es decir, las instrucciones fundamentales de la computadora).
+    \item El \textbf{análisis dinámico} funciona ejecutando el malware en un entorno controlado y monitoreando sus actividades. Le permite observar cómo se comporta el malware cuando se ejecuta.
+\end{itemize}
+\section{Otros}
+\subsection{Autenticación}
+autenticación es un proceso para probar la identidad del solicitante.
+
+Hay tres métodos comunes de autenticación:
+\begin{itemize}
+ 
+
+   \item Algo que sabes: Contraseñas o paráfrasis
+   \item Algo que tienes: Tokens, tarjetas de memoria, tarjetas inteligentes
+   \item Algo que eres: biometría, características medibles
+\end{itemize}
+\begin{itemize}
+   \item Usar solo uno de los métodos de autenticación mencionados anteriormente se conoce como autenticación de un solo factor (SFA) .
+    \item Otorgar acceso a los usuarios solo después de demostrar o mostrar con éxito dos o más de estos métodos se conoce como autenticación multifactor (MFA) .
+ \end{itemize}
+
+ \subsection{No repudio}
+  protección contra un individuo que niega falsamente haber realizado una acción en particular.
+\subsection{Privacidad}
+derecho de un individuo a controlar la distribución de información sobre sí mismo.
+
+privacidad global es un tema especialmente crucial cuando se consideran los requisitos relacionados con la recopilación y la seguridad de la información personal.
+
+HIPPA ambiente médico
+GDPR regulación europe
+
+
+Test
+1. Proceso de control de acceso que compara uno o más factores de identificación para validar que el sistema conoce la identidad reclamada por un usuario o entidad.
+
+
+Autenticación
+   Autenticación
+
+2. Asegurar el acceso y uso oportuno y confiable de la información por parte de los usuarios autorizados.
+
+
+Disponibilidad
+   Disponibilidad
+
+3. La propiedad de que los datos no hayan sido alterados de forma no autorizada.
+
+
+Integridad
+   Integridad
+
+4. La incapacidad de negarse haber realizado una acción, como enviar un mensaje de correo electrónico.
+
+
+No repudio
+   No repudio
+
+5. El derecho de un individuo a controlar la distribución de información sobre sí mismo.
+
+
+Privacidad
+   Privacidad
+
+6. La característica de los datos o la información cuando no se pone a disposición o se divulga a personas o procesos no autorizados.
+
+
+Confidencialidad
+   Confidencialidad
+
+7. El derecho o permiso que se otorga a una entidad del sistema para acceder a un recurso del sistema.
+
+
+Autorización
+   Autorización

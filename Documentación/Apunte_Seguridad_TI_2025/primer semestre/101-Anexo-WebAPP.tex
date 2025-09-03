@@ -1,0 +1,244 @@
+\chapter{Anexo: Desarrollo Evolutivo de una Aplicación Web y sus Vulnerabilidades}
+
+\section{Introducción}
+Este anexo documenta el proceso evolutivo de desarrollo de una aplicación web, desde un simple "Hola Mundo" hasta una aplicación completa con base de datos. En cada etapa, se analizan las vulnerabilidades introducidas y las consideraciones de seguridad necesarias.
+
+\section{Etapa 1: Hola Mundo en Flask}
+
+\subsection{Configuración Inicial}
+El primer paso es instalar Flask:
+\begin{verbatim}
+pip install Flask
+\end{verbatim}
+
+\subsection{Primera Aplicación}
+Creamos \texttt{app.py}:
+\begin{verbatim}
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hola Mundo'
+
+if __name__ == '__main__':
+    app.run(debug=True)
+\end{verbatim}
+
+\subsection{Vulnerabilidades en Etapa 1}
+\begin{itemize}
+    \item \textbf{Debug Mode Activo}: El modo debug expone información sensible y permite ejecución de código remoto
+    \item \textbf{Sin HTTPS}: La comunicación no está cifrada
+    \item \textbf{Sin Control de Acceso}: Cualquiera puede acceder a la aplicación
+\end{itemize}
+
+\section{Etapa 2: Tienda Básica (Secure Shop v1)}
+
+\subsection{Estructura Inicial}
+\begin{lstlisting}
+Criptografia-WebApp - 1/
+- templates/
+  - tienda.html
+  - carrito.html
+- app.py
+\end{lstlisting}
+
+\subsection{Implementación}
+\begin{verbatim}
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+productos = [
+    {'id': 1, 'nombre': 'Collar para perro', 'precio': 5000},
+    {'id': 2, 'nombre': 'Correa retráctil', 'precio': 8000}
+]
+
+@app.route('/')
+def tienda():
+    return render_template('tienda.html', productos=productos)
+
+@app.route('/carrito')
+def carrito():
+    return render_template('carrito.html')
+\end{verbatim}
+
+\subsection{Vulnerabilidades en Etapa 2}
+\begin{itemize}
+    \item \textbf{Datos en Memoria}: Los productos se pierden al reiniciar
+    \item \textbf{Sin Validación}: No hay validación de entradas
+    \item \textbf{Sin Autenticación}: Cualquiera puede acceder al carrito
+    \item \textbf{XSS Potencial}: No hay escape de datos en las plantillas
+\end{itemize}
+
+\section{Etapa 3: Aplicación Distribuida (Secure Shop v2)}
+
+\subsection{Nueva Estructura}
+\begin{lstlisting}
+Criptografia-WebApp - 2/
+- templates/
+  - tienda.html
+  - carrito.html
+  - inscribir.html
+- app.py
+- README.md
+\end{lstlisting}
+
+\subsection{Funcionalidades Añadidas}
+\begin{itemize}
+    \item Registro de mascotas
+    \item Carrito de compras persistente
+    \item Más productos en catálogo
+\end{itemize}
+\subsection{Vulnerabilidades en Etapa 3}
+\begin{itemize}
+    \item \textbf{CSRF (Cross-Site Request Forgery)}: No hay protección contra ataques de falsificación de solicitudes entre sitios. Esto significa que un atacante podría engañar a un usuario autenticado para que realice acciones no deseadas en la aplicación, como cambiar su contraseña o realizar una compra, sin su consentimiento. En este caso una inscripción de mascota.
+    \item \textbf{Inyección de Datos}: Los formularios no sanitizan las entradas de los usuarios. Esto permite que un atacante inyecte código malicioso, como comandos SQL o scripts, que pueden comprometer la base de datos o ejecutar acciones no autorizadas en el servidor.
+    \item \textbf{Datos Sensibles}: El RUT y otros datos personales se almacenan y transmiten sin cifrar. Esto expone información confidencial a posibles interceptaciones y accesos no autorizados, poniendo en riesgo la privacidad de los usuarios.
+    \item \textbf{Session Hijacking}: No hay un manejo seguro de las sesiones de usuario. Esto permite que un atacante pueda robar o secuestrar la sesión de un usuario autenticado, obteniendo acceso a su cuenta y realizando acciones en su nombre.
+\end{itemize}
+
+\section{Etapa 4: Aplicación Multi-Componente (Secure Shop v3)}
+
+\subsection{Arquitectura Distribuida}
+\begin{lstlisting}
+Criptografia-WebApp - 3/
+- templates/
+  - carrito.html
+  - estadisticas.html
+  - inscribir.html
+  - login.html
+  - tienda.html
+- api.py          # Puerto 5001
+- secureshop.py   # Puerto 5003
+- securesoftware.py # Puerto 5002
+\end{lstlisting}
+
+\subsection{Componentes}
+\subsubsection{API (api.py)}
+\begin{verbatim}
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+
+mascotas = []  # Lista en memoria
+
+@app.route('/registrar_mascota', methods=['POST'])
+def registrar_mascota():
+    data = request.json
+    mascotas.append(data)
+    return jsonify({'message': 'Mascota registrada'}), 201
+\end{verbatim}
+
+\subsubsection{Panel Admin (securesoftware.py)}
+\begin{verbatim}
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        usuario = request.form['usuario']
+        password = request.form['password']
+        if usuario == 'admin' and password == 'colocolo':
+            return redirect(url_for('estadisticas'))
+    return render_template('login.html')
+\end{verbatim}
+
+\subsection{Vulnerabilidades en Etapa 4}
+\begin{itemize}
+    \item \textbf{CORS Abierto}: Permite peticiones desde cualquier origen
+    \item \textbf{Credenciales en Código}: Usuario y contraseña hardcodeados
+    \item \textbf{Bypass de Autenticación}: Acceso directo a \texttt{/estadisticas}
+    \item \textbf{Datos en Memoria}: Lista de mascotas se pierde al reiniciar
+    \item \textbf{Sin Rate Limiting}: Vulnerable a ataques de fuerza bruta
+    \item \textbf{Comunicación Insegura}: Entre componentes sin SSL/TLS
+\end{itemize}
+
+\section{Etapa 5: Persistencia con SQLite (Secure Shop v4)}
+
+\subsection{Estructura Final}
+\begin{lstlisting}
+Criptografia-WebApp - 4/
+- templates/
+  - carrito.html
+  - estadisticas.html
+  - inscribir.html
+  - login.html
+  - tienda.html
+- api.py
+- secureshop.py
+- securesoftware.py
+- secure_shop.db
+\end{lstlisting}
+
+\subsection{Base de Datos}
+\begin{verbatim}
+def init_db():
+    conn = sqlite3.connect('secure_shop.db')
+    c = conn.cursor()
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS mascotas (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre TEXT NOT NULL,
+            rut TEXT NOT NULL,
+            chip TEXT,
+            edad TEXT,
+            color TEXT,
+            tipo TEXT,
+            fecha_registro TIMESTAMP
+        )
+    ''')
+\end{verbatim}
+
+\subsection{Vulnerabilidades en Etapa 5}
+\begin{itemize}
+    \item \textbf{SQL Injection}: Consultas sin parametrizar
+    \item \textbf{Permisos de BD}: Archivo SQLite accesible para todos
+    \item \textbf{Contraseñas en Texto Plano}: No hay hash de contraseñas
+    \item \textbf{Race Conditions}: Sin manejo de concurrencia
+    \item \textbf{Datos Sensibles}: RUT almacenado sin cifrar
+    \item \textbf{Session Fixation}: Sin rotación de tokens de sesión
+\end{itemize}
+
+\section{Recomendaciones de Seguridad}
+
+\subsection{Mejoras Generales}
+\begin{itemize}
+    \item Implementar HTTPS en todos los componentes
+    \item Usar Flask-Login para manejo de sesiones
+    \item Implementar CSRF tokens en formularios
+    \item Sanitizar todas las entradas de usuario
+    \item Cifrar datos sensibles en la base de datos
+    \item Usar consultas parametrizadas
+    \item Implementar rate limiting
+\end{itemize}
+
+\subsection{Mejoras Específicas por Componente}
+\begin{enumerate}
+    \item API (\texttt{api.py}):
+    \begin{itemize}
+        \item Configurar CORS específico por origen
+        \item Implementar autenticación por token
+        \item Validar y sanitizar JSON de entrada
+    \end{itemize}
+    
+    \item Panel Admin (\texttt{securesoftware.py}):
+    \begin{itemize}
+        \item Implementar manejo de sesiones
+        \item Hashear contraseñas (bcrypt)
+        \item Proteger todas las rutas administrativas
+    \end{itemize}
+    
+    \item Tienda (\texttt{secureshop.py}):
+    \begin{itemize}
+        \item Validar datos del carrito
+        \item Implementar timeout de sesión
+        \item Sanitizar datos de formularios
+    \end{itemize}
+\end{enumerate}
+
+\section{Conclusiones}
+Este desarrollo evolutivo demuestra cómo una aplicación web simple puede crecer en complejidad y, con cada etapa, introducir nuevas vulnerabilidades de seguridad. Es crucial considerar la seguridad desde el inicio del desarrollo y no como una característica adicional.
+
+Las vulnerabilidades presentadas son comunes en aplicaciones web y sirven como ejemplos educativos de lo que NO hacer en un entorno de producción. Para una aplicación en producción, todas las vulnerabilidades mencionadas deberían ser abordadas siguiendo las recomendaciones de seguridad proporcionadas.

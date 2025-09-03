@@ -1,0 +1,283 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {chapter}{\numberline {1}Repaso: Fundamentos de Redes para Seguridad de TI}{9}{chapter.1}%
+\ttl@starttoc {default@1}
+\contentsline {section}{\numberline {1.1}Modelo de capas y arquitectura de red}{9}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}El problema de la complejidad}{9}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Solución: Capas de abstracción}{10}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}Modelo de referencia OSI}{10}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4}Modelo TCP/IP}{10}{subsection.1.1.4}%
+\contentsline {subsection}{\numberline {1.1.5}Capas 1 y 2: Física y Enlace de Datos}{11}{subsection.1.1.5}%
+\contentsline {subsubsection}{Capa 1: Capa Física}{11}{section*.2}%
+\contentsline {subsubsection}{Capa 2: Capa de Enlace}{11}{section*.3}%
+\contentsline {subsubsection}{Direcciones MAC}{11}{section*.4}%
+\contentsline {subsubsection}{Protocolo ARP}{11}{section*.5}%
+\contentsline {subsection}{\numberline {1.1.6}Capa 3: Red}{12}{subsection.1.1.6}%
+\contentsline {subsubsection}{Protocolo de Internet (IP)}{12}{section*.6}%
+\contentsline {subsubsection}{Direcciones IPv4}{12}{section*.7}%
+\contentsline {subsubsection}{Direcciones especiales IPv4}{13}{section*.8}%
+\contentsline {subsubsection}{IPv6}{13}{section*.9}%
+\contentsline {subsection}{\numberline {1.1.7}Capa 4: Transporte}{13}{subsection.1.1.7}%
+\contentsline {subsubsection}{Tipos de servicios}{13}{section*.10}%
+\contentsline {subsubsection}{Comunicación sin conexión vs. orientada a conexión}{14}{section*.11}%
+\contentsline {subsubsection}{Protocolo UDP}{14}{section*.12}%
+\contentsline {subsubsection}{Puertos}{14}{section*.13}%
+\contentsline {subsubsection}{Protocolo TCP}{15}{section*.14}%
+\contentsline {subsection}{\numberline {1.1.8}Sistema de nombres de dominio (DNS)}{15}{subsection.1.1.8}%
+\contentsline {subsubsection}{Jerarquía de servidores DNS}{15}{section*.15}%
+\contentsline {subsubsection}{Resolución de nombres}{15}{section*.16}%
+\contentsline {subsubsection}{Configuración de DNS}{16}{section*.17}%
+\contentsline {subsubsection}{Seguridad DNS}{16}{section*.18}%
+\contentsline {subsubsection}{Medidas de protección DNS}{16}{section*.19}%
+\contentsline {subsubsection}{Configuración Linux}{17}{section*.20}%
+\contentsline {subsubsection}{Evolución de las redes móviles}{18}{section*.21}%
+\contentsline {subsubsection}{Características de la 6G}{19}{section*.22}%
+\contentsline {subsubsection}{Aplicaciones futuras de la 6G}{19}{section*.23}%
+\contentsline {subsubsection}{Seguridad en redes móviles vs WiFi}{19}{section*.24}%
+\contentsline {subsubsection}{Vulnerabilidades en redes WiFi}{19}{section*.25}%
+\contentsline {subsubsection}{Medidas de seguridad para WiFi}{19}{section*.26}%
+\contentsline {subsection}{\numberline {1.1.9}Tipos y Topologías de redes}{20}{subsection.1.1.9}%
+\contentsline {subsection}{\numberline {1.1.10}Topologías}{20}{subsection.1.1.10}%
+\contentsline {section}{\numberline {1.2}Protocolos de Red}{21}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Conceptos fundamentales}{21}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Arquitectura TCP/IP}{21}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Protocolos de la capa de aplicación}{21}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Protocolos de la capa de transporte}{21}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.5}Protocolos de la capa de Internet}{22}{subsection.1.2.5}%
+\contentsline {subsection}{\numberline {1.2.6}Protocolos de la capa de acceso a red}{22}{subsection.1.2.6}%
+\contentsline {subsection}{\numberline {1.2.7}Protocolo TCP en detalle}{22}{subsection.1.2.7}%
+\contentsline {subsubsection}{Características principales de TCP}{22}{section*.27}%
+\contentsline {subsubsection}{Estados de conexión TCP}{22}{section*.28}%
+\contentsline {subsection}{\numberline {1.2.8}Protocolo UDP en detalle}{23}{subsection.1.2.8}%
+\contentsline {subsubsection}{Características principales de UDP}{23}{section*.29}%
+\contentsline {subsubsection}{Aplicaciones típicas de UDP}{23}{section*.30}%
+\contentsline {subsection}{\numberline {1.2.9}Paquetes y transmisión de datos}{24}{subsection.1.2.9}%
+\contentsline {subsubsection}{Encabezamiento del paquete}{24}{section*.31}%
+\contentsline {subsubsection}{¿Cómo viaja la información por la red?}{24}{section*.32}%
+\contentsline {subsubsection}{¿Por qué puedo ver paquetes que no son para mí?}{24}{section*.33}%
+\contentsline {subsection}{\numberline {1.2.10}¿Cómo funciona la transmisión física de datos?}{24}{subsection.1.2.10}%
+\contentsline {subsubsection}{Del software al cable}{24}{section*.34}%
+\contentsline {subsubsection}{Señales en diferentes medios}{25}{section*.35}%
+\contentsline {subsubsection}{¿Por qué 1500 bytes por paquete?}{25}{section*.36}%
+\contentsline {subsubsection}{El viaje de un paquete}{25}{section*.37}%
+\contentsline {section}{\numberline {1.3}Comandos de terminal para análisis de red (macOS)}{25}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Información básica de red}{25}{subsection.1.3.1}%
+\contentsline {subsubsection}{Configuración de red}{25}{section*.38}%
+\contentsline {subsubsection}{Conectividad y diagnóstico}{26}{section*.39}%
+\contentsline {subsubsection}{Análisis de tráfico}{26}{section*.40}%
+\contentsline {subsubsection}{Información del sistema}{26}{section*.41}%
+\contentsline {section}{\numberline {1.4}Ejercicios prácticos de análisis de red}{27}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Ejercicio 1: Análisis de conexiones activas}{27}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Ejercicio 2: Captura de tráfico HTTP}{27}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Ejercicio 3: Análisis de DNS}{27}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}Ejercicio 4: Monitoreo de tráfico en tiempo real}{28}{subsection.1.4.4}%
+\contentsline {subsection}{\numberline {1.4.5}Ejercicio 5: Análisis de seguridad básico}{28}{subsection.1.4.5}%
+\contentsline {subsection}{\numberline {1.4.6}Herramientas adicionales recomendadas}{28}{subsection.1.4.6}%
+\contentsline {section}{\numberline {1.5}Limitaciones y consideraciones éticas}{28}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}¿Qué NO puedes ver desde tu computadora?}{28}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.5.2}¿Qué SÍ puedes ver?}{29}{subsection.1.5.2}%
+\contentsline {subsection}{\numberline {1.5.3}Consideraciones éticas y legales}{29}{subsection.1.5.3}%
+\contentsline {subsection}{\numberline {1.5.4}Cuándo SÍ está permitido el análisis}{29}{subsection.1.5.4}%
+\contentsline {subsection}{\numberline {1.5.5}Alternativas seguras para aprendizaje}{29}{subsection.1.5.5}%
+\contentsline {subsection}{\numberline {1.5.6}Recursos para aprendizaje ético}{29}{subsection.1.5.6}%
+\contentsline {subsection}{\numberline {1.5.7}Comunicación cliente-servidor}{30}{subsection.1.5.7}%
+\contentsline {subsection}{\numberline {1.5.8}Comunicación cliente-servidor}{30}{subsection.1.5.8}%
+\contentsline {subsubsection}{Arquitectura de comunicación}{30}{section*.42}%
+\contentsline {subsubsection}{API de sockets TCP}{30}{section*.43}%
+\contentsline {subsubsection}{API de sockets TCP}{30}{section*.44}%
+\contentsline {subsubsection}{Puertos y multiplexación}{31}{section*.45}%
+\contentsline {subsubsection}{Puertos y multiplexación}{31}{section*.46}%
+\contentsline {subsection}{\numberline {1.5.9}Configuraciones reales de red}{31}{subsection.1.5.9}%
+\contentsline {subsubsection}{Configuración Windows}{31}{section*.47}%
+\contentsline {subsubsection}{Configuración Linux}{31}{section*.48}%
+\contentsline {subsection}{\numberline {1.5.10}Principios de seguridad en redes}{32}{subsection.1.5.10}%
+\contentsline {subsection}{\numberline {1.5.11}Descripción detallada de las capas del modelo OSI}{32}{subsection.1.5.11}%
+\contentsline {subsubsection}{Capa 7: Aplicación}{32}{section*.49}%
+\contentsline {subsubsection}{Capa 6: Presentación}{33}{section*.50}%
+\contentsline {subsubsection}{Capa 5: Sesión}{33}{section*.51}%
+\contentsline {subsubsection}{Capa 4: Transporte}{34}{section*.52}%
+\contentsline {subsubsection}{Capa 3: Red}{34}{section*.53}%
+\contentsline {subsubsection}{Capa 2: Enlace de Datos}{35}{section*.54}%
+\contentsline {subsubsection}{Capa 1: Física}{35}{section*.55}%
+\contentsline {subsection}{\numberline {1.5.12}Interacción entre capas y seguridad}{36}{subsection.1.5.12}%
+\contentsline {subsection}{\numberline {1.5.13}Herramientas de seguridad por capa}{36}{subsection.1.5.13}%
+\contentsline {section}{\numberline {1.6}Conclusiones}{36}{section.1.6}%
+\contentsline {chapter}{\numberline {2}Introducción}{39}{chapter.2}%
+\ttl@stoptoc {default@1}
+\ttl@starttoc {default@2}
+\contentsline {section}{\numberline {2.1}¿Qué es la Seguridad}{39}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Confidencialidad}{40}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Integridad}{40}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Disponibilidad}{41}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Modelos de Amenazas}{41}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Ejemplo de Modelado de Amenazas: HTTPS}{41}{subsection.2.2.1}%
+\contentsline {section}{\numberline {2.3}Gestión de Riesgos}{41}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Análisis de Riesgos}{41}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Determinación de la Probabilidad}{42}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Determinación de Consecuencias}{42}{subsection.2.3.3}%
+\contentsline {section}{\numberline {2.4}Superficie de Ataque}{42}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Ejemplos de Superficie de Ataque}{43}{subsection.2.4.1}%
+\contentsline {section}{\numberline {2.5}Estrategia de Seguridad}{43}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Prevención y Detección}{43}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Pruebas de Seguridad}{44}{subsection.2.5.2}%
+\contentsline {section}{\numberline {2.6} Análisis de Riesgos}{44}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Prioridad de Riesgos}{44}{subsection.2.6.1}%
+\contentsline {section}{\numberline {2.7}Superficie de Ataque}{44}{section.2.7}%
+\contentsline {subsection}{\numberline {2.7.1}Ejemplos de Superficie de Ataque}{44}{subsection.2.7.1}%
+\contentsline {section}{\numberline {2.8}Estrategia de Seguridad}{45}{section.2.8}%
+\contentsline {subsection}{\numberline {2.8.1}Prevención y Detección}{45}{subsection.2.8.1}%
+\contentsline {subsection}{\numberline {2.8.2}Pruebas de Seguridad}{45}{subsection.2.8.2}%
+\contentsline {section}{\numberline {2.9}Amenazas y Ataques}{45}{section.2.9}%
+\contentsline {section}{\numberline {2.10}Software Malicioso (Malware)}{45}{section.2.10}%
+\contentsline {subsection}{\numberline {2.10.1}Definición y clasificación del malware}{45}{subsection.2.10.1}%
+\contentsline {subsection}{\numberline {2.10.2}Tipos principales de malware}{45}{subsection.2.10.2}%
+\contentsline {subsubsection}{Advanced Persistent Threats (APTs)}{45}{section*.59}%
+\contentsline {subsubsection}{Virus}{46}{section*.60}%
+\contentsline {subsubsection}{Adware}{46}{section*.61}%
+\contentsline {subsubsection}{Attack Kit}{46}{section*.62}%
+\contentsline {subsubsection}{Auto-rooter}{47}{section*.63}%
+\contentsline {subsubsection}{Backdoor}{47}{section*.64}%
+\contentsline {subsubsection}{Downloaders}{47}{section*.65}%
+\contentsline {subsection}{\numberline {2.10.3}Métodos de propagación del malware}{47}{subsection.2.10.3}%
+\contentsline {subsubsection}{Propagación por red}{47}{section*.66}%
+\contentsline {subsubsection}{Propagación por medios físicos}{47}{section*.67}%
+\contentsline {subsection}{\numberline {2.10.4}Detección y prevención del malware}{48}{subsection.2.10.4}%
+\contentsline {subsubsection}{Métodos de detección}{48}{section*.68}%
+\contentsline {subsubsection}{Medidas de prevención}{48}{section*.69}%
+\contentsline {subsection}{\numberline {2.10.5}Impacto del malware en la seguridad}{48}{subsection.2.10.5}%
+\contentsline {subsection}{\numberline {2.10.6}Tendencias actuales en malware}{48}{subsection.2.10.6}%
+\contentsline {subsubsection}{Malware como servicio (MaaS)}{48}{section*.70}%
+\contentsline {subsubsection}{Malware dirigido a dispositivos móviles}{48}{section*.71}%
+\contentsline {subsubsection}{Malware para IoT}{48}{section*.72}%
+\contentsline {subsubsection}{Ransomware}{48}{section*.73}%
+\contentsline {section}{\numberline {2.11}Ataques de Denial of Service (DoS)}{48}{section.2.11}%
+\contentsline {subsection}{\numberline {2.11.1}Definición y características de los ataques DoS}{49}{subsection.2.11.1}%
+\contentsline {subsection}{\numberline {2.11.2}Categorías de recursos atacados}{49}{subsection.2.11.2}%
+\contentsline {subsubsection}{Ancho de banda de red}{49}{section*.74}%
+\contentsline {subsubsection}{Recursos del sistema}{49}{section*.75}%
+\contentsline {subsubsection}{Recursos de aplicación}{49}{section*.76}%
+\contentsline {subsection}{\numberline {2.11.3}Ataques DoS clásicos}{50}{subsection.2.11.3}%
+\contentsline {subsubsection}{Flooding con ping}{50}{section*.77}%
+\contentsline {subsubsection}{SYN Spoofing}{50}{section*.78}%
+\contentsline {subsection}{\numberline {2.11.4}Ataques DoS distribuidos (DDoS)}{50}{subsection.2.11.4}%
+\contentsline {subsubsection}{Características de los ataques DDoS}{50}{section*.79}%
+\contentsline {subsubsection}{Tipos de ataques DDoS}{51}{section*.80}%
+\contentsline {subsection}{\numberline {2.11.5}Ataques DoS con dispositivos IoT}{51}{subsection.2.11.5}%
+\contentsline {subsection}{\numberline {2.11.6}Motivaciones de los ataques DoS}{51}{subsection.2.11.6}%
+\contentsline {subsubsection}{Extorsión financiera}{51}{section*.81}%
+\contentsline {subsubsection}{Hacktivismo}{51}{section*.82}%
+\contentsline {subsubsection}{Ataques patrocinados por estados}{51}{section*.83}%
+\contentsline {subsubsection}{Diversión}{52}{section*.84}%
+\contentsline {subsection}{\numberline {2.11.7}Medidas de defensa contra ataques DoS}{52}{subsection.2.11.7}%
+\contentsline {subsubsection}{Medidas preventivas}{52}{section*.85}%
+\contentsline {subsubsection}{Medidas de detección}{52}{section*.86}%
+\contentsline {subsubsection}{Medidas de respuesta}{52}{section*.87}%
+\contentsline {subsection}{\numberline {2.11.8}Impacto y consecuencias}{52}{subsection.2.11.8}%
+\contentsline {subsection}{\numberline {2.11.9}Tendencias actuales}{52}{subsection.2.11.9}%
+\contentsline {chapter}{\numberline {3}Seguridad de Redes y Protocolos}{55}{chapter.3}%
+\ttl@stoptoc {default@2}
+\ttl@starttoc {default@3}
+\contentsline {section}{\numberline {3.1}Introducción a la seguridad de redes}{55}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}¿Por qué es importante la seguridad de redes?}{55}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Principios fundamentales de seguridad de redes}{56}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Seguridad en redes inalámbricas (WiFi)}{56}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Características únicas de las redes inalámbricas}{56}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Componentes del entorno inalámbrico}{56}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Amenazas específicas a redes inalámbricas}{57}{subsection.3.2.3}%
+\contentsline {subsubsection}{Asociación accidental}{57}{section*.88}%
+\contentsline {subsubsection}{Asociación maliciosa}{57}{section*.89}%
+\contentsline {subsubsection}{Redes ad hoc}{57}{section*.90}%
+\contentsline {subsubsection}{Robo de identidad (MAC spoofing)}{57}{section*.91}%
+\contentsline {subsubsection}{Ataques Man-in-the-Middle}{58}{section*.92}%
+\contentsline {subsubsection}{Denial of Service (DoS)}{58}{section*.93}%
+\contentsline {subsubsection}{Inyección de red}{58}{section*.94}%
+\contentsline {subsection}{\numberline {3.2.4}Medidas de seguridad para transmisiones inalámbricas}{58}{subsection.3.2.4}%
+\contentsline {subsubsection}{Técnicas de ocultación de señales}{58}{section*.95}%
+\contentsline {subsubsection}{Encriptación}{59}{section*.96}%
+\contentsline {subsection}{\numberline {3.2.5}Estándares de seguridad WiFi}{59}{subsection.3.2.5}%
+\contentsline {subsubsection}{IEEE 802.11i - Red de Seguridad Robusta (RSN)}{59}{section*.97}%
+\contentsline {subsubsection}{Fases de operación de IEEE 802.11i}{60}{section*.98}%
+\contentsline {subsubsection}{Protocolos de protección de datos}{60}{section*.99}%
+\contentsline {paragraph}{TKIP (Temporal Key Integrity Protocol)}{60}{section*.100}%
+\contentsline {paragraph}{CCMP (Counter Mode-CBC MAC Protocol)}{61}{section*.101}%
+\contentsline {subsection}{\numberline {3.2.6}WiFi Protected Access (WPA)}{61}{subsection.3.2.6}%
+\contentsline {subsubsection}{WPA}{61}{section*.102}%
+\contentsline {subsubsection}{WPA2}{61}{section*.103}%
+\contentsline {subsubsection}{WPA3}{61}{section*.104}%
+\contentsline {subsection}{\numberline {3.2.7}Autenticación 802.1X}{62}{subsection.3.2.7}%
+\contentsline {subsubsection}{Componentes de 802.1X}{62}{section*.105}%
+\contentsline {subsubsection}{Proceso de autenticación}{62}{section*.106}%
+\contentsline {subsection}{\numberline {3.2.8}Mejores prácticas de seguridad WiFi}{63}{subsection.3.2.8}%
+\contentsline {subsubsection}{Configuración de puntos de acceso}{63}{section*.107}%
+\contentsline {subsubsection}{Segmentación de red}{63}{section*.108}%
+\contentsline {subsubsection}{Monitoreo y detección}{63}{section*.109}%
+\contentsline {subsection}{\numberline {3.2.9}Vulnerabilidades específicas de WiFi}{64}{subsection.3.2.9}%
+\contentsline {subsubsection}{KRACK (Key Reinstallation Attack)}{64}{section*.110}%
+\contentsline {subsubsection}{Evil Twin Attacks}{64}{section*.111}%
+\contentsline {subsubsection}{Deauthentication Attacks}{64}{section*.112}%
+\contentsline {subsection}{\numberline {3.2.10}Seguridad en dispositivos móviles}{65}{subsection.3.2.10}%
+\contentsline {subsubsection}{Amenazas específicas a dispositivos móviles}{65}{section*.113}%
+\contentsline {subsubsection}{Estrategia de seguridad para dispositivos móviles}{65}{section*.114}%
+\contentsline {subsection}{\numberline {3.2.11}Herramientas de seguridad WiFi}{66}{subsection.3.2.11}%
+\contentsline {subsubsection}{Herramientas de análisis}{66}{section*.115}%
+\contentsline {subsubsection}{Herramientas de monitoreo}{66}{section*.116}%
+\contentsline {subsection}{\numberline {3.2.12}Consideraciones de cumplimiento}{66}{subsection.3.2.12}%
+\contentsline {subsubsection}{Estándares de la industria}{66}{section*.117}%
+\contentsline {subsubsection}{Políticas organizacionales}{67}{section*.118}%
+\contentsline {subsection}{\numberline {3.2.13}Capa 7: Aplicación - Seguridad a nivel de aplicación}{67}{subsection.3.2.13}%
+\contentsline {subsection}{\numberline {3.2.14}Capa 6: Presentación - Seguridad de datos}{68}{subsection.3.2.14}%
+\contentsline {subsection}{\numberline {3.2.15}Capa 5: Sesión - Seguridad de sesiones}{68}{subsection.3.2.15}%
+\contentsline {subsection}{\numberline {3.2.16}Capa 4: Transporte - Seguridad de transporte}{69}{subsection.3.2.16}%
+\contentsline {subsection}{\numberline {3.2.17}Capa 3: Red - Seguridad de red}{69}{subsection.3.2.17}%
+\contentsline {subsection}{\numberline {3.2.18}Capa 2: Enlace de Datos - Seguridad de enlace}{70}{subsection.3.2.18}%
+\contentsline {subsection}{\numberline {3.2.19}Capa 1: Física - Seguridad física}{70}{subsection.3.2.19}%
+\contentsline {section}{\numberline {3.3}Casos de estudio: Ataques por capa}{72}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Caso 1: Ataque a nivel de aplicación - SQL Injection}{72}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Caso 2: Ataque a nivel de transporte - SYN Flood}{72}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Caso 3: Ataque a nivel de red - Man-in-the-Middle}{72}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Herramientas de seguridad de redes}{73}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Herramientas de análisis de tráfico}{73}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Herramientas de monitoreo}{73}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Herramientas de análisis de vulnerabilidades}{73}{subsection.3.4.3}%
+\contentsline {section}{\numberline {3.5}Mejores prácticas de seguridad de redes}{73}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Arquitectura de red segura}{73}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Control de acceso}{73}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Monitoreo y respuesta}{73}{subsection.3.5.3}%
+\contentsline {section}{\numberline {3.6}Tendencias emergentes en seguridad de redes}{74}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Seguridad definida por software (SDS)}{74}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Automatización e inteligencia artificial}{74}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}Seguridad en redes 5G/6G}{74}{subsection.3.6.3}%
+\contentsline {section}{\numberline {3.7}Conclusiones}{74}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Casos de estudio adicionales}{75}{section.3.8}%
+\contentsline {subsection}{\numberline {3.8.1}Caso 3: Análisis de incidente DNS}{75}{subsection.3.8.1}%
+\contentsline {subsection}{\numberline {3.8.2}Caso 4: Incidente de puerto HTTPS bloqueado}{75}{subsection.3.8.2}%
+\contentsline {section}{\numberline {3.9}Técnicas de evasión y ataques avanzados}{75}{section.3.9}%
+\contentsline {subsection}{\numberline {3.9.1}Fast Flux}{75}{subsection.3.9.1}%
+\contentsline {subsection}{\numberline {3.9.2}Ataques Punycode}{76}{subsection.3.9.2}%
+\contentsline {subsection}{\numberline {3.9.3}URL Shorteners maliciosos}{76}{subsection.3.9.3}%
+\contentsline {subsection}{\numberline {3.9.4}Evasión de detección por hash}{76}{subsection.3.9.4}%
+\contentsline {section}{\numberline {3.10}Herramientas específicas de análisis de red}{77}{section.3.10}%
+\contentsline {subsection}{\numberline {3.10.1}Nmap (Network Mapper)}{77}{subsection.3.10.1}%
+\contentsline {subsection}{\numberline {3.10.2}Netcat}{77}{subsection.3.10.2}%
+\contentsline {subsection}{\numberline {3.10.3}Snort - Sistema de detección de intrusiones}{77}{subsection.3.10.3}%
+\contentsline {section}{\numberline {3.11}Controles de seguridad específicos}{78}{section.3.11}%
+\contentsline {subsection}{\numberline {3.11.1}NAT (Network Address Translation)}{78}{subsection.3.11.1}%
+\contentsline {subsection}{\numberline {3.11.2}Filtrado de paquetes}{78}{subsection.3.11.2}%
+\contentsline {subsection}{\numberline {3.11.3}Control de acceso a la red (NAC)}{78}{subsection.3.11.3}%
+\contentsline {subsection}{\numberline {3.11.4}Gestión de identidad y acceso (IAM)}{78}{subsection.3.11.4}%
+\contentsline {subsection}{\numberline {3.11.5}Balanceo de carga}{79}{subsection.3.11.5}%
+\contentsline {subsection}{\numberline {3.11.6}Segmentación de red}{79}{subsection.3.11.6}%
+\contentsline {section}{\numberline {3.12}Análisis de tráfico detallado}{79}{section.3.12}%
+\contentsline {subsection}{\numberline {3.12.1}Técnicas de análisis}{79}{subsection.3.12.1}%
+\contentsline {subsubsection}{Análisis de flujo}{79}{section*.119}%
+\contentsline {subsubsection}{Análisis de paquetes}{79}{section*.120}%
+\contentsline {subsection}{\numberline {3.12.2}Inspección profunda de paquetes (DPI)}{80}{subsection.3.12.2}%
+\contentsline {section}{\numberline {3.13}Zero Trust Microsoft}{80}{section.3.13}%
+\contentsline {section}{\numberline {3.14}Referencias y recursos adicionales}{80}{section.3.14}%
+\contentsline {subsection}{\numberline {3.14.1}Organizaciones de seguridad}{81}{subsection.3.14.1}%
+\contentsline {subsection}{\numberline {3.14.2}Lecturas recomendadas}{81}{subsection.3.14.2}%
+\contentsline {section}{\numberline {3.15}Ataques}{81}{section.3.15}%
+\contentsline {subsection}{\numberline {3.15.1}Casos}{82}{subsection.3.15.1}%
+\contentsline {chapter}{\numberline {4}Comandos SO Linux}{83}{chapter.4}%
+\ttl@stoptoc {default@3}
+\ttl@starttoc {default@4}
+\contentsfinish 

@@ -1,0 +1,316 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  A bright and image filled report style, currently set up here for use with ILM report 8600-219.
+%  Contains all that is required, glossaries, content management, references and good looks.
+%
+% The original template (the Legrand Orange Book Template) can be found here --> http://www.latextemplates.com/template/the-legrand-orange-book
+% Original author of the Legrand Orange Book Template:
+% Mathias Legrand (legrand.mathias@gmail.com) 
+%
+% Modifications made for ILM specific reporting
+% 
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use this
+%
+% Upload a file called FrontCover.jpg to become your new front cover - into the Pictures folder
+% Upload files called Heading1.jpg, Heading2.jpg etc to become your new chapter headers - into the Pictures folder
+% Make sure these images are the right size to fit their locations and use good quality images
+%
+% Locate the variables below and set your name, title etc.
+%
+% If you want to change text colour on the front cover, the areas required are commented below
+% If you want to modify text and border colours for your chapter headers go into the structure.tex file and replace the name of the colour (set to ) with a new colour name (find and replace ctrl+f will do this for you).
+%
+% Add all references into references.bib
+% Cite these references by using \cite{referenceName}
+%
+% Commonly used acronyms or industry specific terms should be added to the glossary
+% These terms may then be referenced in the text using \gls{termName}
+%
+% Finally put some answers in there!
+%
+% 
+% Note: This template is set up specifically for ILM reports, it can be modified for other forms of reports
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+ 
+%----------------------------------------------------------------------------------------
+%	SET THESE VARIABLES!
+%----------------------------------------------------------------------------------------
+
+\def\mytitle{Seguridad TI } % Title of the ILM project
+%\def\ILMCode{RT } % Unique code for the ILM project
+
+%\def\ILMCentreName{ILM centre name } % The name of the centre you're the ILM sitting at
+%\def\ILMCentreCode{123456/A} % Unique code the centre at which you're sitting the ILM
+%\def\ILMLevel{3 } % What level are you sitting with the ILM. i.e. 3, 4, 5
+%\def\reviewer{Reviewer's name} % You may not know this, if not use the centre's name
+
+%\def\author{@rominabot}
+%\def\id{romina.torres.t@uai.cl } % Your unique identifier
+
+\def\date{\today } % Today's date 
+
+
+ 
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage[spanish]{babel}
+\usepackage[most]{tcolorbox}
+\usepackage{colortbl} % color columnas
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{glossaries}
+\usepackage{todonotes}
+\usepackage{tabularx}
+\usepackage{tikz}
+
+
+\tikzset{
+  startstop/.style={
+    rectangle,
+    rounded corners,
+    draw=black,
+    fill=red!30,
+    text width=5em,
+    text centered,
+    minimum height=2em
+  },
+  process/.style={
+    rectangle,
+    draw=black,
+    fill=orange!30,
+    text width=10em,
+    text centered,
+    minimum height=2em
+  },
+  decision/.style={
+    diamond,
+    draw=black,
+    fill=green!30,
+    text width=5em,
+    text badly centered,
+    inner sep=0pt
+  },
+  arrow/.style={
+    ->,
+    thick
+  }
+}
+
+\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+\makeglossaries
+
+%--------------------------------------------------------------------------
+
+% Glossary entries
+
+%--------------------------------------------------------------------------
+
+\newglossaryentry{Codificación}
+{
+   name = {Codificación},
+   description= {esta NO es una forma de encriptación, solo una forma de representación de datos como base64 o hexadecimal. Inmediatamente reversible.}}
+
+
+
+\newglossaryentry{tarcoiris}
+{name={Tabla Arcoíris},
+description={Una tabla arcoíris es una tabla de búsqueda de hashes a textos sin formato, por lo que puede averiguar rápidamente qué contraseña tenía un usuario a partir del hash. Una tabla de arcoíris intercambia el tiempo necesario para descifrar un hash por espacio en el disco duro, pero se necesita tiempo para crear.}}
+
+\newglossaryentry{Hash}
+{    name = {hash}, 
+    description={un hash es la salida de una función hash. Hashing también se puede usar como un verbo, "to hash", que significa producir el valor hash de algunos datos.}}
+
+\newglossaryentry{Fuerza_bruta}
+{    name = {Fuerza_bruta},
+   description={atacar la criptografía probando cada contraseña diferente o cada clave diferente}}
+
+\newglossaryentry{Criptoanálisis}
+{name={Criptoanálisis},
+description={atacar la criptografía al encontrar una debilidad en las matemáticas subyacentes}}
+
+\newglossaryentry{Firewall}
+{
+    name = {firewall},
+    description = {Conjunto de tecnologías que permiten que un usuario visualice parte del mundo real a través de un dispositivo tecnológico con información gráfica añadida por este.}
+}
+
+\newglossaryentry{ip-scanner}
+{
+   name = {ip-scanner.thm},
+    description = {x.}
+}
+
+\newglossaryentry{EventosAdversos}
+{
+name ={Eventos adversos},
+description={eventos con una consecuencia negativa, como bloqueos del sistema, inundaciones de paquetes de red, uso no autorizado de privilegios del sistema, desfiguración de una página web o ejecución de código malicioso que destruye datos.}
+}
+
+
+\begin{comment}
+    
+Incidente: un evento que real o potencialmente pone en peligro la confidencialidad, integridad o disponibilidad de un sistema de información o la información que el sistema procesa, almacena o transmite.
+Manejo de incidentes: la mitigación de las violaciones de las políticas de seguridad y las prácticas recomendadas. Fuente: NIST SP 800-61 Rev. 2
+Respuesta a incidentes (IR): la mitigación de las violaciones de las políticas de seguridad y las prácticas recomendadas. Fuente: NIST SP 800-61 Rev. 2
+Plan de respuesta a incidentes (IRP): la documentación de un conjunto predeterminado de instrucciones o procedimientos para detectar, responder y limitar las consecuencias de un ciberataque malicioso contra los sistemas de información de una organización. Fuente: NIST SP 800-34 Rev 1
+Intrusión: un evento de seguridad, o una combinación de eventos de seguridad, que constituye un incidente de seguridad en el que un intruso obtiene o intenta obtener acceso a un sistema o recurso del sistema sin autorización. Fuente: IETF RFC 4949 Ver 2
+Centro de operaciones de seguridad: una función organizativa centralizada realizada por un equipo de seguridad de la información que monitorea, detecta y analiza eventos en la red o el sistema para prevenir y resolver problemas antes de que provoquen interrupciones comerciales.
+Vulnerabilidad: debilidad en un sistema de información, procedimientos de seguridad del sistema, controles internos o implementación que podría ser explotada o desencadenada por una fuente de amenaza. Fuente: NIST SP 800-128.
+Zero Day: una vulnerabilidad del sistema previamente desconocida con el potencial de explotación sin riesgo de detección o prevención porque, en general, no se ajusta a patrones, firmas o métodos reconocidos.
+Violación: la pérdida de control, el compromiso, la divulgación no autorizada, la adquisición no autorizada o cualquier evento similar donde: una persona que no sea un usuario autorizado accede o potencialmente accede a información de identificación personal; o un usuario autorizado accede a información de identificación personal para un propósito distinto al autorizado. Fuente: NIST SP 800-53 Rev. 5
+Continuidad Comercial (BC) - Acciones, procesos y herramientas para garantizar que una organización pueda continuar con las operaciones críticas durante una contingencia.
+Plan de continuidad comercial (BCP): la documentación de un conjunto predeterminado de instrucciones o procedimientos que describen cómo se mantendrán los procesos comerciales/misión de una organización durante y después de una interrupción significativa.
+Análisis de impacto comercial (BIA): un análisis de los requisitos, funciones e interdependencias de un sistema de información que se utiliza para caracterizar los requisitos y prioridades de contingencia del sistema en caso de una interrupción significativa. Referencia: https://csrc.nist.gov/glossary/term/business-impact-analysis
+Recuperación ante desastres (DR): en términos de sistemas de información, las actividades necesarias para restaurar los servicios de comunicaciones y de TI en una organización durante y después de una interrupción, interrupción o perturbación de cualquier tipo o escala.
+Plan de recuperación ante desastres (DRP): los procesos, políticas y procedimientos relacionados con la preparación para la recuperación o la continuación de las funciones comerciales críticas, la infraestructura tecnológica, los sistemas y las aplicaciones de una organización después de que la organización experimente un desastre. Un desastre es cuando las funciones comerciales críticas de una organización no se pueden realizar a un nivel aceptable dentro de un período predeterminado después de una interrupción.
+Evento - Cualquier ocurrencia observable en una red o sistema. Fuente: NIST SP 800-61 Rev. 2
+Exploit - Un ataque particular. Se llama así porque estos ataques aprovechan las vulnerabilidades del sistema.
+\end{comment}
+%--------------------------------------------------------------------------
+
+% Document begins here
+
+%--------------------------------------------------------------------------
+
+\begin{document}
+\renewcommand{\bibname}{Referencias} % Adds in the link to your references
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begingroup
+\thispagestyle{empty}
+\AddToShipoutPicture*{\put(-20,-20){\includegraphics[scale=1.6]{Pictures/hackpng.png}}} % Image background
+%\AddToShipoutPicture*{\put(0,0){\includegraphics[height=900, width=650]{Pictures/exponential.png}}} % Image background
+\centering
+\vspace*{11.3cm}
+\par\normalfont\fontsize{35}{35}\sffamily\selectfont
+
+\begin{center}
+    % List of Latex Colour names here: https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX
+    \textbf{\color{Orange} \mytitle}  % Modify the name of the colour used to suit your image
+    
+    %\textbf{\color{White}(\ILMCode)} % Modify the name of the colour used to suit your image
+    
+    %\color{black}ILM\par % Modify the name of the colour used to suit your image
+  \end{center}
+
+   \vspace*{5cm}
+   \LARGE  \color{white} \textbf{\author \\} % Modify the name of the colour used to suit your image
+
+    %(\id)\par  
+
+
+\endgroup
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+%\noindent \textbf{Statement of confirmation of authenticity}
+%\vspace{0.5cm}
+
+%\noindent By the act of making this submission, the learner declares that this is the work of the learner named on the cover sheet. The work has not, in whole or in part, been knowingly presented elsewhere for assessment, or where assessment has been built on a previous assessment, this has been identified. Where materials have been used from other sources it has been properly acknowledged. If this statement is untrue, the learner acknowledges that an assessment offence has been committed.
+%Attention is drawn to the plagiarism and cheating policies of both the centre and of ILM. Plagiarism can result in a learner being withdrawn from a qualification.
+%\vspace{1cm}
+
+\noindent \textbf{Objetivo de este documento}
+\vspace{0.5cm}
+
+\noindent Este documento ha sido preparado para introducir los temas a tratar durante el curso: Seguridad TI. Favor no compartir este documento con terceros que no sean miembros actuales de este curso (de este semestre - segundo semestre 2025) dado que es un documento de uso interno aún en preparación. Si usted por error tiene este documento, por favor elimínelo.
+
+
+%\begin{wrapfigure}{r}{60mm}
+ % \begin{center}
+  %  \includegraphics[scale=0.5]{RT.jpg}
+  %\end{center}
+%\end{wrapfigure}
+% \noindent \textbf{ROMINA TORRES} recibió en 2014 su grado de Doctor en Ingeniería Informática de la Universidad Técnica Federico Santa María. Egresada de Ingeniería Civil Informática realizó pasantías en las empresas KLA-Tencor y Synopsys el año 2001 y 2002 respectivamente en Silicon Valley, Estados Unidos. Posterior. a ello, trabajó para Motorola Software Group Valparaíso y Software AG. El 2012 realizó su pasantía doctoral en el Instituto INRIA, Rocquencourt, París, Francia. Entre el 2013-2020 fue directora de las carreras Informáticas de la Universidad Andrés Bello de la sede Viña del Mar. Entre el 2020 e inicios del 2023 fue Directora del Magister en Ciencias de la Computación y del Magister en Gestión de TI y Telecomunicaciones en la misma casa de estudios. Recibió el premio de mujer destacada Viña del Mar 2020 en la categoría innovación. Entre el 2019 y 2021 fue la directora alterna del FONDEF IDEA Ciencia ``Sistema Inteligente para la telerehabilitación cardiovascular. 
+ %Desde el 2018 colabora con el Instituto Nacional de Ciberseguridad en formación para hacer de Valparaíso la capital de ciberseguridad del pacífico sur. Es la Investigadora Responsable de un Fondecyt de Iniciación 2022-2024: ``Framework for detecting, monitoring and analyzing multi-stage attacks in evolution during runtime''. Desde Abril 2023 es académica de la Facultad de Ingeniería y Ciencias de la Universidad Adolfo Ibáñez.  \textbf{e-mail:} romina.torres.t@uai.cl. \textbf{twitter:} @rominabot. %\textbf{Sitio Web:} \url{http://www.informatica-unab-vm.cl/profesores/romina.torres/}.  
+
+
+
+\vspace{1cm}
+
+%\noindent \textsc{\ILMCentreName - Report for the Award of a Level \ILMLevel Certificate from the Institute of Leadership and Management}\\
+
+%\noindent This was written by \author, to be approved for submission by \reviewer. Written at the \ILMCentreName  (\ILMCentreCode).\\ % License information
+
+\noindent \textit{ Liberación v0.2, \date. romibot} % Printing/edition date
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+\chapterimage{diferente2.png} % Table of contents heading image
+\vspace{20px}
+\pagestyle{empty} % No headers
+
+\tableofcontents % Print the table of contents itself
+
+%\listoftables %uncomment this if you want to print the list of tables at the start
+
+\pagestyle{fancy} % Print headers again
+
+
+%----------------------------------------------------------------------------------------
+%	Glossary
+%----------------------------------------------------------------------------------------
+
+\chapterimage{ampolletas.png} % Table of contents heading image
+\vspace{20px}
+
+\input{00Repaso}
+\input{01Fundamentales}
+\input{02SeguridadRedesProtocolos}
+%\input{02AutenticacionAutorizacion}
+%\input{03MalwareDoS}
+%\input{04Criptografía}
+\input{100Comandos}
+%\input{101-Anexo-WebAPP}
+%\input{102-CartaRiesgos}
+
+
+%---------------------------------------------------------------------
+%---------------------------------------------------------------------
+
+
+
+
+\chapterimage{Pictures/map2.png} % Table of contents heading image
+\vspace{50cm}
+\printglossaries
+
+
+%----------------------------------------------------------------------------------------
+%	References
+%----------------------------------------------------------------------------------------
+
+\chapterimage{bigdata.png} % Chapter heading image
+
+\bibliographystyle{plain} % Change this to IEEE or Harvard etc.
+\bibliography{references}
+
+
+\end{document}

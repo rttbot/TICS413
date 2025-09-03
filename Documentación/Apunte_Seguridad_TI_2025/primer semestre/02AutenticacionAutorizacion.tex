@@ -1,0 +1,390 @@
+\chapterimage{contrasena-codigo-binario.jpg}
+\chapter{Autenticación y Autorización}
+\vspace{95px}
+\begin{flushright}
+    \textit{ }
+\end{flushright}
+
+
+
+\section{Caso de Estudio: Autenticación en un Entorno Real}
+Imaginemos una empresa de comercio electrónico, SecureShop, que maneja miles de transacciones diarias. La autenticación es crítica para proteger la información sensible de los clientes. SecureShop implementa varios métodos de autenticación para asegurar sus sistemas.
+
+
+\section{Introducción a la Autenticación}
+La autenticación es un proceso fundamental en la seguridad informática que verifica la identidad de un usuario o sistema. Es crucial para proteger la confidencialidad, integridad y disponibilidad de los datos.
+
+
+Existen varios métodos de autenticación, cada uno con sus propias características y niveles de seguridad:
+
+\begin{itemize}
+    \item \textbf{Algo que el usuario sabe}: Incluye contraseñas y números de identificación personal (PIN). Estos métodos son comunes pero vulnerables a ataques de fuerza bruta y phishing.
+    \item \textbf{Algo que el usuario tiene}: Tokens físicos como tarjetas inteligentes o dispositivos de autenticación. Ofrecen un nivel adicional de seguridad al requerir un objeto físico.
+    \item \textbf{Algo que el usuario es}: La biometría utiliza características físicas o comportamentales, como huellas dactilares o reconocimiento facial, para autenticar a los usuarios.
+\end{itemize}
+
+Por tanto en nuestro ejemplo, SecureShop utiliza una combinación de métodos de autenticación para garantizar la seguridad:
+
+\begin{itemize}
+    \item \textbf{Conocimiento del Usuario}: Contraseñas y PINs son utilizados para el acceso inicial. Por ejemplo, una contraseña puede ser "SecureShop2023!" y un PIN puede ser "1234". Aunque comunes, son vulnerables a ataques de fuerza bruta y phishing.
+    \item \textbf{Posesión del Usuario}: Tokens físicos, como tarjetas inteligentes, son requeridos para acceder a áreas críticas. Por ejemplo, una tarjeta inteligente puede ser una tarjeta con un chip que se inserta en un lector para verificar la identidad del usuario. Estos tokens añaden una capa de seguridad al requerir un objeto físico.
+    \item \textbf{Biometría}: SecureShop implementa reconocimiento facial para autenticar a los usuarios en sus dispositivos móviles, ofreciendo alta seguridad. Por ejemplo, el usuario puede usar su rostro para desbloquear su teléfono y acceder a la aplicación de SecureShop.
+    \item \textbf{Autenticación Multifactor (MFA)}: Combinan contraseñas con tokens o biometría para aumentar la seguridad. Por ejemplo, un usuario puede necesitar ingresar su contraseña y luego usar un token físico o su huella dactilar para completar el proceso de autenticación. Esto es crucial para proteger las cuentas de los usuarios.
+\end{itemize}
+
+
+
+\section{Contraseñas y Seguridad}
+Las contraseñas son el método de autenticación más utilizado, pero presentan varios riesgos de seguridad:
+\begin{itemize}
+    \item \textbf{Uso de Contraseñas Hash}: Las contraseñas se almacenan como hashes para protegerlas. Un hash es una representación cifrada de la contraseña original.
+    \item \textbf{Ataques Comunes}: Incluyen ataques de diccionario, fuerza bruta y phishing. Las contramedidas incluyen el uso de contraseñas fuertes y políticas de cambio regular.
+\end{itemize}
+
+
+Un hash es una función que convierte una entrada (o 'mensaje') en una salida de longitud fija, que generalmente parece una cadena de caracteres aleatorios. Esta salida se conoce como valor hash o simplemente hash. Los hashes son fundamentales en la seguridad informática, especialmente en la autenticación y la integridad de los datos.
+
+
+
+Supongamos que tenemos una contraseña simple: "SecureShop2023!". Queremos almacenar esta contraseña de manera segura en nuestra base de datos. En lugar de almacenar la contraseña en texto plano, utilizamos una función hash para convertirla en un valor hash.
+
+Por ejemplo, utilizando el algoritmo SHA-256, la contraseña "SecureShop2023!" se convierte en el siguiente hash:
+
+\begin{verbatim}
+Contraseña: SecureShop2023!
+Hash: 5e884898da28047151d0e56f8dc6292773603d0d6aabbddc8a14d873584d6c92
+\end{verbatim}  
+
+Un ataque de diccionario es un método utilizado por los atacantes para descifrar contraseñas. Este tipo de ataque se basa en la suposición de que muchas personas utilizan contraseñas comunes o palabras del diccionario. Los atacantes utilizan una lista predefinida de palabras y combinaciones comunes para intentar acceder a cuentas protegidas por contraseñas.
+
+\textbf{Caso Conocido: Brecha de Seguridad en LinkedIn}
+En 2012, LinkedIn sufrió una brecha de seguridad masiva en la que se filtraron millones de contraseñas de usuarios. Los atacantes utilizaron ataques de diccionario para descifrar muchas de estas contraseñas, ya que muchos usuarios empleaban contraseñas comunes y fáciles de adivinar. Este incidente subrayó la importancia de utilizar contraseñas fuertes y únicas.
+
+
+Supongamos que un atacante tiene una lista de contraseñas comunes, como "123456", "password", "qwerty", etc. El atacante intentará cada una de estas contraseñas en una cuenta objetivo hasta encontrar la correcta.
+
+Por ejemplo, si la contraseña de un usuario es "password", el atacante la encontrará rápidamente utilizando un ataque de diccionario, ya que "password" es una de las contraseñas más comunes.
+
+
+
+Una pregunta común es cómo un atacante puede usar un ataque de diccionario si típicamente se bloquearía la cuenta después de varios intentos fallidos. La respuesta es que los atacantes pueden distribuir sus intentos a lo largo del tiempo o utilizar múltiples direcciones IP para evitar los bloqueos. Además, pueden aprovechar brechas de seguridad en sistemas que no implementan correctamente las políticas de bloqueo.
+
+
+
+El phishing es una técnica en la que los atacantes engañan a los usuarios para que revelen sus credenciales. Por ejemplo, un atacante puede enviar un correo electrónico que parece provenir de SecureShop, solicitando al usuario que inicie sesión en un sitio web falso. Una vez que el usuario ingresa sus credenciales, el atacante las captura.
+
+Supongamos que un atacante obtiene una lista de contraseñas a través de phishing. Luego, puede utilizar un ataque de fuerza bruta para intentar estas contraseñas en múltiples cuentas. Por ejemplo, si un usuario utiliza la misma contraseña en varios sitios, el atacante puede probar esa contraseña en SecureShop y otras plataformas.
+
+
+
+En el contexto de la seguridad de la información, una política es un conjunto de reglas y prácticas que regulan cómo se gestionan y protegen los datos. Las políticas de seguridad son esenciales para mitigar riesgos y asegurar que todos los usuarios sigan procedimientos consistentes.
+
+\textbf{Ejemplo de Política de Contraseñas:}
+\begin{itemize}
+    \item \textbf{Longitud Mínima}: Las contraseñas deben tener al menos 12 caracteres.
+    \item \textbf{Complejidad}: Las contraseñas deben incluir una combinación de letras mayúsculas, minúsculas, números y caracteres especiales.
+    \item \textbf{Cambio Regular}: Las contraseñas deben cambiarse cada 90 días.
+    \item \textbf{No Reutilización}: No se pueden reutilizar las últimas 5 contraseñas.
+    \item \textbf{Bloqueo de Cuenta}: La cuenta se bloqueará después de 5 intentos fallidos de inicio de sesión.
+\end{itemize}
+
+Estas políticas ayudan a proteger las cuentas de los usuarios y a reducir la efectividad de los ataques de diccionario y fuerza bruta.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Seguridad de Contraseñas}
+Las contraseñas son esenciales pero presentan riesgos:
+
+\begin{itemize}
+    \item \textbf{Amenazas Comunes}: Incluyen ataques de diccionario, fuerza bruta y phishing. SecureShop implementa políticas de contraseñas fuertes y cambios regulares para mitigar estos riesgos.
+    \item \textbf{Uso de Contraseñas Hash}: Las contraseñas se almacenan como hashes, utilizando algoritmos como SHA-256, para protegerlas de accesos no autorizados. SHA-256 es parte de la familia de algoritmos SHA-2, desarrollada por la Agencia de Seguridad Nacional (NSA) de los Estados Unidos y publicada por el Instituto Nacional de Estándares y Tecnología (NIST) en 2001. 
+\end{itemize}
+
+
+
+
+
+
+La Autenticación Multifactor (MFA) combina múltiples métodos de autenticación para aumentar la seguridad. Por ejemplo, una contraseña (algo que sabes) y un token (algo que tienes).
+
+\textbf{Autenticación Basada en Tokens}
+\begin{itemize}
+    \item \textbf{Tarjetas de Memoria y Tarjetas Inteligentes}: 
+    \begin{itemize}
+        \item Almacenan información de autenticación.
+        \item Requieren un lector especial para acceder a los datos.
+        \item \textbf{Ejemplo en Chile}: Las tarjetas BIP del sistema de transporte público de Santiago.
+    \end{itemize}
+    \item \textbf{Tokens de Hardware y Software}:
+    \begin{itemize}
+        \item Generan códigos de acceso temporales.
+        \item Se utilizan junto con otros métodos de autenticación.
+        \item \textbf{Ejemplo en Chile}: Los tokens de seguridad utilizados por bancos como Banco de Chile para transacciones en línea.
+    \end{itemize}
+\end{itemize}
+
+\textbf{Autenticación Biométrica}
+\begin{itemize}
+    \item \textbf{Características Físicas}:
+    \begin{itemize}
+        \item Incluyen huellas dactilares, reconocimiento facial y escaneo de iris.
+        \item \textbf{Ejemplo en Chile}: El uso de huellas dactilares en el Registro Civil para la emisión de cédulas de identidad.
+    \end{itemize}
+    \item \textbf{Características Dinámicas}:
+    \begin{itemize}
+        \item Incluyen reconocimiento de voz y patrones de escritura.
+        \item Ofrecen alta seguridad pero pueden ser costosas de implementar.
+        \item \textbf{Ejemplo en Chile}: Sistemas de reconocimiento de voz utilizados en centros de atención telefónica para la verificación de identidad.
+    \end{itemize}
+\end{itemize}
+
+\textbf{Protocolos de Autenticación Remota}
+Los protocolos de desafío-respuesta son comunes en la autenticación remota. Permiten verificar la identidad sin transmitir contraseñas directamente. 
+\textbf{Ejemplo en Chile}: El uso de preguntas de seguridad en los servicios bancarios en línea para verificar la identidad del usuario.
+
+SecureShop utiliza tokens para autenticar a los usuarios:
+
+\begin{itemize}
+    \item \textbf{Tokens de Hardware}:
+    \begin{itemize}
+        \item Dispositivos físicos que generan códigos de acceso temporales.
+        \item Son seguros pero pueden ser costosos.
+        \item \textbf{Ejemplo explícito}: Un dispositivo Digipass del Banco de Chile que genera un código de seis dígitos cada 60 segundos. Este código debe ser ingresado junto con la contraseña del usuario para acceder a un sistema seguro.
+    \end{itemize}
+    \item \textbf{Tokens de Software}:
+    \begin{itemize}
+        \item Aplicaciones móviles que generan códigos de un solo uso.
+        \item Son convenientes y ampliamente utilizados.
+        \item \textbf{Ejemplo explícito}: Google Authenticator, una aplicación que genera un código de seis dígitos cada 30 segundos. Este código debe ser ingresado junto con la contraseña del usuario para acceder a servicios como Gmail o Dropbox.
+    \end{itemize}
+\end{itemize}
+
+
+
+
+\textbf{Autenticación Biométrica}
+La biometría es utilizada para autenticar a los usuarios de manera segura:
+
+\begin{itemize}
+    \item \textbf{Características Físicas}:
+    \begin{itemize}
+        \item Huellas dactilares y reconocimiento facial son comunes.
+        \item Ofrecen alta seguridad pero pueden ser costosos de implementar.
+    \end{itemize}
+    \item \textbf{Ventajas y Desventajas}:
+    \begin{itemize}
+        \item La biometría es difícil de falsificar.
+        \item Plantea preocupaciones sobre la privacidad y la precisión.
+    \end{itemize}
+\end{itemize}
+
+
+SecureShop utiliza protocolos de desafío-respuesta para autenticar a los usuarios de forma remota, asegurando que las contraseñas no se transmitan directamente.
+
+\section{Problemas de Seguridad en la Autenticación}
+\subsection{Ataques Comunes}
+Incluyen el robo de credenciales y la suplantación de identidad. Las contramedidas incluyen el uso de MFA y la monitorización continua.
+
+
+Los problemas comunes incluyen el robo de credenciales y la suplantación de identidad. SecureShop mitiga estos riesgos con MFA y monitorización continua. Para detectar el robo de credenciales, se utilizan sistemas de detección de anomalías que identifican patrones de acceso inusuales, como intentos de inicio de sesión desde ubicaciones geográficas atípicas o en horarios no habituales. En caso de detectar una posible suplantación de identidad, se activa un protocolo de seguridad que incluye la desactivación inmediata de las credenciales comprometidas y la notificación al usuario afectado. Además, se realizan auditorías regulares para identificar y eliminar cualquier acceso no autorizado, asegurando así la integridad de los sistemas.
+
+\section{Niveles de Confianza en la Autenticación}
+El NIST define niveles de confianza (IAL y AAL) para evaluar la seguridad de los sistemas de autenticación.
+SecureShop evalúa sus sistemas de autenticación según los niveles de confianza definidos por el NIST (IAL y AAL), asegurando que las medidas de seguridad sean adecuadas para el riesgo asociado. 
+
+El NIST (Instituto Nacional de Estándares y Tecnología) define dos niveles principales de confianza en la autenticación: IAL (Identity Assurance Level) y AAL (Authenticator Assurance Level). Estos niveles ayudan a determinar la robustez de los métodos de autenticación utilizados y la confianza en la identidad del usuario.
+
+\begin{itemize}
+    \item \textbf{IAL (Identity Assurance Level)}: Este nivel se refiere a la confianza en la identidad del usuario. Existen tres niveles de IAL:
+    \begin{itemize}
+        \item \textbf{IAL1}: La identidad del usuario se autoafirma sin verificación. Por ejemplo, un usuario crea una cuenta en un sitio web proporcionando su nombre y correo electrónico sin ninguna verificación adicional.
+        \item \textbf{IAL2}: La identidad del usuario se verifica mediante la presentación de pruebas, como documentos de identidad. Por ejemplo, un usuario debe proporcionar una copia de su pasaporte o licencia de conducir para verificar su identidad.
+        \item \textbf{IAL3}: La identidad del usuario se verifica en persona con pruebas físicas y biométricas. Por ejemplo, un usuario debe presentarse en una oficina y proporcionar su huella dactilar junto con su documento de identidad.
+    \end{itemize}
+    \item \textbf{AAL (Authenticator Assurance Level)}: Este nivel se refiere a la confianza en el autenticador utilizado. Existen tres niveles de AAL:
+    \begin{itemize}
+        \item \textbf{AAL1}: Requiere un solo factor de autenticación. Por ejemplo, un usuario ingresa su contraseña para acceder a su cuenta.
+        \item \textbf{AAL2}: Requiere dos factores de autenticación. Por ejemplo, un usuario ingresa su contraseña y luego un código generado por una aplicación de autenticación como Google Authenticator.
+        \item \textbf{AAL3}: Requiere autenticación multifactor con autenticadores físicos y biométricos. Por ejemplo, un usuario ingresa su contraseña, utiliza un token físico y proporciona su huella dactilar.
+    \end{itemize}
+\end{itemize}
+
+\textbf{Ejemplo en SecureShop}:
+\begin{itemize}
+    \item \textbf{IAL1 y AAL1}: Un usuario se registra en SecureShop proporcionando su nombre y correo electrónico, y luego accede a su cuenta utilizando solo una contraseña.
+    \item \textbf{IAL2 y AAL2}: Un usuario verifica su identidad proporcionando una copia de su documento de identidad y luego accede a su cuenta utilizando una contraseña y un código de Google Authenticator.
+    \item \textbf{IAL3 y AAL3}: Un usuario verifica su identidad en persona proporcionando su documento de identidad y huella dactilar, y luego accede a su cuenta utilizando una contraseña, un token físico y su huella dactilar.
+\end{itemize}
+
+\textbf{Fortalezas y Debilidades de SecureShop}:
+SecureShop ha implementado un sistema de autenticación robusto que combina varios niveles de IAL y AAL para proteger la información de sus usuarios. Las fortalezas incluyen el uso de autenticación multifactor (MFA) y la verificación de identidad en persona para niveles más altos de seguridad. Sin embargo, aún existen riesgos, especialmente en los niveles más bajos de IAL y AAL, donde la autenticación se basa únicamente en contraseñas, lo que puede ser vulnerable a ataques de fuerza bruta y phishing.
+
+\textbf{Matriz de Riesgos}:
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Riesgo} \& \textbf{Impacto} \& \textbf{Probabilidad de Ocurrencia} \\
+\hline
+Robo de credenciales (IAL1, AAL1) \& Alto \& Alto \\
+\hline
+Suplantación de identidad (IAL2, AAL2) \& Medio \& Medio \\
+\hline
+Acceso no autorizado (IAL3, AAL3) \& Bajo \& Bajo \\
+\hline
+\end{tabular}
+
+Esta matriz de riesgos reutiliza los niveles de impacto y probabilidad de ocurrencia discutidos en el capítulo 01Fundamentales, permitiendo a SecureShop priorizar sus esfuerzos de seguridad en las áreas más vulnerables.
+
+\section{Conclusión}
+La autenticación es esencial para la seguridad de la información. SecureShop demuestra cómo un enfoque multifacético puede ofrecer una protección robusta, combinando varios métodos de autenticación para asegurar sus sistemas y datos.
+
+
+
+
+
+
+\section{Autorización}
+
+La autorización es un componente esencial de la seguridad informática que determina los permisos de acceso de los usuarios a los recursos del sistema. En SecureShop, la autorización asegura que solo los usuarios autorizados puedan acceder a la información crítica, protegiendo así la integridad de los sistemas.
+
+\subsection{Conceptos Clave de Autorización}
+
+\begin{itemize}
+    \item \textbf{Sujetos:} Usuarios o entidades que solicitan acceso a los recursos.
+    \item \textbf{Objetos:} Recursos o datos a los que se desea acceder.
+    \item \textbf{Derechos de Acceso:} Permisos que determinan qué acciones puede realizar un sujeto sobre un objeto.
+\end{itemize}
+
+\subsection{Control de Acceso Basado en Roles (RBAC)}
+
+El Control de Acceso Basado en Roles (RBAC) es un modelo de autorización que asigna permisos a roles en lugar de a usuarios individuales. Esto simplifica la gestión de permisos al agrupar usuarios con funciones similares.
+
+\begin{itemize}
+    \item \textbf{Restricciones - RBAC:} Permite adaptar RBAC a las políticas administrativas y de seguridad específicas de una organización.
+    \item \textbf{Relación entre Roles:} Define una estructura jerárquica o condicional entre roles para gestionar permisos de manera eficiente.
+    \item \textit{Ejemplo en SecureShop:} Un "Administrador" tiene acceso completo, mientras que un "Vendedor" solo accede a sus propias ventas.
+\end{itemize}
+
+\subsection{Control de Acceso Basado en Atributos (ABAC)}
+
+El Control de Acceso Basado en Atributos (ABAC) utiliza atributos de usuario, objeto y entorno para tomar decisiones de acceso. Este modelo ofrece flexibilidad al considerar múltiples factores para la autorización.
+
+\begin{itemize}
+    \item \textbf{Modelo ABAC:} Utiliza atributos de usuario, objeto y entorno para tomar decisiones de acceso.
+    \item \textbf{Políticas de ABAC:} Ofrecen flexibilidad al considerar múltiples factores para la autorización.
+    \item \textit{Ejemplo en SecureShop:} Un "Gerente de Ventas" puede acceder a informes solo durante el horario laboral.
+\end{itemize}
+
+\subsection{Federación de Identidades}
+
+La Federación de Identidades permite a una organización confiar en las identidades digitales y credenciales emitidas por otra organización. Esto es crucial en entornos donde múltiples organizaciones colaboran y necesitan compartir recursos de manera segura.
+
+\begin{itemize}
+    \item \textbf{Concepto:} Permite a una organización confiar en las identidades digitales y credenciales emitidas por otra organización.
+    \item \textbf{Preguntas Clave:}
+    \begin{itemize}
+        \item ¿Cómo confía en las identidades de personas de organizaciones externas?
+        \item ¿Cómo responde por las identidades de su organización al colaborar externamente?
+    \end{itemize}
+\end{itemize}
+
+\subsection{Caso – SecureShop v1.0 al v2.0}
+
+SecureShop busca permitir que aplicaciones de terceros accedan a los datos de los clientes para ofrecer servicios adicionales, como análisis de compras o recomendaciones personalizadas. Esto se logra mediante la implementación de OAuth, que permite delegar autoridad de manera segura.
+
+\subsubsection{Desafíos Antes de OAuth}
+
+\begin{itemize}
+    \item \textbf{Compartición de Credenciales:} Los clientes debían proporcionar sus credenciales a aplicaciones de terceros, generando preocupaciones de seguridad.
+    \item \textbf{Acceso Ilimitado:} Las aplicaciones de terceros tenían acceso completo a la cuenta del cliente.
+    \item \textbf{Revocación de Acceso:} No había un mecanismo fácil para revocar el acceso sin cambiar contraseñas.
+\end{itemize}
+
+\subsubsection{Introducción a OAuth}
+
+OAuth es un protocolo de autorización que permite a las aplicaciones acceder a los datos de un usuario de manera segura y controlada, sin necesidad de compartir sus credenciales. Es esencial en el mundo digital actual, donde la seguridad y la privacidad son primordiales.
+
+\begin{itemize}
+    \item \textbf{Ventajas de OAuth:}
+    \begin{itemize}
+        \item \textbf{Seguridad:} No se comparten contraseñas.
+        \item \textbf{Control:} Los usuarios pueden revocar el acceso en cualquier momento.
+        \item \textbf{Flexibilidad:} Acceso granular a los datos.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Proceso de Autorización en OAuth}
+
+\begin{enumerate}
+    \item \textbf{Solicitud de Autorización:} El cliente redirige al usuario al proveedor de servicios.
+    \item \textbf{Consentimiento del Usuario:} El usuario revisa y concede permiso.
+    \item \textbf{Código de Autorización:} El proveedor genera un código y lo envía al cliente.
+    \item \textbf{Intercambio de Código por Token:} El cliente solicita un token de acceso.
+    \item \textbf{Acceso a los Datos:} El cliente accede a los datos según los permisos otorgados.
+\end{enumerate}
+
+\subsubsection{Ventajas de OAuth}
+
+\begin{itemize}
+    \item \textbf{Seguridad:} Una de las principales ventajas de OAuth es que no requiere compartir contraseñas. Esto reduce significativamente el riesgo de comprometer las credenciales del usuario.
+    \item \textbf{Control:} Los usuarios mantienen el control sobre sus datos, ya que pueden revocar el acceso en cualquier momento si así lo desean.
+    \item \textbf{Flexibilidad:} OAuth permite un acceso granular a los datos, lo que significa que los usuarios pueden especificar exactamente qué datos pueden ser accedidos y por cuánto tiempo.
+\end{itemize}
+
+\subsubsection{Diagrama de Flujo de OAuth}
+
+Para ilustrar mejor el proceso de OAuth, a continuación se presenta un diagrama de flujo que resume los pasos descritos:
+
+\begin{center}
+\begin{tikzpicture}[node distance=2cm, auto]
+    \node (start) [startstop] {Inicio};
+    \node (authRequest) [process, below of=start] {Solicitud de Autorización};
+    \node (userConsent) [decision, below of=authRequest] {Consentimiento del Usuario};
+    \node (authCode) [process, below of=userConsent, yshift=-1cm] {Código de Autorización};
+    \node (tokenExchange) [process, below of=authCode] {Intercambio de Código por Token};
+    \node (dataAccess) [process, below of=tokenExchange] {Acceso a los Datos};
+    \node (end) [startstop, below of=dataAccess] {Fin};
+
+    \draw [arrow] (start) -- (authRequest);
+    \draw [arrow] (authRequest) -- (userConsent);
+    \draw [arrow] (userConsent) -- node {Sí} (authCode);
+    \draw [arrow] (authCode) -- (tokenExchange);
+    \draw [arrow] (tokenExchange) -- (dataAccess);
+    \draw [arrow] (dataAccess) -- (end);
+    \draw [arrow] (userConsent.east) -- ++(1,0) node [anchor=north] {No} |- (end);
+\end{tikzpicture}
+\end{center}
+
+OAuth es ampliamente utilizado para integrar aplicaciones con servicios de terceros de manera segura y eficiente, proporcionando un equilibrio entre seguridad, control y flexibilidad.
+
+\subsection{Conclusión}
+
+La autorización es crucial para proteger los recursos de una organización. Al implementar políticas de control de acceso efectivas, SecureShop puede asegurar que solo los usuarios autorizados accedan a la información crítica, reduciendo el riesgo de accesos no autorizados y protegiendo la integridad de sus sistemas.
+
+
+
+
+
+
+
+
+%
+\section{Bibliografía}
+\begin{itemize}
+    \item \textbf{RFC 6749: The OAuth 2.0 Authorization Framework}
+    \item \textbf{RFC 6750: The OAuth 2.0 Authorization Framework: Bearer Token Usage}
+    \item \textbf{RFC 6751: The OAuth 2.0 Authorization Framework: Access Token Profile}
+    \item Boyd, Ryan. Getting Started with OAuth 2.0: Programming Clients for Secure Web API Authorization and Authentication (English Edition) (pp. 13-15). (Function). Kindle Edition. 
+    \item Stallings, W., \& Brown, L. (2023). Computer security: Principles and practice (5th ed.). Pearson.
+\end{itemize}
+

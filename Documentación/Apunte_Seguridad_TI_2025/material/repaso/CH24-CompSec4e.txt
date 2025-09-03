@@ -1,0 +1,826 @@
+Lecture slides prepared for “Computer Security: Principles and Practice”, 4/e, by
+William Stallings and Lawrie Brown, Chapter 24 “Wireless Network Security”.
+
+1
+
+Wireless networks and communication links have become pervasive for both
+personal and organizational communications. A wide variety of technologies and
+network types have been adopted, including Wi-Fi, Bluetooth, WiMAX, ZigBee,
+and cellular technologies. Although the security threats and countermeasures
+discussed throughout this book apply to wireless networks and communications
+links, there are some unique aspects to the wireless environment.
+This chapter begins with a general overview of wireless security issues. We
+then focus on the relatively new area of mobile device security, examining threats
+and countermeasures for mobile devices used in the enterprise. Then, we look
+at the IEEE 802.11i standard for wireless LAN security. This standard is part of
+IEEE 802.11, also referred to as Wi-Fi. We begin the discussion with an overview of
+IEEE 802.11, and then we look in some detail at IEEE 802.11i.
+
+2
+
+Wireless networks, and the wireless devices that use them, introduce a host of security
+problems over and above those found in wired networks. Some of the key factors
+contributing to the higher security risk of wireless networks compared to wired
+networks include the following [MA10]:
+• Channel: Wireless networking typically involves broadcast communications,
+which is far more susceptible to eavesdropping and jamming than wired networks.
+Wireless networks are also more vulnerable to active attacks that
+exploit vulnerabilities in communications protocols.
+• Mobility: Wireless devices are, in principal and usually in practice, far more
+portable and mobile than wired devices. This mobility results in a number of
+risks, described subsequently.
+• Resources: Some wireless devices, such as smartphones and tablets, have
+sophisticated operating systems but limited memory and processing resources
+with which to counter threats, including denial of service and malware.
+
+3
+
+• Accessibility: Some wireless devices, such as sensors and robots, may be left
+unattended in remote and/or hostile locations. This greatly increases their
+vulnerability
+to physical attacks.
+
+3
+
+In simple terms, the wireless environment consists of three components that
+provide point of attack ( Figure 24.1 ). The wireless client can be a cell phone, a
+Wi-Fi enabled laptop or tablet, a wireless sensor, a Bluetooth device, and so on.
+The wireless access point provides a connection to the network or service. Examples
+of access points are cell towers, Wi-Fi hot spots, and wireless access points to wired
+local or wide-area networks. The transmission medium, which carries the radio
+waves for data transfer, is also a source of vulnerability.
+
+4
+
+[CHOI08] lists the following security threats to wireless networks:
+• Accidental association: Company wireless LANs or wireless access points to
+wired LANs in close proximity (e.g., in the same or neighboring buildings) may
+create overlapping transmission ranges. A user intending to connect to one
+LAN may unintentionally lock on to a wireless access point from a neighboring
+network. Although the security breach is accidental, it nevertheless exposes
+resources of one LAN to the accidental user.
+• Malicious association: In this situation, a wireless device is configured to
+appear to be a legitimate access point, enabling the operator to steal passwords
+from legitimate users and then penetrate a wired network through a legitimate
+wireless access point.
+• Ad hoc networks: These are peer-to-peer networks between wireless
+computers with no access point between them. Such networks can pose a
+security threat due to a lack of a central point of control.
+• Nontraditional networks: Nontraditional networks and links, such as personal
+network Bluetooth devices, barcode readers, and handheld PDAs pose a
+security risk both in terms of eavesdropping and spoofing.
+• Identity theft (MAC spoofing): This occurs when an attacker is able to
+eavesdrop on network traffic and identify the MAC address of a computer
+with network privileges.
+• Man-in-the middle attacks: This type of attack is described in Chapter 21 in
+the context of the Diffie-Hellman key exchange protocol. In a broader sense,
+this attack involves persuading a user and an access point to believe that they
+are talking to each other when in fact the communication is going through an
+intermediate attacking device. Wireless networks are particularly vulnerable
+to such attacks.
+• Denial of service (DoS): This type of attack was discussed in detail in
+Chapter 7. In the context of a wireless network, a DoS attack occurs when an
+attacker continually bombards a wireless access point or some other accessible
+wireless port with various protocol messages designed to consume
+system resources. The wireless environment lends itself to this type of attack,
+because it is so easy for the attacker to direct multiple wireless messages at
+the target.
+• Network injection: A network injection attack targets wireless access points
+that are exposed to non-filtered network traffic, such as routing protocol
+messages or network management messages. An example of such an attack is
+one in which bogus reconfiguration commands are used to affect routers and
+switches to degrade network performance.
+
+5
+
+Following [CHOI08], we can group wireless security measures into those dealing
+with wireless transmissions, wireless access points, and wireless networks (consisting
+of wireless routers and endpoints).
+The principal threats to wireless transmission
+are eavesdropping, altering or inserting messages, and disruption. To deal with
+eavesdropping, two types of countermeasures are appropriate:
+• Signal-hiding techniques: Organizations can take a number of measures to
+make it more difficult for an attacker to locate their wireless access points,
+including turning off service set identifier (SSID) broadcasting by wireless
+access points; assigning cryptic names to SSIDs; reducing signal strength to the
+lowest level that still provides requisite coverage; and locating wireless access
+points in the interior of the building, away from windows and exterior walls.
+Greater security can be achieved by the use of directional antennas and of
+signal-shielding techniques.
+• Encryption: Encryption of all wireless transmission is effective against
+eavesdropping to the extent that the encryption keys are secured.
+The use of encryption and authentication protocols is the standard method of
+countering attempts to alter or insert transmissions.
+The methods discussed in Chapter 7 for dealing with denial of service apply
+to wireless transmissions. Organizations can also reduce the risk of unintentional
+DoS attacks. Site surveys can detect the existence of other devices using the same
+frequency range, to help determine where to locate wireless access points. Signal
+strengths can be adjusted and shielding used in an attempt to isolate a wireless
+environment from competing nearby transmissions.
+
+6
+
+The main threat involving wireless access
+points is unauthorized access to the network. The principal approach for preventing
+such access is the IEEE 802.1X standard for port-based network access control. The
+standard provides an authentication mechanism for devices wishing to attach to a
+LAN or wireless network. The use of 802.1X can prevent rogue access points and
+other unauthorized devices from becoming insecure backdoors.
+
+7
+
+[CHOI08] recommends the following techniques
+for wireless network security:
+1. Use encryption. Wireless routers are typically equipped with built-in
+encryption mechanisms for router-to-router traffic.
+2. Use anti-virus and anti-spyware software, and a firewall. These facilities
+should be enabled on all wireless network endpoints.
+3. Turn off identifier broadcasting. Wireless routers are typically configured to
+broadcast an identifying signal so that any device within range can learn of
+the router’s existence. If a network is configured so that authorized devices
+know the identity of routers, this capability can be disabled, so as to thwart
+attackers.
+4. Change the identifier on your router from the default. Again, this measure
+thwarts attackers who will attempt to gain access to a wireless network using
+default router identifiers.
+5. Change your router’s pre-set password for administration. This is another
+prudent step.
+6. Allow only specific computers to access your wireless network. A router
+can be configured to only communicate with approved MAC addresses.
+Of course, MAC addresses can be spoofed, so this is just one element of a
+security strategy.
+
+8
+
+Prior to the widespread use of smartphones, the dominant paradigm for computer
+and network security in organizations was as follows. Corporate IT was tightly
+controlled.
+User devices were typically limited to Windows PCs. Business applications
+were controlled by IT and either run locally on endpoints or on physical servers
+in data centers. Network security was based upon clearly defined perimeters that
+separated trusted internal networks from the untrusted Internet. Today, there have
+been massive changes in each of these assumptions. An organization’s networks
+must accommodate the following:
+• Growing use of new devices: Organizations are experiencing significant growth
+in employee’s use of mobile devices. In many cases, employees are allowed to
+use a combination of endpoint devices as part of their day-to-day activities.
+• Cloud-based applications: Applications no longer run solely on physical
+servers in corporate data centers. Quite the opposite, applications can run
+anywhere—on traditional physical servers, on mobile virtual servers, or in the
+
+9
+
+cloud. Additionally, end users can now take advantage of a wide variety of
+cloud-based applications and IT services for personal and professional use.
+Facebook can be used for an employee’s personal profile or as a component
+of a corporate marketing campaign. Employees depend upon Skype to speak
+with friends abroad or for legitimate business video conferencing. Dropbox
+and Box can be used to distribute documents between corporate and personal
+devices for mobility and user productivity.
+• De-perimeterization: Given new device proliferation, application mobility,
+and cloud-based consumer and corporate services, the notion of a static network
+perimeter is all but gone. Now there are a multitude of network perimeters
+around devices, applications, users, and data. These perimeters have also
+become quite dynamic as they must adapt to various environmental conditions
+such as user role, device type, server virtualization mobility, network location,
+and time-of-day.
+• External business requirements: The enterprise must also provide guests,
+third-party contractors, and business partners network access using various
+devices from a multitude of locations.
+The central element in all of these changes is the mobile computing device.
+Mobile devices have become an essential element for organizations as part of the
+overall network infrastructure. Mobile devices such as smartphones, tablets, and
+memory sticks provide increased convenience for individuals as well as the potential
+for increased productivity in the workplace. Because of their widespread use and
+unique characteristics, security for mobile devices is a pressing and complex issue.
+In essence, an organization needs to implement a security policy through a
+combination
+of security features built into the mobile devices and additional security controls
+provided by network components that regulate the use of the mobile devices.
+
+9
+
+Mobile devices need additional, specialized protection measures beyond those
+implemented for other client devices, such as desktop and laptop devices that are
+used only within the organization’s facilities and on the organization’s networks.
+NIST SP 800-124 (Guidelines for Managing the Security of Mobile Devices in the
+Enterprise , June 2013) lists seven major security concerns for mobile devices. We
+examine each of these in turn.
+Lack of Physical Security Controls Mobile devices are typically under the
+complete control of the user, and are used and kept in a variety of locations outside
+the organization’s control, including off premises. Even if a device is required to
+remain on premises, the user may move the device within the organization between
+secure and non secured locations. Thus, theft and tampering are realistic threats.
+The security policy for mobile devices must be based on the assumption that
+any mobile device may be stolen or at least accessed by a malicious party. The threat
+is twofold: A malicious party may attempt to recover sensitive data from the device
+itself, or may use the device to gain access to the organization’s resources.
+
+10
+
+Use of Untrusted Mobile Devices In addition to company-issued and
+companycontrolled
+mobile devices, virtually all employees will have personal smartphones
+and/or tablets. The organization must assume that these devices are not trustworthy.
+That is, the devices may not employ encryption and either the user or a third party
+may have installed a bypass to the built-in restrictions on security, operating system
+use, and so on.
+Use of Untrusted Networks If a mobile device is used on premises, it can connect
+to organization resources over the organization’s own in-house wireless networks.
+However, for off-premises use, the user will typically access organizational resources
+via Wi-Fi or cellular access to the Internet and from the Internet to the organization.
+Thus, traffic that includes an off-premises segment is potentially susceptible to
+eavesdropping or man-in-the-middle types of attacks. Thus, the security policy must
+be based on the assumption that the networks between the mobile device and the
+organization are not trustworthy.
+Use of Untrusted Applications By design, it is easy to find and install thirdparty
+applications on mobile devices. This poses the obvious risk of installing malicious
+software. An organization has several options for dealing with this threat, as
+described subsequently.
+Interaction with other Systems A common feature found on smartphones and
+tablets is the ability to automatically synchronize data, apps, contacts, photos, and so
+on with other computing devices and with cloud-based storage. Unless an organization
+has control of all the devices involved in synchronization, there is considerable
+risk of the organization’s data being stored in an unsecured location, plus the risk of
+the introduction of malware.
+Use of Untrusted Content Mobile devices may access and use content that
+
+10
+
+other computing devices do not encounter. An example is the Quick Response
+(QR) code, which is a two-dimensional barcode. QR codes are designed to be
+captured
+by a mobile device camera and used by the mobile device. The QR code
+translates to a URL, so a malicious QR code could direct the mobile device to
+malicious Websites.
+Use of Location Services The GPS capability on mobile devices can be used to
+maintain a knowledge of the physical location of the device. While this feature might
+be useful to an organization as part of a presence service, it creates security risks. An
+attacker can use the location information to determine where the device and user are
+located, which may be of use to the attacker.
+
+10
+
+With the threats listed in the preceding discussion in mind, we outline the principal
+elements of a mobile device security strategy. They fall into three categories: device
+security, client/server traffic security, and barrier security (Figure 24.2).
+
+11
+
+IEEE 802 is a committee that has developed standards for a wide range of local area
+networks (LANs). In 1990, the IEEE 802 Committee formed a new working group,
+IEEE 802.11, with a charter to develop a protocol and transmission specifications
+for wireless LANs (WLANs). Since that time, the demand for WLANs at different
+frequencies and data rates has exploded. Keeping pace with this demand, the IEEE
+802.11 working group has issued an ever-expanding list of standards. Table 24.1
+briefly defines key terms used in the IEEE 802.11 standard.
+
+12
+
+The first 802.11 standard to gain broad industry acceptance was 802.11b. Although
+802.11b products are all based on the same standard, there is always a concern
+whether products from different vendors will successfully interoperate. To meet
+this concern, the Wireless Ethernet Compatibility Alliance (WECA), an industry
+consortium, was formed in 1999. This organization, subsequently renamed the
+Wi-Fi (Wireless Fidelity) Alliance, created a test suite to certify interoperability
+for 802.11b products. The term used for certified 802.11b products is Wi-Fi . Wi-Fi
+certification has been extended to 802.11g products. The Wi-Fi Alliance has also
+developed a certification process for 802.11a products, called Wi-Fi5 . The Wi-Fi
+Alliance is concerned with a range of market areas for WLANs, including enterprise,
+home, and hot spots.
+More recently, the Wi-Fi Alliance has developed certification procedures for
+IEEE 802.11 security standards, referred to as Wi-Fi Protected Access (WPA). The
+most recent version of WPA, known as WPA2, incorporates all of the features of
+the IEEE 802.11i WLAN security specification.
+
+13
+
+Before proceeding, we need to briefly preview the IEEE 802 protocol architecture.
+IEEE 802.11 standards are defined within the structure of a layered set
+of protocols. This structure, used for all IEEE 802 standards, is illustrated in
+Figure 24.3 .
+The lowest layer of the IEEE 802 reference model is the
+physical layer , which includes such functions as encoding/decoding of signals and
+bit transmission/reception. In addition, the physical layer includes a specification of
+the transmission medium. In the case of IEEE 802.11, the physical layer also defines
+frequency bands and antenna characteristics.
+All LANs consist of collections of devices that share
+the network’s transmission capacity. Some means of controlling access to the
+transmission medium is needed to provide an orderly and efficient use of that
+capacity. This is the function of a medium access control (MAC) layer. The MAC
+layer receives data from a higher-layer protocol, typically the logical link control
+(LLC) layer, in the form of a block of data known as the MAC service data unit
+(MSDU). In general, the MAC layer performs the following functions:
+• On transmission, assemble data into a frame, known as a MAC protocol data
+unit (MPDU) with address and error-detection fields.
+• On reception, disassemble frame, and perform address recognition and error
+detection.
+• Govern access to the LAN transmission medium.
+
+14
+
+The exact format of the MPDU differs somewhat for the various MAC protocols
+in use. In general, all of the MPDUs have a format similar to that of Figure 24.4 .
+The fields of this frame are as follows:
+• MAC Control: This field contains any protocol control information needed
+for the functioning of the MAC protocol. For example, a priority level could
+be indicated here.
+• Destination MAC Address: The destination physical address on the LAN for
+this MPDU.
+• Source MAC Address: The source physical address on the LAN for this
+MPDU.
+• MAC Service Data Unit: The data from the next higher layer.
+• CRC: The cyclic redundancy check field, also known as the Frame Check
+Sequence (FCS) field. This is an error-detecting code, such as that which is
+used in other data-link control protocols. The CRC is calculated based on the
+bits in the entire MPDU. The sender calculates the CRC and adds it to the
+frame. The receiver performs the same calculation on the incoming MPDU
+and compares that calculation to the CRC field in that incoming MPDU. If the
+two values don’t match, then one or more bits have been altered in transit.
+The fields preceding the MSDU field are referred to as the MAC header, and
+the field following the MSDU field is referred to as the MAC trailer. The header
+and trailer contain control information that accompany the data field and that are
+used by the MAC protocol.
+
+15
+
+Figure 24.5 illustrates the model developed by the 802.11 working group. The
+smallest building block of a wireless LAN is a basic service set (BSS), which consists
+of wireless stations executing the same MAC protocol and competing for access to
+the same shared wireless medium. A BSS may be isolated or it may connect to a
+backbone distribution system (DS) through an access point (AP). The AP functions
+as a bridge and a relay point. In a BSS, client stations do not communicate directly
+with one another. Rather, if one station in the BSS wants to communicate with
+another station in the same BSS, the MAC frame is first sent from the originating
+station to the AP and then from the AP to the destination station. Similarly, a MAC
+frame from a station in the BSS to a remote station is sent from the local station to
+the AP and then relayed by the AP over the DS on its way to the destination station.
+The BSS generally corresponds to what is referred to as a cell in the literature. The
+DS can be a switch, a wired network, or a wireless network.
+When all the stations in the BSS are mobile stations that communicate directly
+with one another (not using an AP) the BSS is called an independent BSS (IBSS).
+An IBSS is typically an ad hoc network. In an IBSS, the stations all communicate
+directly, and no AP is involved.
+A simple configuration is shown in Figure 24.5 , in which each station belongs
+to a single BSS; that is, each station is within wireless range only of other stations
+within the same BSS. It is also possible for two BSSs to overlap geographically,
+so that a single station could participate in more than one BSS. Furthermore, the
+association between a station and a BSS is dynamic. Stations may turn off, come
+within range, and go out of range.
+An extended service set (ESS) consists of two or more basic service sets
+interconnected by a distribution system. The extended service set appears as a
+single logical LAN to the LLC level.
+
+16
+
+IEEE 802.11 defines nine services that need to be provided by the wireless LAN to
+achieve functionality equivalent to that which is inherent to wired LANs. Table 24.2
+lists the services and indicates two ways of categorizing them.
+1. The service provider can be either the station or the DS. Station services
+are implemented in every 802.11 station, including AP stations. Distribution
+services are provided between BSSs; these services may be implemented in an
+AP or in another special-purpose device attached to the distribution system.
+2. Three of the services are used to control IEEE 802.11 LAN access and
+confidentiality. Six of the services are used to support delivery of MSDUs
+between stations. If the MSDU is too large to be transmitted in a single
+MPDU, it may be fragmented and transmitted in a series of MPDUs.
+Following the IEEE 802.11 document, we next discuss the services in an order
+designed to clarify the operation of an IEEE 802.11 ESS network. MSDU delivery ,
+which is the basic service, has already been mentioned. Services related to security
+are introduced in Section 24.3 .
+
+17
+
+The two services involved with the
+distribution of messages within a DS are distribution and integration. Distribution
+is the primary service used by stations to exchange MPDUs when the MPDUs must
+traverse the DS to get from a station in one BSS to a station in another BSS. For
+example, suppose a frame is to be sent from station 2 (STA 2) to station 7 (STA 7)
+in Figure 24.5 . The frame is sent from STA 2 to AP 1, which is the AP for this BSS.
+The AP gives the frame to the DS, which has the job of directing the frame to the
+AP associated with STA 7 in the target BSS. AP 2 receives the frame and forwards
+it to STA 7. How the message is transported through the DS is beyond the scope of
+the IEEE 802.11 standard.
+If the two stations that are communicating are within the same BSS, then the
+distribution service logically goes through the single AP of that BSS.
+The integration service enables transfer of data between a station on an IEEE
+802.11 LAN and a station on an integrated IEEE 802.x LAN. The term integrated
+refers to a wired LAN that is physically connected to the DS and whose stations
+may be logically connected to an IEEE 802.11 LAN via the integration service. The
+integration service takes care of any address translation and media conversion logic
+required for the exchange of data.
+
+18
+
+The primary purpose of the MAC layer is to
+transfer MSDUs between MAC entities; this purpose is fulfilled by the distribution
+service. For that service to function, it requires information about stations within
+the ESS that is provided by the association-related services. Before the distribution
+service can deliver data to or accept data from a station, that station must be
+associated . Before looking at the concept of association, we need to describe the
+concept of mobility. The standard defines three transition types, based on mobility:
+• No transition: A station of this type is either stationary or moves only within
+the direct communication range of the communicating stations of a single BSS.
+• BSS transition: This is defined as a station movement from one BSS to
+another BSS within the same ESS. In this case, delivery of data to the station
+requires that the addressing capability be able to recognize the new location
+of the station.
+• ESS transition: This is defined as a station movement from a BSS in one ESS
+to a BSS within another ESS. This case is supported only in the sense that
+the station can move. Maintenance of upper-layer connections supported
+by 802.11 cannot be guaranteed. In fact, disruption of service is likely to
+occur.
+
+19
+
+To deliver a message within a DS, the distribution service needs to know where
+the destination station is located. Specifically, the DS needs to know the identity of
+the AP to which the message should be delivered in order for that message to reach
+the destination station. To meet this requirement, a station must maintain an association
+with the AP within its current BSS. Three services relate to this requirement:
+• Association: Establishes an initial association between a station and an AP.
+Before a station can transmit or receive frames on a wireless LAN, its identity
+and address must be known. For this purpose, a station must establish an
+association with an AP within a particular BSS. The AP can then communicate
+this information to other APs within the ESS to facilitate routing and delivery
+of addressed frames.
+• Reassociation: Enables an established association to be transferred from one
+AP to another, allowing a mobile station to move from one BSS to another.
+• Disassociation: A notification from either a station or an AP that an existing
+association is terminated. A station should give this notification before leaving
+an ESS or shutting down. However, the MAC management facility protects
+itself against stations that disappear without notification.
+
+20
+
+There are two characteristics of a wired LAN that are not inherent in a wireless
+LAN.
+1. In order to transmit over a wired LAN, a station must be physically connected
+to the LAN. On the other hand, with a wireless LAN, any station within radio
+range of the other devices on the LAN can transmit. In a sense, there is a
+form of authentication with a wired LAN in that it requires some positive and
+presumably observable action to connect a station to a wired LAN.
+2. Similarly, in order to receive a transmission from a station that is part of a
+wired LAN, the receiving station also must be attached to the wired LAN.
+On the other hand, with a wireless LAN, any station within radio range can
+receive. Thus, a wired LAN provides a degree of privacy, limiting reception of
+data to stations connected to the LAN.
+These differences between wired and wireless LANs suggest the increased
+need for robust security services and mechanisms for wireless LANs. The
+original 802.11 specification included a set of security features for privacy and
+authentication that were quite weak. For privacy, 802.11 defined the Wired
+Equivalent Privacy (WEP) algorithm. The privacy portion of the 802.11
+standard contained major weaknesses. Subsequent to the development of WEP,
+the 802.11i task group has developed a set of capabilities to address the WLAN
+security issues. In order to accelerate the introduction of strong security into
+WLANs, the Wi-Fi Alliance promulgated Wi-Fi Protected Access (WPA) as a
+Wi-Fi standard. WPA is a set of security mechanisms that eliminates most 802.11
+security issues and was based on the current state of the 802.11i standard. The
+final form of the 802.11i standard is referred to as Robust Security Network
+(RSN). The Wi-Fi Alliance certifies vendors in compliance with the full 802.11i
+specification under the WPA2 program.
+
+21
+
+The 802.11i RSN security specification defines the following services.
+• Authentication: A protocol is used to define an exchange between a user and an
+AS (authentication server) that provides mutual authentication and generates
+temporary keys to be used between the client and the AP over the wireless link.
+• Access control: This function enforces the use of the authentication function,
+routes the messages properly, and facilitates key exchange. It can work with a
+variety of authentication protocols.
+• Privacy with message integrity: MAC-level data (e.g., an LLC PDU) are
+encrypted along with a message integrity code that ensures that the data have
+not been altered.
+Figure 24.6a indicates the security protocols used to support these services,
+while Figure 24.6b lists the cryptographic algorithms used for these services.
+
+22
+
+The operation of an IEEE 802.11i RSN can be broken down into five distinct
+phases. The exact nature of the phases will depend on the configuration and the end
+points of the communication. Possibilities include (see Figure 24.5 ):
+1. Two wireless stations in the same BSS communicating via the access point for
+that BSS.
+2. Two wireless stations (STAs) in the same ad hoc IBSS communicating directly
+with each other.
+3. Two wireless stations in different BSSs communicating via their respective
+APs across a distribution system.
+4. A wireless station communicating with an end station on a wired network via
+its AP and the distribution system.
+IEEE 802.11i security is concerned only with secure communication between
+the STA and its AP. In case 1 in the preceding list, secure communication is assured
+if each STA establishes secure communications with the AP. Case 2 is similar,
+with the AP functionality residing in the STA. For case 3, security is not provided
+across the distribution system at the level of IEEE 802.11, but only within each BSS.
+End-to-end security (if required) must be provided at a higher layer. Similarly, in
+case 4, security is only provided between the STA and its AP.
+With these considerations in mind, Figure 24.7 depicts the five phases of
+operation for an RSN and maps them to the network components involved. One
+new component is the authentication server (AS). The rectangles indicate the
+exchange of sequences of MPDUs. The five phases are defined as follows:
+• Discovery: An AP uses messages called Beacons and Probe Responses to
+advertise its IEEE 802.11i security policy. The STA uses these to identify an
+AP for a WLAN with which it wishes to communicate. The STA associates
+with the AP, which it uses to select the cipher suite and authentication
+mechanism when the Beacons and Probe Responses present a choice.
+• Authentication: During this phase, the STA and AS prove their identities to each
+other. The AP blocks non-authentication traffic between the STA and AS until
+the authentication transaction is successful. The AP does not participate in the
+authentication transaction other than forwarding traffic between the STA and AS.
+Key Management: The AP and the STA perform several operations
+that cause cryptographic keys to be generated and placed on the AP and
+the STA. Frames are exchanged between the AP and STA only.
+• Protected data transfer: Frames are exchanged between the STA and the end
+station through the AP. As denoted by the shading and the encryption module
+icon, secure data transfer occurs between the STA and the AP only; security is
+not provided end-to-end.
+• Connection termination: The AP and STA exchange frames. During this
+phase, the secure connection is torn down and the connection is restored to
+the original state.
+
+23
+
+We now look in more detail at the RSN phases of operation, beginning with the
+discovery phase, which is illustrated in the upper portion of Figure 24.8 . The
+purpose of this phase is for an STA and an AP to recognize each other, agree on a
+set of security capabilities, and establish an association for future communication
+using those security capabilities.
+During this phase, the STA and AP decide on specific
+techniques in the following areas:
+• Confidentiality and MPDU integrity protocols for protecting unicast traffic
+(traffic only between this STA and AP)
+• Authentication method
+• Cryptography key management approach
+Confidentiality and integrity protocols for protecting multicast/broadcast traffic
+are dictated by the AP, since all STAs in a multicast group must use the same
+protocols and ciphers. The specification of a protocol, along with the chosen key
+length (if variable), is known as a cipher suite . The options for the confidentiality
+and integrity cipher suite are:
+• WEP, with either a 40-bit or 104-bit key, which allows backward compatibility
+with older IEEE 802.11 implementations
+• TKIP
+• CCMP
+• Vendor-specific methods
+The other negotiable suite is the authentication and key management (AKM)
+suite, which defines (1) the means by which the AP and STA perform mutual
+authentication and (2) the means for deriving a root key from which other keys may
+be generated. The possible AKM suites are
+• IEEE 802.1X
+• Pre-shared key (no explicit authentication takes place and mutual authentication
+is implied if the STA and AP share a unique secret key)
+• Vendor-specific methods
+The discovery phase consists of three exchanges.
+• Network and security capability discovery: During this exchange, STAs
+discover the existence of a network with which to communicate. The AP
+either periodically broadcasts its security capabilities (not shown in figure),
+indicated by RSN IE (Robust Security Network Information Element), in a
+specific channel through the Beacon frame; or responds to a station’s Probe
+Request through a Probe Response frame. A wireless station may discover
+available access points and corresponding security capabilities by either
+passively monitoring the Beacon frames or actively probing every channel.
+• Open system authentication: The purpose of this frame sequence, which
+provides no security, is simply to maintain backward compatibility with the
+IEEE 802.11 state machine, as implemented in existing IEEE 802.11 hardware.
+In essence, the two devices (STA and AP) simply exchange identifiers.
+• Association: The purpose of this stage is to agree on a set of security
+capabilities to be used. The STA then sends an Association Request frame
+to the AP. In this frame, the STA specifies one set of matching capabilities
+(one authentication and key management suite, one pair-wise cipher suite, and
+one group-key cipher suite) from among those advertised by the AP. If there
+is no match in capabilities between the AP and the STA, the AP refuses the
+Association Request. The STA blocks it too, in case it has associated with a
+rogue AP or someone is inserting frames illicitly on its channel. As shown in
+Figure 24.8, the IEEE 802.1X controlled ports are blocked, and no user traffic
+goes beyond the AP. The concept of blocked ports is explained subsequently.
+As was mentioned, the authentication phase enables mutual authentication between
+an STA and an authentication server located in the DS. Authentication is designed
+to allow only authorized stations to use the network and to provide the STA with
+assurance that it is communicating with a legitimate network.
+
+24
+
+IEEE 802.11i makes use of another
+standard that was designed to provide access control functions for LANs. The
+standard is IEEE 802.1X, Port-Based Network Access Control. The authentication
+protocol that is used, the Extensible Authentication Protocol (EAP), is defined in
+the IEEE 802.1X standard. IEEE 802.1X uses the terms supplicant , authenticator ,
+and authentication server. In the context of an 802.11 WLAN, the first two terms
+correspond to the wireless station and the AP. The AS is typically a separate device
+on the wired side of the network (i.e., accessible over the DS) but could also reside
+directly on the authenticator.
+Until the AS authenticates a supplicant (using an authentication protocol),
+the authenticator only passes control and authentication messages between the
+supplicant and the AS; the 802.1X control channel is unblocked, but the 802.11 data
+channel is blocked. Once a supplicant is authenticated and keys are provided, the
+authenticator can forward data from the supplicant, subject to predefined access
+control limitations for the supplicant to the network. Under these circumstances,
+the data channel is unblocked.
+As indicated in Figure 24.9, 802.1X uses the concepts of controlled and
+uncontrolled ports. Ports are logical entities defined within the authenticator and
+refer to physical network connections. For a WLAN, the authenticator (the AP)
+may have only two physical ports: one connecting to the DS and one for wireless
+communication within its BSS. Each logical port is mapped to one of these two
+physical ports. An uncontrolled port allows the exchange of PDUs between the supplicant
+and the other AS, regardless of the authentication state of the supplicant. A
+controlled port allows the exchange of PDUs between a supplicant and other systems
+on the LAN only if the current state of the supplicant authorizes such an exchange.
+The 802.1X framework, with an upper-layer authentication protocol, fits nicely
+with a BSS architecture that includes a number of wireless stations and an AP. However,
+for an IBSS, there is no AP. For an IBSS, 802.11i provides a more complex solution
+that, in essence, involves pairwise authentication between stations on the IBSS.
+
+25
+
+The lower part of Figure 24.8 shows the MPDU exchange
+dictated by IEEE 802.11 for the authentication phase. We can think of authentication
+phase as consisting of the following three phases.
+• Connect to AS: The STA sends a request to its AP (the one with which it has
+an association) for connection to the AS. The AP acknowledges this request
+and sends an access request to the AS.
+• EAP exchange: This exchange authenticates the STA and AS to each other.
+A number of alternative exchanges are possible, as explained subsequently.
+• Secure key delivery: Once authentication is established, the AS generates
+a master session key (MSK), also known as the Authentication,
+Authorization, and Accounting (AAA) key, and sends it to the STA. As
+explained subsequently, all the cryptographic keys needed by the STA for
+secure communication with its AP are generated from this MSK. IEEE
+802.11i does not prescribe a method for secure delivery of the MSK but
+relies on EAP for this. Whatever method is used, it involves the transmission
+of an MPDU containing an encrypted MSK from the AS, via the AP,
+to the AS.
+
+26
+
+During the key management phase, a variety of cryptographic keys are generated
+and distributed to STAs. There are two types of keys: pairwise keys used for
+communication between an STA and an AP and group keys used for multicast
+communication. Figure 24.10, based on [FRAN07], shows the two key hierarchies,
+and Table 24.3 defines the individual keys.
+
+27
+
+Pairwise keys are used for communication between a pair
+of devices, typically between an STA and an AP. These keys form a hierarchy
+beginning with a master key from which other keys are derived dynamically and
+used for a limited period of time.
+At the top level of the hierarchy are two possibilities. A pre-shared key (PSK)
+is a secret key shared by the AP and a STA and installed in some fashion outside
+the scope of IEEE 802.11i. The other alternative is the master session key (MSK) ,
+also known as the AAAK, which is generated using the IEEE 802.1X protocol during
+the authentication phase, as described previously. The actual method of key
+generation depends on the details of the authentication protocol used. In either case
+(PSK or MSK), there is a unique key shared by the AP with each STA with which
+it communicates. All the other keys derived from this master key are also unique
+between an AP and an STA. Thus, each STA, at any time, has one set of keys, as
+depicted in the hierarchy of Figure 24.10a , while the AP has one set of such keys for
+each of its STAs.
+The pairwise master key (PMK) is derived from the master key. If a PSK is
+used, then the PSK is used as the PMK; if a MSK is used, then the PMK is derived
+from the MSK by truncation (if necessary). By the end of the authentication phase,
+marked by the 802.1x EAP Success message ( Figure 24.8 ), both the AP and the
+STA have a copy of their shared PMK.
+The PMK is used to generate the pairwise transient key (PTK), which in fact
+consists of three keys to be used for communication between an STA and AP after
+they have been mutually authenticated. To derive the PTK, the HMAC-SHA-1
+function is applied to the PMK, the MAC addresses of the STA and AP, and nonces
+generated when needed. Using the STA and AP addresses in the generation of the
+PTK provides protection against session hijacking and impersonation; using nonces
+provides additional random keying material.
+The three parts of the PTK are as follows.
+• EAP Over LAN (EAPOL) Key Confirmation Key (EAPOL-KCK): Supports
+the integrity and data origin authenticity of STA-to-AP control frames during
+operational setup of an RSN. It also performs an access control function:
+proof-of-possession of the PMK. An entity that possesses the PMK is
+authorized to use the link.
+• EAPOL Key Encryption Key (EAPOL-KEK): Protects the confidentiality of
+keys and other data during some RSN association procedures.
+• Temporal Key (TK): Provides the actual protection for user traffic.
+Group keys are used for multicast communication in which one STA
+sends MPDUs to multiple STAs. At the top level of the group key hierarchy is the
+group master key (GMK). The GMK is a key-generating key used with other inputs
+to derive the group temporal key (GTK). Unlike the PTK, which is generated using
+material from both AP and STA, the GTK is generated by the AP and transmitted
+to its associated STAs. Exactly how this GTK is generated is undefined. IEEE
+802.11i, however, requires that its value is computationally indistinguishable from
+random. The GTK is distributed securely using the pairwise keys that are already
+established. The GTK is changed every time a device leaves the network.
+
+28
+
+The upper part of Figure 24.11 shows the MPDU
+exchange for distributing pairwise keys. This exchange is known as the 4-way
+handshake. The STA and AP use this handshake to confirm the existence of
+the PMK, verify the selection of the cipher suite, and derive a fresh PTK for the
+following data session. The four parts of the exchange are as follows.
+• AP → STA: Message includes the MAC address of the AP and a nonce (Anonce)
+• STA → AP: The STA generates its own nonce (Snonce) and uses both nonces
+and both MAC addresses, plus the PMK, to generate a PTK. The STA then
+sends a message containing its MAC address and Snonce, enabling the AP to
+generate the same PTK. This message includes a message integrity code (MIC)
+using HMAC-MD5 or HMAC-SHA-1-128. The key used with the MIC is KCK.
+• AP → STA: The AP is now able to generate the PTK. The AP then sends a
+message to the STA, containing the same information as in the first message,
+but this time including a MIC.
+• STA → AP: This is merely an acknowledgement message, again protected
+by a MIC.
+For group key distribution, the AP generates a GTK
+and distributes it to each STA in a multicast group. The two-message exchange with
+each STA consists of the following:
+• AP → STA: This message includes the GTK, encrypted either with RC4 or
+with AES. The key used for encryption is KEK. A MIC value is appended.
+• STA → AP: The STA acknowledges receipt of the GTK. This message
+includes a MIC value.
+
+29
+
+IEEE 802.11i defines two schemes for protecting data transmitted in 802.11
+MPDUs: the Temporal Key Integrity Protocol (TKIP) and the Counter Mode-CBC
+MAC Protocol (CCMP).
+TKIP is designed to require only software changes to devices that are
+implemented with the older wireless LAN security approach called Wired
+Equivalent Privacy (WEP). TKIP provides two services:
+• Message integrity: TKIP adds a message integrity code to the 802.11 MAC
+frame after the data field. The MIC is generated by an algorithm, called
+Michael, that computes a 64-bit value using as input the source and destination
+MAC address values and the data field, plus key material.
+• Data confidentiality: Data confidentiality is provided by encrypting the
+MPDU plus MIC value using RC4.
+The 256-bit TK ( Figure 24.10 ) is employed as follows. Two 64-bit keys are
+used with the Michael message digest algorithm to produce a message integrity
+code. One key is used to protect STA-to-AP messages, and the other key is used to
+protect AP-to-STA messages. The remaining 128 bits are truncated to generate the
+RC4 key used to encrypt the transmitted data.
+For additional protection, a monotonically increasing TKIP sequence counter
+(TSC) is assigned to each frame. The TSC serves two purposes. First, the TSC is
+included with each MPDU and is protected by the MIC to protect against replay attacks.
+Second, the TSC is combined with the session TK to produce a dynamic encryption key
+that changes with each transmitted MPDU, thus making cryptanalysis more difficult.
+
+30
+
+CCMP is intended for newer IEEE 802.11 devices that are equipped with
+the hardware to support this scheme. As with TKIP, CCMP provides two services:
+• Message integrity: CCMP uses the cipher-block-chaining message
+authentication code (CBC-MAC), described in Chapter 12.
+• Data confidentiality: CCMP uses the CTR block cipher mode of operation
+with AES for encryption. CTR is described in Chapter 20.
+The same 128-bit AES key is used for both integrity and confidentiality.
+The scheme uses a 48-bit packet number to construct a nonce to prevent replay
+attacks.
+
+31
+
+At a number of places in the IEEE 802.11i scheme, a pseudorandom function
+(PRF) is used. For example, it is used to generate nonces, to expand pairwise
+keys, and to generate the GTK. Best security practice dictates that different
+pseudorandom number streams be used for these different purposes. However, for
+implementation efficiency we would like to rely on a single pseudorandom number
+generator function.
+The PRF is built on the use of HMAC-SHA-1 to generate a pseudorandom
+bit stream. Recall that HMAC-SHA-1 takes a message (block of data) and a key of
+length at least 160 bits and produces a 160-bit hash value. SHA-1 has the property that
+the change of a single bit of the input produces a new hash value with no apparent
+connection to the preceding hash value. This property is the basis for pseudorandom
+number generation.
+The IEEE 802.11i PRF takes four parameters as input and produces the desired
+number of random bits. The function is of the form PRF(K , A , B , Len ), where
+K = a secret key
+A = a text string specific to the application (e.g., nonce generation or pairwise
+key expansion)
+B = some data specific to each case
+Len = desired number of pseudorandom bits
+For example, for the pairwise transient key for CCMP:
+PTK = PRF(PMK, “Pairwise key expansion”, min(AP-Addr, STA-Addr)||
+max (AP-Addr, STA-Addr)|| min(Anonce, Snonce)|| max(Anonce, Snonce), 384)
+So, in this case, the parameters are
+K = PMK
+A = the text string “Pairwise key expansion”
+B = a sequence of bytes formed by concatenating the two MAC addresses
+and the two nonces
+Len = 384 bits
+Similarly, a nonce is generated by
+Nonce = PRF(Random Number,"Init Counter", MAC || Time, 256)
+Where Time is a measure of the network time known to the nonce generator.
+The group temporal key is generated by:
+GTK = PRF(GMK, "Group key expansion", MAC || Gnonce, 256)
+Figure 24.12 illustrates the function PRF( K , A , B , Len ). The parameter
+K serves as the key input to HMAC. The message input consists of four items
+concatenated together: the parameter A , a byte with value 0, the parameter B ,
+and a counter i . The counter is initialized to 0. The HMAC algorithm is run once,
+producing a 160-bit hash value. If more bits are required, HMAC is run again with
+the same inputs, except that i is incremented each time until the necessary number
+of bits is generated. We can express the logic as
+PRF(K, A, B, Len)
+R ← null string
+for i ← 0 to ((Len + 159)/160 – 1) do
+R ← R||HMAC-SHA-1(K, A||0||B||i)
+Return Truncate-to-Len(R, Len)
+
+32
+
+Chapter 24 summary.
+
+33
+
+

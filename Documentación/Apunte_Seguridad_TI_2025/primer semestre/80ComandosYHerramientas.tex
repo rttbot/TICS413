@@ -1,0 +1,347 @@
+\chapterimage{ampolletas.png}
+\chapter{Seguridad de Software}
+\begin{flushright}
+    \textit{ }
+\end{flushright}
+%capitulo 9
+
+\section{Sistema Operativo}
+Comandos básicos
+\begin{itemize}
+    \item 
+        \begin{lstlisting}
+            ipconfig getifaddr en0 
+            ifconfig | grep "inet "
+            ping -c 4 192.168.0.7 
+            ssh user@192.168.0.7
+            su - root
+            whoami
+        \end{lstlisting}
+     \item Forense 
+      \begin{lstlisting}
+            pdfinfo
+            exiftool imagenes
+            
+        \end{lstlisting}
+     \item cat 
+     \item history
+     \item Protocolos:
+     \begin{itemize}
+         \item \gls{DHCP} stands for Dynamic Host Configuration Protocol, and it is responsible for assigning an IP address to the systems that try to connect to a network.
+         \item  \gls{DNS} Domain Name System, and it is the protocol responsible for converting a domain name, such as tryhackme.com, to an IP address, such as 10.3.13.37, among other domain name related queries. One analogy of the DNS query is asking, “How can I reach TryHackMe?” and someone replying with the postal address. 
+     \end{itemize}
+\end{itemize}
+\section{Web}
+
+
+\begin{itemize}
+    \item \gls{gobuster}\\
+        \begin{lstlisting}
+            gobuster -u website -w filewithwords2try
+        \end{lstlisting}
+     \item \gls{ip-scanner} para verificar si una IP es maliciosa acorde a una BD dedicada a esto. Ejemplo: AbuseIPDB, y Cisco Talos Intelligence donde en el primero es incluso posible reportar. Otros: \url{https://urlscan.io} -  \url{https://www.virustotal.com/gui/home/upload}/
+\end{itemize}
+
+
+
+Otro material 
+https://www.khanacademy.org/partner-content/nova/nova-labs-topic/cyber/v/the-secret-lives-of-hackers
+https://www.studocu.com/en-us/course/ivy-tech-community-college-of-indiana/introduction-to-cyber-security-and-information-assurance/2920022
+https://library.ivytech.edu/Valpo/CyberSecurity/CSIA105
+https://ccecc.acm.org/guidance/cybersecurity
+
+
+\color{red}
+En primera instancia es necesario capturar la información de la red y analizar los paquetes, para ello utilizaremos packet capture library (libpcap) & tcpdump, que permitirá capturar el protocolo de control de transmisión (TCP). El cuál está diseñado para usarse como un protocolo confiable de comunicación de máquina a máquina, o entre máquinas y múltiples sistemas interconectados en las redes.\\
+
+\textbf{tcpdump:} permite una descripción del contenido de los paquetes en una interfaz de red, la descripción está precedida por una marca de tiempo, como horas, minutos, segundos y fracciones de segundos. \cite{noauthor_tcpdumplibpcap_nodate} \\
+
+Las opciones que utilizaremos de tcpdump, nos permitirá realizar las siguientes acciones con el trafico capturado: 
+
+\begin{enumerate}
+    \item Capturar la trama de paquetes (menos su encabezado de nivel de enlace), que nos será útil para capturar páginas web. 
+    \item Capturar la lista de interfaces de red disponibles y en las que tcpdump puede capturar paquetes. 
+    \item Capturar el encabezado de nivel de enlace en cada línea de volcado. Esto se puede utilizar, por ejemplo, para imprimir direcciones de capa MAC para protocolos como Ethernet e IEEE 802.11. 
+    \item Validar los resúmenes que se encuentran en los segmentos TCP con la opción TCP-MD5 (RFC 2385)
+\end{enumerate}
+
+La interfaz TCP/usuario proporciona llamadas realizadas por el usuario en el TCP. para ABRIR o CERRAR una conexión, para ENVIAR o RECIBIR datos, o para obtener ESTADO sobre una conexión. Estas llamadas son como relacionadas a otras llamadas del usuario, como  programas en el sistema operativo, por ejemplo, las llamadas para abrir, leer y cerrar un archivo.\\
+
+La interfaz TCP/Internet proporciona llamadas para enviar y recibir datagramas dirigidos a módulos TCP en máquinas on en cualquier lugar de Internet. Estas llamadas tienen parámetros para pasar la dirección, tipo de servicio, precedencia, seguridad y otra información de control. \cite{noauthor_rfc_nodate}.\\
+
+%La Figura [\ref{fig:EspecificacionesFuncionamientoTCP}], es una noción fundamental en el diseño es que cada octeto de datos es enviado a través de una conexión TCP tiene un número de secuencia. Dado que cada octeto es secuenciados, cada uno de ellos puede ser reconocido.\\ 
+
+Podemos observar en la Figura [\ref{fig:TCPHeaderFormat}], el formato de encabezamiento que tiene una trama de TCP, permitiendo identificar la data, número secuencias de la trama, opciones de envío, origen y destino, entre otros datos que utilizaremos en el modelo de aprendizaje:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Images/TCPHeaderFormat.png}
+    \caption{Formato de encabezado Protocolo de control de transmisión (TCP).
+    Fuente: \cite{noauthor_rfc_nodate}}
+    \label{fig:TCPHeaderFormat}
+\end{figure}
+
+
+
+\textbf{libpcap} es el principal formato de archivo de captura utilizado en TcpDump/WinDump, Snort y muchas otras herramientas de red. Aunque a veces se asume que este formato de archivo es adecuado solo para redes Ethernet, podemos observar que también puede ser utilizado en diferentes tipos de redes, como se muestra en la Figura [\ref{fig:redPcap}].\\
+
+La biblioteca pcap, permite recolectar todos los paquetes de la red, incluso los que son enviados a otros máquinas son accesibles a través de este mecanismo, capturando tanto los paquetes enviados por la máquina como los paquetes recibidos por la máquina.\\
+\\
+\\
+A alto nivel presentamos el siguiente esquema de captura y análisis de datos con el modelo de aprendizaje no supervisado:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{Images/Controlador.png}
+    \caption{Diagrama de paquetes de alto nivel del Controlador.}
+    \label{fig:diagramaPaquetesControlador}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{Images/Encabezado de Internet.png}
+    \caption{Formato de encabezado de Internet.
+    Fuente: \cite{postel_internet_nodate} (RFC 791)}
+    \label{fig:EncabezadoIPV4}
+\end{figure}
+\color{black}
+
+
+\todo[inline]{lo de arriba es de la tesis de morales - }
+
+Un Sistema de Detección de Intrusiones (IDS), es la primera línea de defensa contra los ciberataques. En general, un IDS tiene 4 componentes clave [8]: c\textbf{omponente decodificador de paquetes }que adquiere porciones del tráfico de red sin procesar, \textbf{componente de preprocesamiento} de datos que captura un conjunto de características de los datos de auditoría sin procesar, \textbf{componente del motor de decisiones} que recibe las características para distinguir una observación de ataque de una normal utilizando las características de entrada y un modelo o reglas y un \textbf{componente de respuesta} (respuesta de defensa) que normalmente alerta de las intrusiones. Un IDS puede ser un IDS basado en host (HIDS) que monitorea los eventos de un host [9] o un IDS basado en red (NIDS) [10] que monitorea remotamente el tráfico de una red para detectar ataques.
+
+SNORT, que corresponde ser un sistema de detección de intrusos basado en red, de característica Open Source (código abierto), donde utiliza reglas para clasificación - posee por defecto alrededor de 3800 reglas de clasificación. 
+
+
+Wireshark es una herramienta muy poderosa cuando se trata de analizar redes informáticas. Su gran número de disectores de protocolo y capacidades de filtrado nos permiten detectar, visualizar y estudiar fácilmente muchos aspectos diferentes de las redes informáticas, no solo desde la perspectiva de la ciberseguridad.
+
+https://www.infosecmatter.com/detecting-network-attacks-with-wireshark/
+\begin{itemize}
+\item Getting Started with Wireshark (Intro Course) - https://bit.ly/wiresharkprotocols
+\item Foundational TCP with Wireshark - https://bit.ly/wiresharktcp
+\item Mastering TCP with Wireshark - https://bit.ly/mastertcp
+Troubleshooting Slow Networks with Wireshark - https://bit.ly/wiresharktshoot
+\item Visualizing Network Traffic with Wireshark - https://bit.ly/wiresharkgraphs
+\end{itemize}
+\subsection{Detección de descubrimiento de host}
+\textbf{ARP scanning} -- Filtro Wireshark para identificar el escaneo ARP (técnica de descubrimiento de host en la capa 2: enlace de datos) \code{arp-scan -l} :\\
+
+\noindent escaneo ARP en Wireshark \code{arp.dst.hw\_mac==00:00:00:00:00:00}: Durante el escaneo ARP, un atacante generalmente envía una gran cantidad de solicitudes ARP en la transmisión (\code{ff:ff:ff:ff:ff:ff}) destinadas a la dirección MAC \code{00:00:00:00:00:00} para descubrir direcciones IP vivas en la red local. \\
+
+\noindent\code{Who has 192.168.0.1? Tell 192.168.0.53}\\
+\code{Who has 192.168.0.2? Tell 192.168.0.53}\\
+\code{Who has 192.168.0.3? Tell 192.168.0.53}\\
+\code{Who has 192.168.0.4? Tell 192.168.0.53}\\
+\code{Who has 192.168.0.5? Tell 192.168.0.53}\\
+
+En este caso, el atacante tiene la dirección IP 192.168.0.53. Si vemos muchas de estas solicitudes ARP en un corto período de tiempo solicitando muchas direcciones IP diferentes, es probable que alguien esté tratando de descubrir direcciones IP activas en nuestra red mediante el escaneo ARP (por ejemplo, ejecutando \code{arp-scan -l}).\\
+
+ 
+ \textbf{IP protocol scan}: con el filtro \code{icmp.type==3 and icmp.code==2}	para  Wireshark podemos identificar escaneos de protocolo IP. La exploración del protocolo IP es una técnica que permite a un atacante descubrir qué protocolos de red son compatibles con el sistema operativo de destino (por ejemplo, ejecutando \code{nmap -sO <target>}). Durante el escaneo del protocolo IP, es probable que veamos muchos mensajes ICMP tipo 3 (Destino inalcanzable) código 2 (Protocolo inalcanzable), porque el atacante generalmente envía una gran cantidad de paquetes con diferentes números de protocolo.\\
+
+
+
+
+
+ 
+ \textbf{ICMP ping sweep}: 	\code{icmp.type==8 or icmp.type==0}: filtro Wireshark para detectar barridos de ping ICMP (técnica de descubrimiento de host en la capa 3:red). Con este filtro estamos filtrando solicitudes ICMP Echo (tipo 8) o respuestas ICMP Echo (tipo 0).
+
+Si vemos demasiados de estos paquetes en un corto período de tiempo dirigidos a muchas direcciones IP diferentes, entonces probablemente estemos presenciando barridos de ping ICMP. Alguien está tratando de identificar todas las direcciones IP activas en nuestra red (por ejemplo, ejecutando \code{nmap -sn -PU \<subnet\>} \\
+
+
+
+ \textbf{TCP ping sweeps}	- \code{tcp.dstport==7}: filtro de Wireshark para detectar barridos de ping TCP (técnica de descubrimiento de host en la capa 4: transporte). 	Los barridos de ping de TCP suelen utilizar el puerto 7 (eco). Si vemos un mayor volumen de dicho tráfico destinado a muchas direcciones IP diferentes, significa que probablemente alguien esté realizando un barrido de ping TCP para encontrar hosts activos en la red (por ejemplo, ejecutando \code{nmap -sn -PS/-PA \<subnet\>}\\
+
+
+
+ 
+ \textbf{UDP ping sweeps} --	\code{udp.dstport==7}:  filtro Wireshark para detectar barridos de ping UDP (técnica de descubrimiento de host en la capa 4--transporte). Al igual que TCP, los barridos de ping UDP suelen utilizar el puerto 7 (eco). Si vemos un gran volumen de dicho tráfico destinado a muchas direcciones IP diferentes, significa que probablemente alguien esté realizando un barrido de ping UDP para encontrar hosts activos en la red (por ejemplo ejecutando \code{nmap -sn -PU \<subnet\>})
+
+
+
+
+\subsection{Detección de escaneo de puertos de red}
+.\\
+
+\textbf{TCP SYN / escaneo sigiloso}: filtro de Wireshark para detectar escaneos de puerto TCP SYN/stealth, también conocido como escaneo TCP semiabierto:
+
+\code{tcp.flags.syn==1 and tcp.flags.ack==0 and tcp.window\_size <= 1024}\\
+\includegraphics[H!]{Images/wireshark-tcp-syn-scan.jpg}\\
+Es decir estamos filtrando paquetes TCP con Conjunto de indicadores SYN, Indicador ACK no establecido y Tamaño de ventana $\leq$ 1024 bytes. 
+
+Este es básicamente un primer paso en el protocolo de enlace de 3 vías TCP (el comienzo de cualquier conexión TCP), con un tamaño de ventana TCP muy pequeño. 
+El tamaño de ventana pequeño en particular es el parámetro característico utilizado por herramientas como nmap o massscan durante los escaneos SYN, lo que indica que habrá muy pocos o ningún dato.
+Si vemos demasiados paquetes de este tipo en un corto período de tiempo, lo más probable es que alguien esté haciendo:
+\begin{itemize}
+    \item Exploraciones SYN en nuestra red (por ejemplo, ejecutando nmap -sS <target>)
+\item El puerto SYN barre la red (por ejemplo, ejecutando nmap -sS -pXX <subnet>)
+\item SYN floods (técnica de denegación de servicio)
+\end{itemize}
+
+
+
+
+\textbf{Escaneo TCP Connect()}	\code{tcp.flags.syn==1 y tcp.flags.ack==0 y tcp.window\_size>1024}	\code{nmap -sT <objetivo>}
+
+\includegraphics[H!]{Images/wireshark-tcp-connect-scan.jpg}\\
+En este caso, estamos filtrando los paquetes TCP con:
+
+Conjunto de banderas SYN
+La bandera ACK no está establecida
+Tamaño de la ventana > 1024 bytes
+La única diferencia con los escaneos SYN es el tamaño más grande de la ventana TCP, lo que indica una conexión TCP estándar, en realidad esperando que también se transfieran algunos datos.
+
+Si vemos demasiados paquetes de este tipo en un corto período de tiempo, lo más probable es que alguien lo haga:
+
+Escaneos de puertos en nuestra red (por ejemplo, ejecutando nmap -sT <target>)
+Port sweeps across the network (e.g. by running nmap -sT -pXX <subnet> )
+
+
+
+
+
+
+
+
+\textbf{Escaneo nulo de TCP}	\code{tcp.flags==0}	\code{	nmap -sN <objetivo>}\\
+El escaneo TCP Null funciona enviando paquetes sin ningún indicador establecido. Esto podría penetrar potencialmente en algunos de los cortafuegos y descubrir puertos abiertos.\\
+
+
+\textbf{Escaneo TCP FIN}	\code{	tcp.flags==0x001}	\code{	nmap -sF <objetivo>}\\
+Los escaneos TCP FIN son característicos al enviar paquetes con solo el marcado de bandera FIN. Esto podría (de nuevo) penetrar potencialmente en algunos de los cortafuegos y descubrir puertos abiertos.\\
+
+
+
+\textbf{Escaneo de Navidad TCP}	\code{tcp.flags.fin==1 && tcp.flags.push==1 && tcp.flags.urg==1}	\code{	nmap -sX <objetivo>}\\
+El escaneo masivo TCP funciona enviando paquetes con los indicadores FIN, PUSH y URG establecidos. Esta es otra técnica para penetrar en algunos de los cortafuegos para descubrir puertos abiertos.\\
+
+
+\textbf{Escaneo de puertos UDP}	\code{	icmp.tipo==3 y icmp.código==3}	\code{	nmap -sU <objetivo>}\\
+Un buen indicador del escaneo continuo de puertos UDP es ver un alto número de paquetes ICMP en nuestra red, a saber, el ICMP tipo 3 (Destino inalcanzable) con el código 3 (Puerto inalcanzable). Estos mensajes ICMP en particular indican que el puerto UDP remoto está cerrado.
+
+Si vemos un gran número de estos paquetes en nuestra red en un corto período de tiempo, lo más probable es que alguien esté haciendo escaneos de puertos UDP 
+
+\subsection{Detección de ataques a la red}
+identificar varios ataques de red, como ataques de envenenamiento, inundaciones, esperanza de VLAN, etc
+
+\textbf{Envenenamiento por ARP}	\code{arp.duplicate-address-detected} o \code{arp.duplicate-address-frame} herramientas	\code{	arpspoof, ettercap}\\
+Este filtro mostrará cualquier aparición de una sola dirección IP reclamada por más de una dirección MAC. Tal situación probablemente indica que el envenenamiento por ARP está ocurriendo en nuestra red.
+
+El envenenamiento de ARP (también conocido como suplantación de ARP) es una técnica utilizada para interceptar el tráfico de red entre el enrutador y otros clientes de la red local. Permite al atacante realizar ataques man-in-the-middle (MitM) a ordenadores que se ven en la red local utilizando herramientas como arpspoof, ettercap y otros.\\
+
+
+
+\textbf{Inundación de ICMP	} \code{icmp y data.len > 48} herramientas	\code{fping, hping}\\
+Un ping ICMP estándar típico envía paquetes con 32 bytes de datos (comando ping en Windows) o 48 bytes (comando ping en Linux).
+
+Cuando alguien está haciendo una inundación de ICMP, normalmente envía datos mucho más grandes, por lo que aquí estamos filtrando todos los paquetes de ICMP con un tamaño de datos de más de 48 bytes. Esto detectará eficazmente cualquier inundación de ICMP, independientemente del tipo o código de ICMP.
+
+Los adversarios suelen usar herramientas como fping o hping para realizar inundaciones de ICMP.\\
+
+\textbf{VLAN}	\code{dtp o vlan.too\_many\_tags} herramientas	\code{	frogger, yersinia}\\
+La esperanza de VLAN es una técnica para eludir los NAC (controles de acceso a la red) que a menudo utilizan los atacantes que intentan acceder a diferentes VLAN explotando las configuraciones erróneas de los conmutadores Cisco.
+
+Un indicador sólido de la esperanza de VLAN es la presencia de paquetes DTP o paquetes etiquetados con múltiples etiquetas VLAN.
+
+Si vemos dichos paquetes en nuestra red, alguien podría estar intentando hacer VLAN con la esperanza, por ejemplo, utilizando utilidades frogger o yersinia\\
+
+
+
+\textbf{Desaplicar paquetes sin explicar	}\code{tcp.analysis.lost\_segment o tcp.analysis.retransmission}	 herramientas	\code{n/a}\\
+Si vemos muchas retransmisiones de paquetes y lagunas en la comunicación de la red (paquetes que faltan), puede indicar que hay un problema grave en la red, posiblemente causado por un ataque de denegación de servicio.
+
+Ver tal situación en Wireshark sin duda merece una investigación adicional\\
+
+\subsection{Detección de ataques a redes inalámbricas}
+filtros de Wireshark útiles para identificar varios ataques de red inalámbrica, como la desautenticación, la desasociación, la inundación de balizas o los ataques de denegación de servicio de autenticación.\\
+
+\textbf{Desautenticación del cliente}	\code{wlan.fc.type\_subtype == 12}	\code{aireplay-ng, mdk3, mdk4}\\
+
+Ver los marcos de tipo 12 (desautenticación) en el aire probablemente indica que hay un atacante tratando de desautenticar a otros clientes de la red para que vuelvan a autenticarse y, en consecuencia, recopilen (sniff) los apretones de manos de 4 vías WPA / WPA2 intercambiados mientras se vuelven a autenticar.\\
+
+
+
+\textbf{Disociación del cliente}	\code{wlan.fc.type\_subtype == 10}	\code{mdk3, mdk4}\\
+
+
+Esta es una técnica conocida para entrar en redes inalámbricas basadas en PSK (clave precompartida). Una vez que el atacante recopila el apretón de manos WPA de 4 vías, el atacante puede intentar descifrarlo y, en consecuencia, obtener la contraseña de texto claro y acceder a la red.
+El ataque de desasociación es otro tipo de ataque contra redes inalámbricas basadas en PSK que funciona contra WPA / WPA2. La idea detrás de este ataque es que el atacante está enviando marcos de tipo 10 (desasociación) que desconecta a todos los clientes del AP objetivo.
+
+Esto podría ser aún más efectivo para que el atacante recoja los apretones de manos en 4 vías. El atacante puede (de nuevo) intentar descifrar uno de ellos y posiblemente obtener la contraseña de texto claro y acceder a la red.
+
+Este tipo de ataque se puede llevar a cabo utilizando herramientas como mdk3 o mdk4 (por ejemplo, ejecutando \code{mdk4 wlan0mon d}).\\
+
+
+\textbf{La inundación de balizas AP falsa}	\code{wlan.fc.type\_subtype == 8}	--\code{mdk3, mdk4}\\
+La idea detrás de este ataque es inundar el área con balizas de puntos de acceso falsas al azar. Esto podría causar interrupciones de conectividad (jamming) dentro del área o bloquear a algunos de los clientes (denuncia del servicio).
+
+Si vemos un gran número de muchos marcos de balizas diferentes en un corto período de tiempo, alguien podría estar realizando inundaciones de balizas en el área.
+
+Dicho ataque se puede llevar a cabo utilizando herramientas como mdk3 o mdk4 (por ejemplo, ejecutando \code{mdk4 wlan0mon b}).\\
+
+
+\textbf{Autenticación DoS}	\code{wlan.fc.type\_subtype == 11}	\code{mdk3, mdk4}\\
+Este tipo de ataque funciona inundando los puntos de acceso inalámbrico en el área con muchos marcos de tipo 11 (autenticación), lo que es esencial simula un gran número de clientes que intentan autenticarse al mismo tiempo. Esto podría sobrecargar algunos puntos de acceso y potencialmente congelarlos o restablecerlos y causar interrupciones de conectividad (bloqueo) en el área.
+
+Si vemos un alto número de fotogramas de tipo 11 en un corto período de tiempo, alguien podría estar realizando una inundación de autenticación en el área.
+
+Este tipo de ataque se puede llevar a cabo utilizando herramientas como mdk3 o mdk4 (por ejemplo, ejecutando \code{mdk4 wlan0mon a}).
+
+
+
+\section{TBD}
+\subsection{Leer registros de tcpdump}
+Un analizador de protocolos de red, a veces llamado rastreador de paquetes o analizador de paquetes, es una herramienta diseñada para capturar y analizar el tráfico de datos dentro de una red. Se utilizan comúnmente como herramientas de investigación para monitorear redes e identificar actividades sospechosas. Existe una amplia variedad de analizadores de protocolos de red disponibles, pero algunos de los analizadores más comunes incluyen:
+\begin{itemize}
+    \item Analizador de tráfico SolarWinds NetFlow
+
+    \item AdministrarEngine OpManager
+
+    \item Vigilante de la red Azure
+
+    \item \textbf{Wireshark}
+
+    \item \textbf{tcpdump}
+
+\end{itemize}
+
+
+tcpdump es un analizador de protocolos de red de línea de comandos. Es popular, liviano (lo que significa que usa poca memoria y un uso bajo de CPU) y utiliza la \textbf{biblioteca libpcap} de código abierto. tcpdump está basado en texto, lo que significa que todos los comandos de tcpdump se ejecutan en la terminal. También se puede instalar en otros sistemas operativos basados en Unix, como macOS®. Está preinstalado en muchas distribuciones de Linux.
+
+tcpdump proporciona un breve análisis de paquetes y convierte información clave sobre el tráfico de la red en formatos fácilmente leídos por los humanos. Imprime información sobre cada paquete directamente en su terminal. tcpdump también muestra la \textbf{dirección IP de origen, las direcciones IP de destino y los números de puerto que se utilizan en las comunicaciones}.
+
+
+tcpdump imprime la salida del comando como los paquetes rastreados en la línea de comando y, opcionalmente, en un archivo de registro, después de ejecutar un comando. El resultado de una captura de paquetes contiene mucha información importante sobre el tráfico de la red. 
+
+
+Parte de la información que recibe de una captura de paquetes incluye: 
+
+\begin{itemize}
+    \item Marca de tiempo : la salida comienza con la marca de tiempo, formateada como horas, minutos, segundos y fracciones de segundo.  
+
+    \item IP de origen : el origen del paquete lo proporciona su dirección IP de origen.
+
+    \item Puerto de origen : este número de puerto es donde se originó el paquete.
+
+    \item IP de destino : la dirección IP de destino es donde se transmite el paquete.
+
+    \item Puerto de destino : este número de puerto es hacia donde se transmite el paquete.
+\end{itemize}
+Nota: \textit{De forma predeterminada, tcpdump intentará resolver direcciones de host en nombres de host. También reemplazará los números de puerto con servicios comúnmente asociados que utilizan estos puertos.}
+
+
+tcpdump y otros analizadores de protocolos de red se utilizan comúnmente para capturar y ver comunicaciones de red y recopilar estadísticas sobre la red, como la resolución de problemas de rendimiento de la red. También se pueden utilizar para:
+\begin{itemize}
+    \item Establezca una línea de base para los patrones de tráfico de la red y las métricas de utilización de la red.
+
+    \item Detectar e identificar tráfico malicioso
+
+    \item Cree alertas personalizadas para enviar las notificaciones correctas cuando surjan problemas de red o amenazas a la seguridad.
+
+    \item Localice mensajes instantáneos (IM), tráfico o puntos de acceso inalámbrico no autorizados.
+\end{itemize}
+\textit{Sin embargo, los atacantes también pueden utilizar analizadores de protocolos de red de forma maliciosa para obtener información sobre una red específica. Por ejemplo, los atacantes pueden capturar paquetes de datos que contienen información confidencial, como nombres de usuario y contraseñas de cuentas. Como analista de ciberseguridad, es importante comprender el propósito y los usos de los analizadores de protocolos de red. }
+
+
+Los analizadores de protocolos de red, como \textbf{tcpdump}, son herramientas comunes que se pueden utilizar para monitorear patrones de tráfico de red e investigar actividades sospechosas. tcpdump es un analizador de protocolos de red de línea de comandos que es compatible con Linux/Unix y macOS®. Cuando ejecuta un comando tcpdump, la herramienta generará información de enrutamiento de paquetes, como la marca de tiempo, la dirección IP de origen y el número de puerto, y la dirección IP y el número de puerto de destino. \textbf{Lamentablemente, los atacantes también pueden utilizar analizadores de protocolos de red para capturar paquetes de datos que contienen información confidencial, como nombres de usuario y contraseñas de cuentas.}
