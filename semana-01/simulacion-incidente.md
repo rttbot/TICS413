@@ -177,49 +177,6 @@ Legal: "Documentación legal preparada para notificación."
 ```
 
 ---
-
-## 📝 **Material de Apoyo**
-
-### **Tarjetas de Rol (para cada participante):**
-- **CSO:** Tarjeta con responsabilidades y guión inicial
-- **Analista:** Tarjeta con información técnica del ataque
-- **Sistemas:** Tarjeta con procedimientos técnicos
-- **Comunicaciones:** Tarjeta con comunicado modelo
-- **Legal:** Tarjeta con obligaciones regulatorias
-
-### **Escenario Detallado:**
-- Cronología del incidente
-- Información técnica específica
-- Stakeholders involucrados
-- Recursos disponibles
-
-### **Checklist de Evaluación:**
-- Lista de verificación para observadores
-- Criterios específicos de evaluación
-- Puntos de observación clave
-
----
-
-## 🎪 **Instrucciones para el Facilitador**
-
-### **Preparación (5 minutos):**
-1. Asignar roles a los estudiantes
-2. Entregar tarjetas de rol
-3. Explicar el escenario
-4. Establecer reglas básicas
-
-### **Durante la Simulación:**
-1. **Minuto 0-2:** Presentación del incidente
-2. **Minuto 2-5:** Respuesta inmediata
-3. **Minuto 5-8:** Evaluación y planificación
-4. **Minuto 8-10:** Acciones inmediatas
-
-### **Después de la Simulación:**
-1. **Debriefing (5 minutos):** Discusión de lo que funcionó y qué mejorar
-2. **Feedback (5 minutos):** Comentarios de observadores
-3. **Aprendizajes (5 minutos):** Conclusiones y lecciones aprendidas
-
----
 ---
 
 **¡Recuerda: En ciberseguridad, la preparación es la mejor defensa! 🛡️** 
