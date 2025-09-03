@@ -322,7 +322,6 @@ Este ejercicio simula un escenario real de seguridad en redes donde los estudian
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
-
 ## Fase 5: Conexión con Casos Prácticos
 
 ### Objetivo de la Fase 5
@@ -335,71 +334,6 @@ Esta fase permite a los estudiantes aplicar los conocimientos adquiridos en las 
 2. **Análisis de Conexión:** Identificar qué tarjetas se relacionan con los ataques del caso asignado
 3. **Aplicación de Contramedidas:** Proponer cómo aplicar las contramedidas de las tarjetas al caso real
 4. **Presentación Integrada:** Explicar la relación entre teoría (tarjetas) y práctica (casos)
-
-### Matriz de Conexión Tarjetas-Casos
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                MATRIZ DE CONEXIÓN TARJETAS-CASOS             │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  TARJETA │ CASO RELACIONADO │ ATAQUE ESPECÍFICO │ APLICACIÓN │
-│  ┌───────┼─────────────────┼───────────────────┼───────────┐ │
-│  │   1   │ Caso 1          │ Evil Twin Attack  │ WIDS/WIPS  │ │
-│  │       │ E-commerce     │ "TechStore_Guest" │ Detección  │ │
-│  │       │                 │                   │ automática │ │
-│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
-│  │   2   │ Caso 1          │ Evil Twin Attack  │ Verificar  │ │
-│  │       │ E-commerce     │ Punto de acceso   │ SSID + VPN │ │
-│  │       │                 │ malicioso         │ obligatorio│ │
-│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
-│  │   3   │ Caso 1          │ SYN Flood         │ SYN Cookies│ │
-│  │       │ E-commerce     │ Múltiples SYN     │ + Rate     │ │
-│  │       │                 │ desde 192.168.1.100│ Limiting   │ │
-│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
-│  │   5   │ Caso 1          │ SQL Injection     │ WAF +      │ │
-│  │       │ E-commerce     │ admin' OR '1'='1' │ Prepared   │ │
-│  │       │                 │                   │ Statements │ │
-│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
-│  │   6   │ Caso 1          │ ARP Poisoning     │ ARP        │ │
-│  │       │ E-commerce     │ Modificación tabla│ Monitoring │ │
-│  │       │                 │ ARP               │ + VLANs    │ │
-│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
-│  │   7   │ Caso 2          │ WiFi Jamming      │ Backup     │ │
-│  │       │ Hospital       │ Señales 2.4 GHz   │ cableado + │ │
-│  │       │                 │                   │ Detección RF│ │
-│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
-│  │   2   │ Caso 2          │ Rogue AP          │ WIDS/WIPS  │ │
-│  │       │ Hospital       │ "Hospital_Guest"  │ + Verificar│ │
-│  │       │                 │                   │ SSID       │ │
-│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
-│  │   8   │ Caso 3          │ Beacon Flooding   │ WIDS/WIPS  │ │
-│  │       │ Universidad     │ Múltiples SSIDs   │ + Rate     │ │
-│  │       │                 │ "UTS_WiFi_1,2"    │ Limiting   │ │
-│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
-│  │   3   │ Caso 3          │ DDoS Attack       │ DDoS       │ │
-│  │       │ Universidad     │ Servidores        │ Protection │ │
-│  │       │                 │ académicos        │ Services   │ │
-│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
-│  │   4   │ Caso 3          │ Auth Server       │ Rate       │ │
-│  │       │ Universidad     │ Overload          │ Limiting + │ │
-│  │       │                 │                   │ Timeouts   │ │
-│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
-│  │   7   │ Caso 4          │ WiFi Jamming      │ Redundancia│ │
-│  │       │ TelecomLatina  │ Señales WiFi/radio│ + Backup   │ │
-│  │       │                 │                   │ cableado   │ │
-│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
-│  │   6   │ Caso 4          │ ARP Poisoning     │ ARP        │ │
-│  │       │ TelecomLatina  │ Masivo            │ Monitoring │ │
-│  │       │                 │                   │ + VLANs    │ │
-│  ├───────┼─────────────────┼───────────────────┼───────────┤ │
-│  │   3   │ Caso 4          │ DDoS Distribuido  │ DDoS       │ │
-│  │       │ TelecomLatina  │ Múltiples IPs     │ Protection │ │
-│  │       │                 │                   │ + Firewalls│ │
-│  └───────┴─────────────────┴───────────────────┴───────────┘ │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
 
 ### Ejercicios de Conexión por Caso
 
@@ -554,57 +488,6 @@ Esta fase permite a los estudiantes aplicar los conocimientos adquiridos en las 
 │  │    • PRIORIDAD: DDoS protection services               │   │
 │  │    • ESCALABILIDAD: Múltiples proveedores             │   │
 │  │    • COORDINACIÓN: CSIRT Chile                         │   │
-│  │                                                     │   │
-│  └─────────────────────────────────────────────────────┘   │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### Evaluación de la Fase 5
-
-#### Criterios de Evaluación:
-
-| Criterio | Puntuación | Descripción |
-|----------|------------|-------------|
-| **Identificación de Conexiones** | 30% | Correcta relación entre tarjetas y casos |
-| **Aplicación de Contramedidas** | 30% | Propuesta realista de implementación |
-| **Análisis de Contexto** | 20% | Comprensión de especificidades del caso |
-| **Pensamiento Estratégico** | 20% | Consideración de prioridades y recursos |
-
-#### Rúbrica de Evaluación:
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                RÚBRICA FASE 5                                │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  EXCELENTE (90-100%):                                      │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │                                                     │   │
-│  │ • Identifica todas las conexiones relevantes       │   │
-│  │ • Propone contramedidas específicas y realistas     │   │
-│  │ • Considera el contexto específico del caso        │   │
-│  │ • Demuestra pensamiento estratégico                 │   │
-│  │                                                     │   │
-│  └─────────────────────────────────────────────────────┘   │
-│                                                             │
-│  BUENO (80-89%):                                           │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │                                                     │   │
-│  │ • Identifica la mayoría de conexiones              │   │
-│  │ • Propone contramedidas apropiadas                  │   │
-│  │ • Considera algunos aspectos del contexto          │   │
-│  │ • Muestra pensamiento básico                        │   │
-│  │                                                     │   │
-│  └─────────────────────────────────────────────────────┘   │
-│                                                             │
-│  SATISFACTORIO (70-79%):                                   │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │                                                     │   │
-│  │ • Identifica algunas conexiones                    │   │
-│  │ • Propone contramedidas básicas                     │   │
-│  │ • Considera limitadamente el contexto              │   │
-│  │ • Pensamiento superficial                           │   │
 │  │                                                     │   │
 │  └─────────────────────────────────────────────────────┘   │
 │                                                             │
